@@ -18,6 +18,7 @@
         </a>
     </li>
 
+
     @if (auth()->user()->hasRole('Superadmin|Admin'))
     <li class="<?php echo ( starts_with($route, ADMIN.'.users') ) ? "active" : '' ?>">
         <a href="{{ route(ADMIN.'.users.index') }}">
@@ -25,7 +26,22 @@
             <span>Users</span>
         </a>
     </li>
+
+    <li class="<?php echo ( starts_with($route, ADMIN.'.categories') ) ? "active" : '' ?>">
+        <a href="{{ route(ADMIN.'.categories.index') }}">
+            <i class="fa fa-list"></i>
+            <span>User Loan mgmt</span>
+        </a>
+    </li>
+
     @endif
+
+    <li class="<?php echo ( starts_with($route, ADMIN.'.categories') ) ? "active" : '' ?>">
+        <a href="{{ route(ADMIN.'.categories.index') }}">
+            <i class="fa fa-list"></i>
+            <span>Loan Request</span>
+        </a>
+    </li>
 
     @if (auth()->user()->hasRole('Superadmin'))
     <li class="treeview">
