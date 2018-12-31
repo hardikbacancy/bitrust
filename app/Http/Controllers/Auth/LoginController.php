@@ -57,10 +57,8 @@ class LoginController extends Controller
             return $this->sendLockoutResponse($request);
         }
 
-
         $user = \App\User::where('email', '=', $request->email)
                           ->get();
-
         if ($user->isEmpty()) {
             // The user is doesnt exist
             return redirect("/login")

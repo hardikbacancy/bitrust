@@ -1,13 +1,11 @@
 <?php
-
 namespace App\Http\Controllers;
-
+use App\Mail\VerifyMail;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use App\User;
+use Illuminate\Support\Facades\Mail;
 use Validator;
 
 class UsersController extends Controller
@@ -42,7 +40,8 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, User::rules());
-        User::create($request->all());
+        $user=User::create($request->all());
+        Mail::to($request->email)->send(new VerifyMail($user));
         return redirect()->route(ADMIN.'.users.index')->withSuccess(trans('app.success_store'));
     }
 

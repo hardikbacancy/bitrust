@@ -7,13 +7,14 @@
       }
     }
   }
-
   //$img_url = (isset($item) ? $item->avatar : "http://placehold.it/160x160");
   $img_url = (isset($item) ? $item->avatar : url('/') . config('variables.avatar.public') . 'avatar0.png');
 ?>
 {!! Form::myInput('text', 'name', 'Name') !!}
 
 {!! Form::myInput('email', 'email', 'Email') !!}
+
+{!! Form::myInput('text', 'mobile', 'Mobile') !!}
 
 {!! Form::myInput('password', 'password', 'Password') !!}
 

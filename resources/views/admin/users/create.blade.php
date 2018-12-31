@@ -1,5 +1,4 @@
 @extends('admin.adminlayout')
-
 @section('page-header')
   User <small>new</small>
 @stop
@@ -13,7 +12,6 @@
                 'files' => true
             ])
         !!}
-
         <div class="box-body" style="margin:10px;">
           @include('admin.users.form')
         </div>
