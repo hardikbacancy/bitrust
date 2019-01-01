@@ -23,4 +23,10 @@ Route::group(['prefix' => ADMIN, 'as' => ADMIN . '.', 'middleware'=>['auth']], f
     Route::resource('users', 'UsersController')->middleware('Role:Superadmin|Admin');
     Route::get('profileedit/{id}', 'ProfileController@edit');
     Route::put('profileupdate/{id}', 'ProfileController@update');
+
+    /* Admin settings */
+    Route::get('/adminsettings', 'admin\AdminSettingController@index')->name('adminsettings.index');
+    Route::get('/adminsettings/{id}/edit', 'admin\AdminSettingController@edit')->name('adminsettings.edit');
+    Route::put('/adminsettings/{id}', 'admin\AdminSettingController@update')->name('adminsettings.update');
+    Route::delete('/adminsettings/{id}', 'admin\AdminSettingController@destroy')->name('adminsettings.destroy');
 });
