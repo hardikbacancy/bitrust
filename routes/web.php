@@ -10,6 +10,8 @@ Route::get('login', function () {
 
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');
+Route::get('/user/verify/{verification_code}', 'Auth\VerificationController@verifyUser');
+
 /*
 |------------------------------------------------------------------------------------
 | Admin
@@ -17,7 +19,7 @@ Route::get('logout', 'Auth\LoginController@logout');
 */
 Route::group(['prefix' => ADMIN, 'as' => ADMIN . '.', 'middleware'=>['auth']], function() {
     Route::get('/', ['uses'=>'DashboardController@index', 'as'=>'dash']);
-    Route::resource('categories', 'CategoriesController');
+    Route::resource('loan_request', 'LoanRequestController');
     Route::resource('users', 'UsersController')->middleware('Role:Superadmin|Admin');
     Route::get('profileedit/{id}', 'ProfileController@edit');
     Route::put('profileupdate/{id}', 'ProfileController@update');

@@ -11,10 +11,10 @@
         </a>
     </li>
 
-    <li class="<?php echo ( starts_with($route, ADMIN.'.categories') ) ? "active" : '' ?>">
-        <a href="{{ route(ADMIN.'.categories.index') }}">
+    <li class="<?php echo ( starts_with($route, ADMIN.'.loan_request') ) ? "active" : '' ?>">
+        <a href="{{ route(ADMIN.'.loan_request.index') }}">
             <i class="fa fa-list"></i>
-            <span>Categories</span>
+            <span>Loan Request</span>
         </a>
     </li>
 
@@ -27,8 +27,8 @@
         </a>
     </li>
 
-    <li class="<?php echo ( starts_with($route, ADMIN.'.categories') ) ? "active" : '' ?>">
-        <a href="{{ route(ADMIN.'.categories.index') }}">
+    <li class="<?php echo ( starts_with($route, ADMIN.'.loan_request') ) ? "active" : '' ?>">
+        <a href="{{ route(ADMIN.'.loan_request.index') }}">
             <i class="fa fa-list"></i>
             <span>User Loan mgmt</span>
         </a>
@@ -36,8 +36,8 @@
 
     @endif
 
-    <li class="<?php echo ( starts_with($route, ADMIN.'.categories') ) ? "active" : '' ?>">
-        <a href="{{ route(ADMIN.'.categories.index') }}">
+    <li class="<?php echo ( starts_with($route, ADMIN.'.loan_request') ) ? "active" : '' ?>">
+        <a href="{{ route(ADMIN.'.loan_request.index') }}">
             <i class="fa fa-list"></i>
             <span>Loan Request</span>
         </a>

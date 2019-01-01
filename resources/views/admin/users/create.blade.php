@@ -7,7 +7,8 @@
 <div class="row">
   <div class="col-sm-12">
     <div class="box" style="border:1px solid #d2d6de;">
-        {!! Form::open([
+        {!!
+         Form::open([
                 'action' => ['UsersController@store'],
                 'files' => true
             ])

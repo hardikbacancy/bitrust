@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Http\Controllers\Controller;
+use App\User;
+use App\UserLoanMgmt;
 use Illuminate\Http\Request;
-use App\Category;
+use App\LoanRequest;
 
-class CategoriesController extends Controller
+class UserLoanMgmtController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +16,8 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $items = Category::with('parent')->get();
-
-        return view('admin.categories.index', compact('items'));
+        $userLoanMgmt = UserLoanMgmt::all()->toArray();
+        return view('admin.loan_management.index', compact('userLoanMgmt'));
     }
 
     /**
@@ -27,7 +27,8 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create');
+        $userDetails=User::all()->toArray();
+        return view('admin.loan_management.create',get_defined_vars());
     }
 
     /**
@@ -38,10 +39,9 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        Category::create($request->all());
-
+        UserLoanMgmt::create($request->all());
         //return back()->withSuccess(trans('app.success_store'));
-        return redirect()->route(ADMIN.'.categories.index')->withSuccess(trans('app.success_store'));
+        return redirect()->route(ADMIN.'.loan_management.index')->withSuccess("Successfully Added");
     }
 
     /**
@@ -63,9 +63,9 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        $item = Category::findOrFail($id);
-
-        return view('admin.categories.edit', compact('item'));
+        $userLoanMgmt = UserLoanMgmt::findOrFail($id);
+        $userDetails=User::all()->toArray();
+        return view('admin.loan_management.edit',get_defined_vars());
     }
 
     /**
@@ -77,10 +77,10 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $item = Category::findOrFail($id);
-        $item->update($request->all());
+        $userLoanMgmt = UserLoanMgmt::findOrFail($id);
+        $userLoanMgmt->update($request->all());
         //return back()->withSuccess(trans('app.success_update'));
-        return redirect()->route(ADMIN.'.categories.index')->withSuccess(trans('app.success_update'));
+        return redirect()->route(ADMIN.'.loan_management.index')->withSuccess(trans('app.success_update'));
     }
 
     /**
@@ -91,8 +91,7 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        Category::destroy($id);
-
+        UserLoanMgmt::destroy($id);
         return back()->withSuccess(trans('app.success_destroy'));
     }
 }
