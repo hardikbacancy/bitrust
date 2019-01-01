@@ -44,6 +44,11 @@
     </li>
 
     @if (auth()->user()->hasRole('Superadmin'))
+
+    <li class="<?php echo ( starts_with($route, ADMIN.'.adminsettings') ) ? "active" : '' ?>">
+        <a href="{{ route(ADMIN.'.adminsettings.index') }}"><i class="fa fa-cog"></i>Settings</a>
+    </li>
+    
     <li class="treeview">
         <a href="#"><i class='fa fa-link'></i> <span>Tools</span> <i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">
