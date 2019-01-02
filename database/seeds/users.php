@@ -13,9 +13,7 @@ class users extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create();
-
         User::truncate();
-
         $data = [];
 
         array_push($data, [
