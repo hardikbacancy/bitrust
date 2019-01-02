@@ -1,7 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
+use App\Models\admin\AdminSetting;
 use App\User;
 use Illuminate\Http\Request;
 use App\LoanRequest;
@@ -31,6 +31,7 @@ class LoanRequestController extends Controller
     public function create()
     {
         $userDetails=User::all()->toArray();
+        $adminSettings=AdminSetting::all()->toArray();
         return view('admin.loan_request.create',get_defined_vars());
     }
 
@@ -68,6 +69,7 @@ class LoanRequestController extends Controller
     {
         $loanRequest = LoanRequest::findOrFail($id);
         $userDetails=User::all()->toArray();
+        $adminSettings=AdminSetting::all()->toArray();
         return view('admin.loan_request.edit',get_defined_vars());
     }
 
@@ -80,6 +82,10 @@ class LoanRequestController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if($request->request_status=='1'){
+           $period=$request->tenuar_period;
+
+        }
         $loanRequest = LoanRequest::findOrFail($id);
         $loanRequest->update($request->all());
         //return back()->withSuccess(trans('app.success_update'));

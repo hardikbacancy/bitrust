@@ -19,12 +19,8 @@
 	  <div class="col-xs-12">
 	    <div class="box" style="border:1px solid #d2d6de;" >
 
-	      <div class="box-header" style="background-color:#f5f5f5;border-bottom:1px solid #d2d6de;">
-          <!-- <a class="btn btn-info" href="{{ route(ADMIN . '.categories.create') }}"  title="Add Item">
-            <i class="fa fa-plus" style="vertical-align:middle"></i>
-          </a> -->
-	      </div>
-       
+	      {{--<div class="box-header" style="background-color:#f5f5f5;border-bottom:1px solid #d2d6de;">--}}
+	      {{--</div>--}}
 
 	      <!-- /.box-header -->
 	      <div class="box-body table-responsive no-padding"  >
