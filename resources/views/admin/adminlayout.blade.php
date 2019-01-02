@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="{{ asset('css/admin-vendor.css') }}">
         <link rel="stylesheet" href="{{ asset('css/admin-custom.css') }}">
     @endif
+    <link rel="stylesheet" href="{{ asset('css/admin-common.css') }}">
 
     @yield('css')
 
@@ -27,9 +28,9 @@
             <!-- Logo -->
             <a href="{{ url(ADMIN . '/') }}" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>L</b>55</span>
+                <span class="logo-mini"><b>B</b>T</span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>Laravel </b> 5.5</span>
+                <span class="logo-lg"><b>Bitrust</b></span>
             </a>
 
             <!-- Header Navbar -->
