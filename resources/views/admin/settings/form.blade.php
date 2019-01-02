@@ -1,5 +1,5 @@
 
-{!! Form::myInput('text', 'penalty', 'Penalty', ['required']) !!}
-{!! Form::myInput('text', 'interest_rate', 'Interest Rate', ['required']) !!}
-{!! Form::myInput('text', 'membership_fee', 'Membership Fee', ['required']) !!}
+{!! Form::myInput('text', 'penalty', 'Penalty <span>*</span>', ['required']) !!}
+{!! Form::myInput('text', 'interest_rate', 'Interest Rate <span>*</span>', ['required']) !!}
+{!! Form::myInput('text', 'membership_fee', 'Membership Fee <span>*</span>', ['required']) !!}
 

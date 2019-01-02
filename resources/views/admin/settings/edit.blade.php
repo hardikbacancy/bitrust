@@ -12,6 +12,7 @@
         {!! Form::model($item, [
                 'action' => ['admin\AdminSettingController@update', $item->id],
                 'method' => 'put',
+                'id' => 'edit-setting',
                 'files' => true
             ])
         !!}
@@ -29,4 +30,30 @@
     </div>
   </div>
 </div>
+@stop
+
+@section('js')
+
+<script src="{{ asset('js/jquery.validate.min.js') }} "></script>
+<script src="{{ asset('js/additional-methods.min.js') }} "></script>
+
+
+ <script>
+    $(document).ready(function () {
+    $('#edit-setting').validate({ // initialize the plugin
+        rules: {
+            penalty: {
+                required: true
+            },
+            interest_rate: {
+                required: true                
+            },      
+            membership_fee: {
+                required: true               
+            },
+        }
+    });
+});
+</script>
+
 @stop
