@@ -11,7 +11,8 @@
         {!! Form::model($loanRequest, [
                 'action' => ['LoanRequestController@update', $loanRequest['id']],
                 'method' => 'put',
-                'files' => true
+                'files' => true,
+                'id' => 'edit-loan-req'
             ])
         !!}
 
@@ -28,4 +29,29 @@
     </div>
   </div>
 </div>
+@stop
+
+
+@section('js')
+
+<script>
+    $(document).ready(function () {
+
+    $("#user_id").select2();
+    $('#edit-loan-req').validate({ // initialize the plugin
+        rules: {
+            user_id: {
+                required: true
+            },
+            loan_amount: {
+                required: true                
+            },
+        }
+    });
+
+
+
+});
+</script>
+
 @stop

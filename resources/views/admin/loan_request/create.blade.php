@@ -10,7 +10,8 @@
     <div class="box" style="border:1px solid #d2d6de;">
         {!! Form::open([
                 'action' => ['LoanRequestController@store'],
-                'files' => true
+                'files' => true,
+                'id' => 'create-loan-req'
             ])
         !!}
 
@@ -27,4 +28,29 @@
     </div>
   </div>
 </div>
+@stop
+
+@section('js')
+
+
+<script>
+    $(document).ready(function () {
+
+    $("#user_id").select2();
+    $('#create-loan-req').validate({ // initialize the plugin
+        rules: {
+            user_id: {
+                required: true
+            },
+            loan_amount: {
+                required: true                
+            },
+        }
+    });
+
+
+
+});
+</script>
+
 @stop

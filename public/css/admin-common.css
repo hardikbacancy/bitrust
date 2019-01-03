@@ -7,3 +7,9 @@ label span{
     color:red; 
     padding-left:5px;
 }
+
+$( ".select2-single, .select2-multiple" ).select2( {
+				placeholder: placeholder,
+				width: null,
+				containerCssClass: ':all:'
+			} );
