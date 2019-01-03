@@ -58,6 +58,6 @@ class RegisterController extends Controller
         $this->validate($request, User::rules());
         $user=User::create($request->all());
         Mail::to($request->email)->send(new VerifyMail($user));
-        return redirect('register')->with('status', 'We have sent a link on email,please verify');
+        return redirect('login')->with('status', 'We have sent a link on email,please verify');
     }
 }

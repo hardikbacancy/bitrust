@@ -14,7 +14,6 @@
                 'files' => true
             ])
         !!}
-
         <div class="box-body" style="margin:10px;">
             {!! Form::myInput('text', 'name', 'Name') !!}
             {!! Form::myInput('email', 'email', 'Email') !!}

@@ -17,7 +17,7 @@ class LoanRequestController extends Controller
      */
     public function index()
     {
-        if(\Auth::user()->role=='0'){
+        if(auth()->user()->hasRole('User')){
             $loanRequest=LoanRequest::where('user_id','=',\Auth::user()->id)->get()->toArray();
         }
         else {
@@ -60,7 +60,7 @@ class LoanRequestController extends Controller
                 ->withInput();
         }
         else {
-            if(\Auth::user()->role=='0'){
+            if(auth()->user()->hasRole('User')){
                 $user_id=\Auth::user()->id;
                 $requestAll=$request->all();
                 $requestAll['user_id']=$user_id;

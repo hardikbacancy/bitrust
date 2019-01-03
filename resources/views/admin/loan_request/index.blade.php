@@ -54,16 +54,36 @@
                                 <td class="actions">
                                         <ul class="list-inline" style="margin-bottom:0px;">
 
-                                            @if($loanRequests['request_status']=='1')
+                                           @if($loanRequests['request_status']=='1')
                                             <li>
                                                 <a href="/admin/loan_request/loandetails/{{$loanRequests['id']}}"
                                                    title="{{ "View Details" }}" class="btn btn-primary btn-xs"><i
                                                             class="fa fa-eye"></i>
                                                 </a>
                                             </li>
+
+                                                    @if (auth()->user()->hasRole('Superadmin|Admin'))
+                                                <li>
+                                                    {!! Form::open([
+                                                        'class'=>'delete',
+                                                        'url'  => route(ADMIN . '.loan_request.destroy', $loanRequests['id']),
+                                                        'method' => 'DELETE',
+                                                        ])
+                                                    !!}
+
+                                                    <button class="btn btn-danger btn-xs"
+                                                            title="{{ trans('app.delete_title') }}"><i
+                                                                class="fa fa-trash"></i></button>
+
+                                                    {!! Form::close() !!}
+
+                                                </li>
+                                                    @endif
+
                                             @endif
 
-                                                    @if(\Auth::user()->role!='0')
+
+                                            @if($loanRequests['request_status']=='0')
                                             <li>
 
                                                 <a href="{{ route(ADMIN . '.loan_request.edit', $loanRequests['id']) }}"
@@ -71,22 +91,22 @@
                                                             class="fa fa-pencil"></i></a>
                                             </li>
 
-                                            <li>
-                                                {!! Form::open([
-                                                    'class'=>'delete',
-                                                    'url'  => route(ADMIN . '.loan_request.destroy', $loanRequests['id']),
-                                                    'method' => 'DELETE',
-                                                    ])
-                                                !!}
+                                                    <li>
+                                                        {!! Form::open([
+                                                            'class'=>'delete',
+                                                            'url'  => route(ADMIN . '.loan_request.destroy', $loanRequests['id']),
+                                                            'method' => 'DELETE',
+                                                            ])
+                                                        !!}
 
-                                                <button class="btn btn-danger btn-xs"
-                                                        title="{{ trans('app.delete_title') }}"><i
-                                                            class="fa fa-trash"></i></button>
+                                                        <button class="btn btn-danger btn-xs"
+                                                                title="{{ trans('app.delete_title') }}"><i
+                                                                    class="fa fa-trash"></i></button>
 
-                                                {!! Form::close() !!}
+                                                        {!! Form::close() !!}
 
-                                            </li>
-                                                @endif
+                                                    </li>
+                                            @endif
                                         </ul>
                                 </td>
                             </tr>
