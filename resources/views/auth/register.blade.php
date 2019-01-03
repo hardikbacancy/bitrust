@@ -3,9 +3,17 @@
 @section('content')
 
     <p class="login-box-msg"><b>Register</b> </p>
-
+    @if (Session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
+  <?php $val=str_random(40);  ?>
     <form role="form" method="POST" action="{{ url('/register') }}">
-            {{ csrf_field() }}
+        {{csrf_field()}}
+        <input type="hidden" name="verification_code" value={{$val}}>
+        <input type="hidden" name="active" value="1">
+
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }} has-feedback">
             <input type="text" class="form-control" placeholder="Full name" name="name" value="{{ old('name') }}">
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -26,6 +34,19 @@
                     </span>
             @endif
         </div>
+
+        <div class="form-group{{ $errors->has('mobile') ? ' has-error' : '' }} has-feedback">
+            <input type="text" class="form-control" placeholder="Mobile" name="mobile" value="{{ old('mobile') }}">
+            <span class="glyphicon glyphicon-phone form-control-feedback"></span>
+
+            @if ($errors->has('mobile'))
+                <span class="help-block">
+                            <strong>{{ $errors->first('mobile') }}</strong>
+                </span>
+            @endif
+        </div>
+
+
         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }} has-feedback">
             <input type="password" class="form-control" placeholder="Password" name="password" >
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>

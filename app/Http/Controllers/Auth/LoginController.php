@@ -28,6 +28,16 @@ class LoginController extends Controller
      */
     protected $redirectTo = '/' . ADMIN;
 
+
+    public function authenticated(Request $request, $user)
+    {
+        if ($user->email_verified_at=='0') {
+            auth()->logout();
+            return back()->with('warning', 'You need to confirm your account. We have sent you an activation code, please check your email.');
+        }
+        return redirect()->intended($this->redirectPath());
+    }
+
     /**
      * Create a new controller instance.
      *
@@ -46,6 +56,7 @@ class LoginController extends Controller
      */
     public function login(Request $request)
     {
+
         $this->validateLogin($request);
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
@@ -59,6 +70,7 @@ class LoginController extends Controller
 
         $user = \App\User::where('email', '=', $request->email)
                           ->get();
+
         if ($user->isEmpty()) {
             // The user is doesnt exist
             return redirect("/login")
@@ -68,12 +80,13 @@ class LoginController extends Controller
 
         $user = \App\User::where('email', '=', $request->email)
                           ->where('active', '=', 1)
+                          ->where('email_verified_at', '=', 1)
                           ->get();
         if ($user->isEmpty()) {
             // The user is exist but inactive
             return redirect("/login")
                 ->withInput($request->only('email', 'remember'))
-                ->withWarning('Your account is inactive or not verified');
+                ->withWarning('Your account is inactive or email not verified');
         }
         
         //try login with password

@@ -11,14 +11,6 @@
         </a>
     </li>
 
-    <li class="<?php echo ( starts_with($route, ADMIN.'.loan_request') ) ? "active" : '' ?>">
-        <a href="{{ route(ADMIN.'.loan_request.index') }}">
-            <i class="fa fa-list"></i>
-            <span>Loan Request</span>
-        </a>
-    </li>
-
-
     @if (auth()->user()->hasRole('Superadmin|Admin'))
     <li class="<?php echo ( starts_with($route, ADMIN.'.users') ) ? "active" : '' ?>">
         <a href="{{ route(ADMIN.'.users.index') }}">
@@ -26,14 +18,6 @@
             <span>Users</span>
         </a>
     </li>
-
-    <li class="<?php echo ( starts_with($route, ADMIN.'.loan_request') ) ? "active" : '' ?>">
-        <a href="{{ route(ADMIN.'.loan_request.index') }}">
-            <i class="fa fa-list"></i>
-            <span>User Loan mgmt</span>
-        </a>
-    </li>
-
     @endif
 
     <li class="<?php echo ( starts_with($route, ADMIN.'.loan_request') ) ? "active" : '' ?>">
@@ -48,14 +32,6 @@
     <li class="<?php echo ( starts_with($route, ADMIN.'.adminsettings') ) ? "active" : '' ?>">
         <a href="{{ route(ADMIN.'.adminsettings.index') }}"><i class="fa fa-cog"></i>Settings</a>
     </li>
-    
-    <li class="treeview">
-        <a href="#"><i class='fa fa-link'></i> <span>Tools</span> <i class="fa fa-angle-left pull-right"></i></a>
-        <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>Settings</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Backups</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Logs</a></li>
-        </ul>
-    </li>
+
     @endif
 </ul>

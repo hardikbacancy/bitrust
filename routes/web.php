@@ -19,7 +19,10 @@ Route::get('/user/verify/{verification_code}', 'Auth\VerificationController@veri
 */
 Route::group(['prefix' => ADMIN, 'as' => ADMIN . '.', 'middleware'=>['auth']], function() {
     Route::get('/', ['uses'=>'DashboardController@index', 'as'=>'dash']);
+    Route::post('/loan_request/loanStatusUpdate', 'LoanRequestController@loanStatusUpdate');
+    Route::get('loan_request/loandetails/{requestId}', 'LoanRequestController@loanDetails');
     Route::resource('loan_request', 'LoanRequestController');
+
     Route::resource('users', 'UsersController')->middleware('Role:Superadmin|Admin');
     Route::get('profileedit/{id}', 'ProfileController@edit');
     Route::put('profileupdate/{id}', 'ProfileController@update');

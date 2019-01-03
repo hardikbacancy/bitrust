@@ -47,26 +47,30 @@
                         @foreach($loanRequest as $loanRequests)
                             <tr>
                                 <td>{{$loanRequests['name']}}</td>
-                                <td>{{$loanRequests['loan_amount']}}</td>
-                                <td>{{$loanRequests['tenuar_period']}}</td>
-                                <td>{{$loanRequests['interest_rate']}}</td>
+                                <td>{{$loanRequests['loan_amount']}}{{"$"}}</td>
+                                <td>{{$loanRequests['tenuar_period']}} {{"Month"}}</td>
+                                <td>{{$loanRequests['interest_rate']}} {{"$"}}</td>
                                 <td>{{$loanRequests['request_status']}}</td>
                                 <td class="actions">
                                         <ul class="list-inline" style="margin-bottom:0px;">
 
                                             @if($loanRequests['request_status']=='1')
                                             <li>
-                                                <a href="{{ route(ADMIN . '.loan_request.edit', $loanRequests['id']) }}"
+                                                <a href="/admin/loan_request/loandetails/{{$loanRequests['id']}}"
                                                    title="{{ "View Details" }}" class="btn btn-primary btn-xs"><i
-                                                            class="fa fa-eye"></i></a>
+                                                            class="fa fa-eye"></i>
+                                                </a>
                                             </li>
                                             @endif
 
+                                                    @if(\Auth::user()->role!='0')
                                             <li>
+
                                                 <a href="{{ route(ADMIN . '.loan_request.edit', $loanRequests['id']) }}"
                                                    title="{{ trans('app.edit_title') }}" class="btn btn-primary btn-xs"><i
                                                             class="fa fa-pencil"></i></a>
                                             </li>
+
                                             <li>
                                                 {!! Form::open([
                                                     'class'=>'delete',
@@ -80,7 +84,9 @@
                                                             class="fa fa-trash"></i></button>
 
                                                 {!! Form::close() !!}
+
                                             </li>
+                                                @endif
                                         </ul>
                                 </td>
                             </tr>
