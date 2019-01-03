@@ -10,6 +10,7 @@
         {!!
          Form::open([
                 'action' => ['UsersController@store'],
+                'id' => 'create-user',
                 'files' => true
             ])
         !!}
@@ -26,4 +27,38 @@
     </div>
   </div>
 </div>
+@stop
+
+@section('js')
+
+
+ <script>
+    $(document).ready(function () {
+    $('#create-user').validate({ // initialize the plugin
+        rules: {
+            name: {
+                required: true
+            },
+            email: {
+                required: true                
+            },      
+            mobile: {
+                required: true,
+                digits: true              
+            },
+            password: {
+                required: true               
+            },
+            password_confirmation: {
+                required: true               
+            },
+            avatar: {
+                required: true,
+                //extension: "jpeg|png"             
+            },
+        }
+    });
+});
+</script>
+
 @stop

@@ -7,6 +7,8 @@
       }
     }
   }
+
+  unset($allowedRoles['5']); // remove superadmin option
   //$img_url = (isset($item) ? $item->avatar : "http://placehold.it/160x160");
   $img_url = (isset($item) ? $item->avatar : url('/') . config('variables.avatar.public') . 'avatar0.png');
   $val=str_random(40);

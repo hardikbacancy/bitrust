@@ -15,6 +15,8 @@
     @endif
     <link rel="stylesheet" href="{{ asset('css/admin-common.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
+
     @yield('css')
 
 </head>
@@ -153,10 +155,10 @@
         <script src="{{ asset('js/admin-all.js') }} "></script>
     @endif
 
-    <script>
-
-    </script>
-
+    <script src="{{ asset('js/jquery.validate.min.js') }} "></script>
+    <script src="{{ asset('js/additional-methods.min.js') }} "></script>
+    <script src="{{ asset('js/select2.min.js') }} "></script>
+    
     @yield('js')
 </body>
 </html>

@@ -8,8 +8,7 @@ return [
     ],
 
     'role' => [
-        '0' => 'User',
-        '1' => 'Manager',
+        '0' => 'User',        
         '4' => 'Admin',
         '5' => 'Superadmin',
     ],
