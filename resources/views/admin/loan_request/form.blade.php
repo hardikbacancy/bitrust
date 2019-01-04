@@ -31,7 +31,9 @@
 </div>
 
 @if(isset($loanRequest))
+    @if(\Auth::user()->role!='0')
     {!! Form::mySelect('request_status', 'request_status', config('variables.boolean')) !!}
+    @endif
 @endif
 
 
