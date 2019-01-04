@@ -84,17 +84,17 @@ class AdminSettingController extends Controller
         return redirect()->route(ADMIN.'.adminsettings.index')->withSuccess(trans('app.success_update'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        AdminSetting::destroy($id);
+    // /**
+    //  * Remove the specified resource from storage.
+    //  *
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function destroy($id)
+    // {
+    //     AdminSetting::destroy($id);
 
-        return back()->withSuccess(trans('app.success_destroy'));
-    }
+    //     return back()->withSuccess(trans('app.success_destroy'));
+    // }
 
 }

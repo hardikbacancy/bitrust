@@ -38,4 +38,4 @@
 
 {!! Form::mySelect('active', 'Active', config('variables.boolean')) !!}
 
-{!! Form::myFileImage('avatar', 'Avatar', $img_url) !!}
+{!! Form::myFileImage('avatar', 'Photo', $img_url) !!}

@@ -59,16 +59,7 @@
                       <td class="actions">
                             <ul class="list-inline" style="margin-bottom:0px;">
                                 <li><a href="{{ route(ADMIN . '.adminsettings.edit', $item->id) }}" title="{{ trans('app.edit_title') }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a></li>
-                                <li>
-                                    {!! Form::open([
-                                        'class'=>'delete',
-                                        'url'  => route(ADMIN . '.adminsettings.destroy', $item->id),
-                                        'method' => 'DELETE',
-                                        ])
-                                    !!}
-                                    <!-- <button class="btn btn-danger btn-xs" title="{{ trans('app.delete_title') }}"><i class="fa fa-trash"></i></button> -->
-                                    {!! Form::close() !!}
-                                </li>
+                               
                             </ul>
                         </td>
       						</tr>
