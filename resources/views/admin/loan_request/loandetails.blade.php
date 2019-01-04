@@ -151,7 +151,7 @@
                     dataType: 'json',
                     type:'post',
                     success: function (res) {
-
+                        notification("Updated successfully.!", "success");
                     }
                 });
 

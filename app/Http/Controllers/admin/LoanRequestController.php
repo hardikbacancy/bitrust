@@ -126,7 +126,8 @@ class LoanRequestController extends Controller
                 $emi_amount_per_month = $emi_amount / $period;
                 $userLoanMgmtData = array();
                 for ($i = 1; $i <= $period; $i++) {
-                    $emi_date = date('Y-m-d', strtotime($i . 'month'));
+                    $firstDay=date('Y-m-d',strtotime("first day of this month"));
+                    $emi_date = date('Y-m-d', strtotime($i.'month', strtotime($firstDay)));
                     $userLoanMgmtData['user_id'] = $user_id;
                     $userLoanMgmtData['request_id'] = $id;
                     $userLoanMgmtData['emi_amount'] = $emi_amount_per_month;

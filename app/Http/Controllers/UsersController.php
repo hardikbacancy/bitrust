@@ -42,9 +42,8 @@ class UsersController extends Controller
         $this->validate($request, User::rules());
         $user=User::create($request->all());
         Mail::to($request->email)->send(new VerifyMail($user));
-        return redirect()->route(ADMIN.'.users.index')->withSuccess(trans('app.success_store'));
+        return redirect()->route(ADMIN.'.users.index')->withSuccess("User Added Successfully");
     }
-
     /**
      * Display the specified resource.
      *
@@ -55,7 +54,6 @@ class UsersController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      *

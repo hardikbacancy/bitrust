@@ -158,6 +158,8 @@
     <script src="{{ asset('js/jquery.validate.min.js') }} "></script>
     <script src="{{ asset('js/additional-methods.min.js') }} "></script>
     <script src="{{ asset('js/select2.min.js') }} "></script>
+    <script src="{{ asset('js/common.js') }}"></script>
+    <script src="{{ asset('js/jquery.noty.packaged.min.js') }}"></script>
     
     @yield('js')
 </body>
