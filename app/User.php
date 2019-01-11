@@ -119,8 +119,7 @@ class User extends Authenticatable
 
     public function userLoanDetails(){
         $adminSettings=AdminSetting::all()->toArray();
-        $roleId=auth()->user()->hasRole('user');
-        $userCount=User::where('role','=',$roleId)->count();
+        $userCount=User::where('role','=',0)->count();
         $loanAmount=LoanRequest::where('request_status','=',1)->sum('loan_amount');
         $availableBal=($adminSettings[0]['membership_fee']*$userCount)-$loanAmount;
         return $availableBal;

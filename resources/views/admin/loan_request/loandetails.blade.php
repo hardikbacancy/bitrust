@@ -14,6 +14,8 @@
                     <!-- /.box-header -->
                     <div class="box-body table-responsive no-padding">
                         @if (auth()->user()->hasRole('Superadmin|Admin'))
+                            <input type="hidden" name="requestId" id="requestId" value="{{$loanRequest[0]['id']}}">
+
                             <table id="tbl" class="table data-tables table-striped table-hover display select"
                                    cellspacing="0" width="100%">
                                 <thead>
@@ -26,6 +28,7 @@
                                     <th>EMI Status</th>
                                     <th>EMI Paid Date</th>
                                     <th>Penalty</th>
+                                    <th class="no-sort">Action</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
@@ -38,6 +41,7 @@
                                     <th></th>
                                     <th></th>
                                     <th></th>
+                                    <th class="actions"></th>
 
                                 </tr>
                                 </tfoot>
@@ -64,6 +68,17 @@
 
                                             <td><input type="text" name="penalty_{{$userLoanMgmts['id']}}" id="penalty"
                                                        value="{{$userLoanMgmts['penalty']}}"></td>
+
+                                        <td class="actions">
+                                            <ul class="list-inline" style="margin-bottom:0px;">
+
+                                                        <li class="delete" data="{{$userLoanMgmts['id']}}">
+                                                            <button class="btn btn-danger btn-xs"
+                                                                    title="{{ trans('app.delete_title') }}"><i
+                                                                        class="fa fa-trash"></i></button>
+                                                        </li>
+                                            </ul>
+                                        </td>
 
                                     </tr>
                                 @endforeach
@@ -121,13 +136,10 @@
 
                         @endif
                     </div>
-
                     <p>
                         @if (auth()->user()->hasRole('Superadmin|Admin'))
                            <button type="submit" class="update-btn">Update</button>
                         @endif
-
-
                     </p>
                 </form>
                 <!-- /.box-body -->
@@ -140,7 +152,6 @@
     <script>
         var table;
         $(document).ready(function (e) {
-
              table = $('#tbl').DataTable({
                 'columnDefs': [
                     {
@@ -162,6 +173,7 @@
                 e.preventDefault();
                 var data = table.$('input').serializeArray();
                 var rows_selected = table.column(0).checkboxes.selected();
+                var requestId=$("#requestId").val();
                 var check_select = [];
                 $.each(rows_selected, function(index, rowId){
                     var stripped = rowId.replace(/[^0-9]/g, '');
@@ -169,15 +181,16 @@
                 });
                 $.ajax({
                     url: '/admin/statusPenalty',
-                    data: {dataValue: data,check_select:check_select,"_token": "{{csrf_token()}}"},
+                    data: {dataValue: data,check_select:check_select,requestId:requestId,"_token": "{{csrf_token()}}"},
                     method: 'post',
                     dataType: 'json',
                     success: function (res) {
-                        location.reload();
+                        console.log(res);
+                         //location.reload();
                     }
                 });
             });
-
+            
             $(document.body).on('change', '.loan_switch_class', function () {
                 var val = $(this).is(":checked");
                 if (val) {
@@ -188,13 +201,16 @@
                     var id = $(this).attr('value');
                     var check_val = 0;
                 }
+
                 $.ajax({
                     url: '/admin/loan_request/loanStatusUpdate',
                     data: {'id': id, 'check_value': check_val, "_token": "{{csrf_token()}}"},
                     dataType: 'json',
                     type: 'post',
                     success: function (res) {
-                     notification("Updated successfully.!", "success");
+                        // console.log($(this).parent('tr').find('#emi_paid_date_44').html('e'));
+                        // $(this).parents('tr').find('#emi_paid_date_44').html('test');
+                     //notification("Updated successfully.!", "success");
                       $("#emi_paid_date_"+res.id).html(res.emi_paid_date);
                      //    table.clear();
                      //    table.rows.add(res);
@@ -202,10 +218,36 @@
                     }
                 });
             });
-
-
             renderBoolColumn('#tbl', 'bool');
             renderBoolColumn('#tb2', 'bool');
+            $(document.body).on('click', '.delete', function(e) {
+                e.preventDefault();
+                var id=$(this).attr('data');
+                var _this = $(this);
+                swal({
+                    title: 'Are you sure?',
+                    type: 'error',
+                    showCancelButton: true,
+                    confirmButtonColor: '#DD4B39',
+                    cancelButtonColor: '#00C0EF',
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: 'No',
+                    closeOnConfirm: false
+                }).catch(swal.noop).then(function(isConfirm) {
+                    if (isConfirm) {
+                        _this.closest("tr").remove();
+                        $.ajax({
+                            url: '/admin/deleteEmi',
+                            data: {id: id,"_token": "{{csrf_token()}}"},
+                            method: 'post',
+                            dataType: 'json',
+                            success: function (res) {
+                            }
+                        });
+                    }
+                });
+            });
         })
+
     </script>
 @stop

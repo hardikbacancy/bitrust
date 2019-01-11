@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
+use App\Models\admin\LoanRequest;
 use App\Models\admin\UserLoanMgmt;
 use Illuminate\Http\Request;
 
@@ -34,7 +35,10 @@ class StatusPenaltyController extends Controller
                 $userLoan->save();
             }
         }
+       // $loanRequest=LoanRequest::find($request->requestId)->toArray();
 
-        return json_encode($request->dataValue);
+        $loanMgt=UserLoanMgmt::where('request_id','=',$request->requestId)->get()->toArray();
+
+        return json_encode($loanMgt);
     }
 }

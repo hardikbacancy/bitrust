@@ -62,7 +62,7 @@ class LoanRequestController extends Controller
      */
     public function create()
     {
-        $userDetails = User::all()->toArray();
+        $userDetails = User::where('role','=',0)->get()->toArray();
         $adminSettings = AdminSetting::all()->toArray();
         return view('admin.loan_request.create', get_defined_vars());
     }
@@ -124,9 +124,9 @@ class LoanRequestController extends Controller
      */
     public function edit($id)
     {
+        $userDetails = User::where('role','=',0)->get()->toArray();
         if(auth()->user()->hasRole('Superadmin|Admin')){
             $loanRequest = LoanRequest::findOrFail($id);
-            $userDetails = User::all()->toArray();
             $adminSettings = AdminSetting::all()->toArray();
             return view('admin.loan_request.edit', get_defined_vars());
         }
@@ -134,10 +134,8 @@ class LoanRequestController extends Controller
             $userId=\Auth::user()->id;
             $loanRequest = LoanRequest::findOrFail($id);
             if($userId==$loanRequest->user_id){
-                $userDetails = User::all()->toArray();
                 $adminSettings = AdminSetting::all()->toArray();
                 return view('admin.loan_request.edit', get_defined_vars());
-
             }
             else{
                 return redirect('/admin');
@@ -195,12 +193,6 @@ class LoanRequestController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         UserLoanMgmt::where("request_id","=",$id)->delete();
@@ -240,6 +232,10 @@ class LoanRequestController extends Controller
         $userloanMgt->emi_paid_date = $emi_paid_date;
         $userloanMgt->save();
         return json_encode($userloanMgt);
+    }
+    public function deleteEmi(Request $request){
+        UserLoanMgmt::where("id","=",$request->id)->delete();
+        return json_encode("1");
     }
 
 }
