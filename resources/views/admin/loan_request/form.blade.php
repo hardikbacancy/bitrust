@@ -1,4 +1,4 @@
-@if(\Auth::user()->role!='0')
+@if (auth()->user()->hasRole('Superadmin|Admin'))
 <div class="form-group">
     <label for="user_id">Select User:</label>
     <select class="form-control" id="user_id" name="user_id">
@@ -31,7 +31,7 @@
 </div>
 
 @if(isset($loanRequest))
-    @if(\Auth::user()->role!='0')
+    @if (auth()->user()->hasRole('Superadmin|Admin'))
     {!! Form::mySelect('request_status', 'request_status', config('variables.boolean')) !!}
     @endif
 @endif

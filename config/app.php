@@ -184,6 +184,8 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         App\Providers\MacroServiceProvider::class,
         Teepluss\Restable\RestableServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class,
+
 
     ],
 

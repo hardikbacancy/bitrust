@@ -14,7 +14,7 @@
   $val=str_random(40);
 
 ?>
-
+<input type="hidden" name="email_verified_at" value="1">
 <input type="hidden" name="verification_code" value={{$val}}>
 {!! Form::myInput('text', 'name', 'Name') !!}
 

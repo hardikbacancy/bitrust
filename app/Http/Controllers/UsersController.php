@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Mail\VerifyMail;
+use App\Models\admin\AdminSetting;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -10,6 +11,10 @@ use Validator;
 
 class UsersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,8 +22,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $items = User::all();
-        return view('admin.users.index', compact('items'));
+        $users = User::all();
+        $adminSettings=AdminSetting::all()->toArray();
+        return view('admin.users.index',get_defined_vars());
     }
 
     /**
@@ -41,7 +47,7 @@ class UsersController extends Controller
     {
         $this->validate($request, User::rules());
         $user=User::create($request->all());
-        Mail::to($request->email)->send(new VerifyMail($user));
+//        Mail::to($request->email)->send(new VerifyMail($user));
         return redirect()->route(ADMIN.'.users.index')->withSuccess("User Added Successfully");
     }
     /**

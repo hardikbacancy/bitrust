@@ -13,6 +13,8 @@
         {{csrf_field()}}
         <input type="hidden" name="verification_code" value={{$val}}>
         <input type="hidden" name="active" value="1">
+        <input type="hidden" name="email_verified_at" value="1">
+
 
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }} has-feedback">
             <input type="text" class="form-control" placeholder="Full name" name="name" value="{{ old('name') }}">

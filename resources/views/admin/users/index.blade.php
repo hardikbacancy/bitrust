@@ -20,7 +20,7 @@
         <div class="col-xs-12">
             <div class="box" style="border:1px solid #d2d6de;">
                 <div class="box-header" style="background-color:#f5f5f5;border-bottom:1px solid #d2d6de;">
-                    <a class="btn btn-info" href="{{ route(ADMIN . '.users.create') }}" title="Add Item">
+                    <a class="btn btn-info" href="{{ route(ADMIN . '.users.create') }}" title="Add User">
                         <i class="fa fa-plus" style="vertical-align:middle"></i>
                     </a>
                 </div>
@@ -32,6 +32,7 @@
                         <tr>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Membership Fee</th>
                             <th>Role</th>
                             <th class='bool text-center'>Active</th>
                             <th class='bool text-center'>Email Verified</th>
@@ -44,28 +45,30 @@
                             <th></th>
                             <th></th>
                             <th></th>
+                            <th></th>
                             <th class="actions"></th>
                         </tr>
                         </tfoot>
 
                         <tbody>
-                        @foreach ($items as $item)
+                        @foreach ($users as $user)
                             <tr>
-                                <td><a href="{{ route(ADMIN . '.users.edit', $item->id) }}">{{ $item->name }}</a></td>
-                                <td>{{ $item->email }}</td>
-                                <td>{{ Helper::getRolename($item->role)  }}</td>
-                                <td>{{ $item->active }}</td>
-                                <td>{{ $item->email_verified_at }}</td>
+                                <td><a href="{{ route(ADMIN . '.users.edit', $user->id) }}">{{ $user->name }}</a></td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $adminSettings[0]['membership_fee'] }}</td>
+                                <td>{{ Helper::getRolename($user->role)  }}</td>
+                                <td>{{ $user->active }}</td>
+                                <td>{{ $user->email_verified_at }}</td>
                                 <td class="actions">
-                                    @if ( Auth::user()->rolename() === "Superadmin" || Auth::user()->role > $item->role)
+                                    @if ( Auth::user()->rolename() === "Superadmin" || Auth::user()->role > $user->role)
                                         <ul class="list-inline" style="margin-bottom:0px;">
-                                            <li><a href="{{ route(ADMIN . '.users.edit', $item->id) }}"
+                                            <li><a href="{{ route(ADMIN . '.users.edit', $user->id) }}"
                                                    title="{{ trans('app.edit_title') }}" class="btn btn-primary btn-xs"><i
                                                             class="fa fa-pencil"></i></a></li>
                                             <li>
                                                 {!! Form::open([
                                                     'class'=>'delete',
-                                                    'url'  => route(ADMIN . '.users.destroy', $item->id),
+                                                    'url'  => route(ADMIN . '.users.destroy', $user->id),
                                                     'method' => 'DELETE',
                                                     ])
                                                 !!}
@@ -77,7 +80,7 @@
                                                 {!! Form::close() !!}
                                             </li>
                                         </ul>
-                                    @elseif (Auth::user()->id === $item->id)
+                                    @elseif (Auth::user()->id === $user->id)
                                         <ul class="list-inline" style="margin-bottom:0px;">
                                             <li>
                                                 <a href="{{ url('admin\profileedit', auth()->id()) }}"

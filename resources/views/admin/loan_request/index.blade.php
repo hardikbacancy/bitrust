@@ -27,14 +27,22 @@
                         <tr>
                             <th>Name</th>
                             <th>Loan Amount</th>
-                            <th>Tenuar Period</th>
+                            <th>EMI Period</th>
                             <th>Interest Rate</th>
+                            <th>Loan Amount(Including Interest)</th>
+                            <th>EMI Paid Amount</th>
+                            <th>EMI Remainning Amount</th>
+                            <th>Loan Status</th>
                             <th class='bool text-center'>Request Status</th>
                             <th class="no-sort">Action</th>
                         </tr>
                         </thead>
                         <tfoot>
                         <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
                             <th></th>
                             <th></th>
                             <th></th>
@@ -50,6 +58,10 @@
                                 <td>{{$loanRequests['loan_amount']}}{{"$"}}</td>
                                 <td>{{$loanRequests['tenuar_period']}} {{"Month"}}</td>
                                 <td>{{$loanRequests['interest_rate']}} {{"$"}}</td>
+                                <td>{{$loanRequests['loan_amount']*$loanRequests['interest_rate']/100+$loanRequests['loan_amount']}} {{"$"}}</td>
+                                <td>{{$loanRequests['paidEmiAmount']}}</td>
+                                <td>{{$loanRequests['remainningEmiAmount']}}</td>
+                                <td>{{$loanRequests['completed']}}</td>
                                 <td>{{$loanRequests['request_status']}}</td>
                                 <td class="actions">
                                         <ul class="list-inline" style="margin-bottom:0px;">

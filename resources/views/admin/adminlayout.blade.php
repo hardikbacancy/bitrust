@@ -13,9 +13,13 @@
         <link rel="stylesheet" href="{{ asset('css/admin-vendor.css') }}">
         <link rel="stylesheet" href="{{ asset('css/admin-custom.css') }}">
     @endif
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin-common.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dataTables.checkboxes.css') }}">
 
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('css/datepicker.css') }}">
+
 
     @yield('css')
 
@@ -160,7 +164,9 @@
     <script src="{{ asset('js/select2.min.js') }} "></script>
     <script src="{{ asset('js/common.js') }}"></script>
     <script src="{{ asset('js/jquery.noty.packaged.min.js') }}"></script>
-    
+
+    <script src="{{ asset('js/dataTables.checkboxes.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/bootstrap-datepicker.js')}}"></script>
     @yield('js')
 </body>
 </html>
