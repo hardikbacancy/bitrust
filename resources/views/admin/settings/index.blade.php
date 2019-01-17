@@ -27,9 +27,9 @@
 	        <table id="tbl" class="table data-tables table-striped table-hover" cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <th>Penalty</th>
-                    <th>Interest Rate</th>
-                    <th>Membership Fee</th>
+                    <th>Penalty(in $)</th>
+                    <th>Interest Rate(in %)</th>
+                    <th>Membership Fee(in $)</th>
                     <th>Updated At</th>
                     <th class="no-sort"></th>
                 </tr>
@@ -48,10 +48,10 @@
                       <td><a href="{{ route(ADMIN . '.adminsettings.edit', $item->id) }}">{{ $item->penalty }}</a></td>
                       
                       <td>
-                          {{ $item->interest_rate }}                      
+                          {{ $item->interest_rate }}
                       </td> 
                       <td>
-                          {{ $item->membership_fee }}                      
+                          {{ $item->membership_fee }}
                       </td> 
                        <td>
                           {{ $item->updated_at }}                      

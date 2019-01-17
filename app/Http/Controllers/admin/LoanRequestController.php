@@ -87,20 +87,24 @@ class LoanRequestController extends Controller
         else {
             $userloanDetails=new User();
             $totalAvailBal=$userloanDetails->userLoanDetails();
+            $interest=$userloanDetails->getInterest();
             if($totalAvailBal>=($request->loan_amount)){
                 if(auth()->user()->hasRole('User')){
                     $user_id=\Auth::user()->id;
                     $requestAll=$request->all();
                     $requestAll['user_id']=$user_id;
+                    $requestAll['interest_rate']=$interest;
                     LoanRequest::create($requestAll);
                 }
                 else{
-                    LoanRequest::create($request->all());
+                    $requestAll=$request->all();
+                    $requestAll['interest_rate']=$interest;
+                    LoanRequest::create($requestAll);
                 }
                 return redirect()->route(ADMIN . '.loan_request.index')->withSuccess("Successfully Added");
             }
             else{
-                return redirect()->route(ADMIN . '.loan_request.create')->withSuccess("Balance is not available for loan");
+                return redirect()->route(ADMIN . '.loan_request.create')->with('message','Balance is not available for loan');
             }
         }
     }
@@ -163,13 +167,16 @@ class LoanRequestController extends Controller
         }
         else {
             $user_id = $request->user_id;
+            $userloanDetails=new User();
+            $interest=$userloanDetails->getInterest();
+
             if ($request->request_status == '1') {
                 $userloanDetails=new User();
                 $totalAvailBal=$userloanDetails->userLoanDetails();
                 if($totalAvailBal>=($request->loan_amount)) {
                     $period = $request->tenuar_period;
                     $loan_amount = $request->loan_amount;
-                    $interest_rate = $request->interest_rate;
+                    $interest_rate = $interest;
                     $emi_amount = ($loan_amount * $interest_rate) / 100 + $loan_amount;
                     $emi_amount_per_month = $emi_amount / $period;
                     $userLoanMgmtData = array();
@@ -230,6 +237,7 @@ class LoanRequestController extends Controller
         $userloanMgt = UserLoanMgmt::findOrFail($request->id);
         $userloanMgt->tenuar_status = $request->check_value;
         $userloanMgt->emi_paid_date = $emi_paid_date;
+        $userloanMgt->penalty = $request->penalty;
         $userloanMgt->save();
         return json_encode($userloanMgt);
     }

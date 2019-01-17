@@ -39,23 +39,12 @@
                             <th class="no-sort"></th>
                         </tr>
                         </thead>
-                        <tfoot>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th class="actions"></th>
-                        </tr>
-                        </tfoot>
-
                         <tbody>
                         @foreach ($users as $user)
                             <tr>
                                 <td><a href="{{ route(ADMIN . '.users.edit', $user->id) }}">{{ $user->name }}</a></td>
                                 <td>{{ $user->email }}</td>
-                                <td>{{ $adminSettings[0]['membership_fee'] }}</td>
+                                <td>{{ $adminSettings[0]['membership_fee'] }}{{"$"}}</td>
                                 <td>{{ Helper::getRolename($user->role)  }}</td>
                                 <td>{{ $user->active }}</td>
                                 <td>{{ $user->email_verified_at }}</td>

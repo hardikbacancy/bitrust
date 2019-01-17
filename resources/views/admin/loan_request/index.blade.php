@@ -26,39 +26,25 @@
                         <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Loan Amount</th>
-                            <th>EMI Period</th>
-                            <th>Interest Rate</th>
-                            <th>Loan Amount(Including Interest)</th>
-                            <th>EMI Paid Amount</th>
-                            <th>EMI Remainning Amount</th>
+                            <th>Loan Amount(in $)</th>
+                            <th>EMI Period(in Month)</th>
+                            <th>Interest Rate(in %)</th>
+                            <th>Loan Amount(Including Interest in $)</th>
+                            <th>EMI Paid Amount(in $)</th>
+                            <th>EMI Remainning Amount(in $)</th>
                             <th>Loan Status</th>
                             <th class='bool text-center'>Request Status</th>
                             <th class="no-sort">Action</th>
                         </tr>
                         </thead>
-                        <tfoot>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th class="actions"></th>
-                        </tr>
-                        </tfoot>
                         <tbody>
                         @foreach($loanRequest as $loanRequests)
                             <tr>
                                 <td>{{$loanRequests['name']}}</td>
-                                <td>{{$loanRequests['loan_amount']}}{{"$"}}</td>
-                                <td>{{$loanRequests['tenuar_period']}} {{"Month"}}</td>
-                                <td>{{$loanRequests['interest_rate']}} {{"$"}}</td>
-                                <td>{{$loanRequests['loan_amount']*$loanRequests['interest_rate']/100+$loanRequests['loan_amount']}} {{"$"}}</td>
+                                <td>{{$loanRequests['loan_amount']}}</td>
+                                <td>{{$loanRequests['tenuar_period']}}</td>
+                                <td>{{$loanRequests['interest_rate']}} </td>
+                                <td>{{$loanRequests['loan_amount']*$loanRequests['interest_rate']/100+$loanRequests['loan_amount']}}</td>
                                 <td>{{$loanRequests['paidEmiAmount']}}</td>
                                 <td>{{$loanRequests['remainningEmiAmount']}}</td>
                                 <td>{{$loanRequests['completed']}}</td>
@@ -68,7 +54,7 @@
 
                                            @if($loanRequests['request_status']=='1')
                                             <li>
-                                                <a href="/admin/loan_request/loandetails/{{$loanRequests['id']}}"
+                                                <a href="{{route(ADMIN . '.loan_request.loan_details', $loanRequests['id'])}}"
                                                    title="{{ "View Details" }}" class="btn btn-primary btn-xs"><i
                                                             class="fa fa-eye"></i>
                                                 </a>

@@ -5,6 +5,13 @@
 @stop
 
 @section('content')
+    @if(session()->has('message'))
+        <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {!! session('message') !!}
+        </div>
+    @endif
+
 <div class="row">
   <div class="col-sm-12">
     <div class="box" style="border:1px solid #d2d6de;">

@@ -15,6 +15,7 @@
     @endif
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin-common.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dataTables.checkboxes.css') }}">
 
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">

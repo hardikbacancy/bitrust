@@ -1,7 +1,6 @@
 <?php
 
 namespace App;
-
 use App\Models\admin\AdminSetting;
 use App\Models\admin\LoanRequest;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -123,6 +122,11 @@ class User extends Authenticatable
         $loanAmount=LoanRequest::where('request_status','=',1)->sum('loan_amount');
         $availableBal=($adminSettings[0]['membership_fee']*$userCount)-$loanAmount;
         return $availableBal;
+    }
+    public function getInterest(){
+        $adminSettings=AdminSetting::all()->toArray();
+        $interest_rate=$adminSettings[0]['interest_rate'];
+        return $interest_rate;
     }
 
 }

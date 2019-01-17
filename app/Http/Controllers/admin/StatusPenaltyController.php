@@ -15,30 +15,22 @@ class StatusPenaltyController extends Controller
      */
     public function statusPenalty(Request $request)
     {
-        foreach($request->dataValue as $key=>$value){
-            $partsId = explode('_', $value['name']);
-            if($partsId[0]=='penalty'){
-                $id=$partsId[1];
-                if(!empty($value['value'])){
-                    $penalty = UserLoanMgmt::find($id);
-                    $penalty->penalty = $value['value'];
-                    $penalty->save();
-                }
-            }
-        }
-        if(!empty($request->check_select)) {
-            foreach ($request->check_select as $key => $value) {
+        foreach($request->check_select as $key=>$value){
+            $partsId = explode('_',$value);
+            if(!empty($partsId[0])){
+                $userLoan = UserLoanMgmt::find($partsId[0]);
                 $emi_paid_date = date('Y-m-d');
-                $userLoan = UserLoanMgmt::find($value);
                 $userLoan->emi_paid_date = $emi_paid_date;
                 $userLoan->tenuar_status = '1';
                 $userLoan->save();
             }
+            if(!empty($partsId[1])) {
+                $userLoan = UserLoanMgmt::find($partsId[0]);
+                $userLoan->penalty = $partsId[1];
+                $userLoan->save();
+            }
         }
-       // $loanRequest=LoanRequest::find($request->requestId)->toArray();
-
         $loanMgt=UserLoanMgmt::where('request_id','=',$request->requestId)->get()->toArray();
-
         return json_encode($loanMgt);
     }
 }

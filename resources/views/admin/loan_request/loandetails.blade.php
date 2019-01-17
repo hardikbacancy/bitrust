@@ -11,6 +11,11 @@
         <div class="col-xs-12">
             <div class="box" style="border:1px solid #d2d6de;">
                 <form id="form-submit" method="POST">
+                    <p style="margin-top:10px;">
+                        @if (auth()->user()->hasRole('Superadmin|Admin'))
+                            <button type="submit" id="update_bulk" class="update-btn" disabled>Update</button>
+                        @endif
+                    </p>
                     <!-- /.box-header -->
                     <div class="box-body table-responsive no-padding">
                         @if (auth()->user()->hasRole('Superadmin|Admin'))
@@ -20,14 +25,14 @@
                                    cellspacing="0" width="100%">
                                 <thead>
                                 <tr>
-                                    <th></th>
-                                    <th>Amount(Per Month)</th>
-                                    <th>Interest Amount(Per Month)</th>
-                                    <th>EMI Amount(Per Month)</th>
+                                    <th class="checkbox_selection"></th>
+                                    <th>Amount(Per Month in $)</th>
+                                    <th>Interest Amount(Per Month in $)</th>
+                                    <th>EMI Amount(Per Month in $)</th>
                                     <th>EMI Date</th>
+                                    <th>Penalty(in $)</th>
                                     <th>EMI Status</th>
                                     <th>EMI Paid Date</th>
-                                    <th>Penalty</th>
                                     <th class="no-sort">Action</th>
                                 </tr>
                                 </thead>
@@ -48,11 +53,13 @@
                                 <tbody>
                                 @foreach($userLoanMgmt as $userLoanMgmts)
                                     <tr>
-                                        <td>{{$userLoanMgmts['id']}}></td>
+                                        <td class="checkbox_selection">{{$userLoanMgmts['id']}}></td>
                                         <td>{{floor($loanRequest[0]['loan_amount']/$loanRequest[0]['tenuar_period'])}}</td>
                                         <td>{{$userLoanMgmts['emi_amount']-floor($loanRequest[0]['loan_amount']/$loanRequest[0]['tenuar_period'])}}</td>
                                         <td>{{$userLoanMgmts['emi_amount']}}</td>
                                         <td>{{$userLoanMgmts['tenuar_date']}}</td>
+                                        <td><input type="text" name="penalty_{{$userLoanMgmts['id']}}" id="penalty_{{$userLoanMgmts['id']}}"
+                                                   value="{{$userLoanMgmts['penalty']}}"></td>
                                         <td>
                                             <label class="switch">
 
@@ -66,8 +73,7 @@
                                         </td>
                                         <td id="emi_paid_date_{{$userLoanMgmts['id']}}">{{$userLoanMgmts['emi_paid_date']}}</td>
 
-                                            <td><input type="text" name="penalty_{{$userLoanMgmts['id']}}" id="penalty"
-                                                       value="{{$userLoanMgmts['penalty']}}"></td>
+
 
                                         <td class="actions">
                                             <ul class="list-inline" style="margin-bottom:0px;">
@@ -89,14 +95,13 @@
                                    cellspacing="0" width="100%">
                                 <thead>
                                 <tr>
-                                    <th>Amount(Per Month)</th>
-                                    <th>Interest Amount(Per Month)</th>
-                                    <th>EMI Amount(Per Month)</th>
+                                    <th>Amount(Per Month in $)</th>
+                                    <th>Interest Amount(Per Month in $)</th>
+                                    <th>EMI Amount(Per Month in $)</th>
                                     <th>EMI Date</th>
+                                    <th>Penalty(in $)</th>
                                     <th>EMI Status</th>
                                     <th>EMI Paid Date</th>
-                                    <th>Penalty</th>
-
                                 </tr>
                                 </thead>
                                 <tfoot>
@@ -118,6 +123,7 @@
                                         <td>{{$userLoanMgmts['emi_amount']-floor($loanRequest[0]['loan_amount']/$loanRequest[0]['tenuar_period'])}}</td>
                                         <td>{{$userLoanMgmts['emi_amount']}}</td>
                                         <td>{{$userLoanMgmts['tenuar_date']}}</td>
+                                        <td>@if(isset($userLoanMgmts['penalty'])){{$userLoanMgmts['penalty']}} @endif</td>
                                         <td>
 
                                            @if($userLoanMgmts['tenuar_status']=='1') <p>Paid</p>
@@ -127,8 +133,6 @@
 
                                         </td>
                                         <td>{{$userLoanMgmts['emi_paid_date']}}</td>
-                                        <td>{{$userLoanMgmts['penalty']}}</td>
-
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -136,11 +140,7 @@
 
                         @endif
                     </div>
-                    <p>
-                        @if (auth()->user()->hasRole('Superadmin|Admin'))
-                           <button type="submit" class="update-btn">Update</button>
-                        @endif
-                    </p>
+
                 </form>
                 <!-- /.box-body -->
             </div>
@@ -152,7 +152,7 @@
     <script>
         var table;
         $(document).ready(function (e) {
-             table = $('#tbl').DataTable({
+            table = $('#tbl').DataTable({
                 'columnDefs': [
                     {
                         'targets': 0,
@@ -168,7 +168,6 @@
             });
 
             var table_2 = $('#tb2').DataTable();
-
             $('#form-submit').on('submit', function (e) {
                 e.preventDefault();
                 var data = table.$('input').serializeArray();
@@ -177,44 +176,49 @@
                 var check_select = [];
                 $.each(rows_selected, function(index, rowId){
                     var stripped = rowId.replace(/[^0-9]/g, '');
-                    check_select.push(stripped);
+                    var penalty=$("#penalty_"+stripped).val();
+                    check_select.push(stripped+"_"+penalty);
                 });
-                $.ajax({
-                    url: '/admin/statusPenalty',
-                    data: {dataValue: data,check_select:check_select,requestId:requestId,"_token": "{{csrf_token()}}"},
-                    method: 'post',
-                    dataType: 'json',
-                    success: function (res) {
-                        console.log(res);
-                         //location.reload();
-                    }
-                });
+
+                if(check_select.length>0) {
+                    $.ajax({
+                        url: '{{route(ADMIN.'.statusPenalty')}}',
+                        data: {
+                            check_select: check_select,
+                            requestId: requestId,
+                            "_token": "{{csrf_token()}}"
+                        },
+                        method: 'post',
+                        dataType: 'json',
+                        success: function (res) {
+                            location.reload();
+                        }
+                    });
+                }
+                else{
+                    alert("please select at least one checkbox");
+                }
             });
-            
             $(document.body).on('change', '.loan_switch_class', function () {
                 var val = $(this).is(":checked");
                 if (val) {
                     var id = $(this).attr('value');
+                    var penalty=$("#penalty_"+id).val();
                     var check_val = 1;
                 }
                 else {
                     var id = $(this).attr('value');
                     var check_val = 0;
+                    var penalty=$("#penalty_"+id).val();
                 }
 
                 $.ajax({
-                    url: '/admin/loan_request/loanStatusUpdate',
-                    data: {'id': id, 'check_value': check_val, "_token": "{{csrf_token()}}"},
+                    url: '{{route(ADMIN.'.loanStatusUpdate')}}',
+                    data: {'id': id, 'check_value': check_val,'penalty':penalty,"_token": "{{csrf_token()}}"},
                     dataType: 'json',
                     type: 'post',
                     success: function (res) {
-                        // console.log($(this).parent('tr').find('#emi_paid_date_44').html('e'));
-                        // $(this).parents('tr').find('#emi_paid_date_44').html('test');
-                     //notification("Updated successfully.!", "success");
                       $("#emi_paid_date_"+res.id).html(res.emi_paid_date);
-                     //    table.clear();
-                     //    table.rows.add(res);
-                     //    table.draw();
                     }
                 });
             });
@@ -237,7 +241,7 @@
                     if (isConfirm) {
                         _this.closest("tr").remove();
                         $.ajax({
-                            url: '/admin/deleteEmi',
+                            url: '{{route(ADMIN.'.deleteEmi')}}',
                             data: {id: id,"_token": "{{csrf_token()}}"},
                             method: 'post',
                             dataType: 'json',
@@ -247,6 +251,23 @@
                     }
                 });
             });
+
+            $(document.body).on('change', '.checkbox_selection', function(e) {
+                var rows_selected = table.column(0).checkboxes.selected();
+                var check_select = [];
+                $.each(rows_selected, function(index, rowId){
+                    var stripped = rowId.replace(/[^0-9]/g, '');
+                    check_select.push(stripped);
+                });
+
+                if(check_select.length>0){
+                    $('#update_bulk').attr('disabled' , false);
+                }
+                else{
+                    $('#update_bulk').attr('disabled' , true);
+                }
+            });
+
         })
 
     </script>
