@@ -124,8 +124,8 @@
             var table = $('.data-tables').DataTable({
                 "columnDefs": [{
                     "targets": 'no-sort',
-                    "orderable": false,
                 }],
+                "order": []
             });
             //replace bool column to checkbox
             renderBoolColumn('#tbl', 'bool');

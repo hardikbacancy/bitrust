@@ -41,18 +41,11 @@
             @endif
         </div>
 
-
-
         <div class="row" style="margin-top:30px;margin-bottom:20px;">
-            <div class="col-xs-8">
-                <div class="checkbox icheck">
-                    <label>
-                        <input type="checkbox" name="remember" > {{ trans('app.remember_me') }}
-                    </label>
-                </div>
+            <div class="col-xs-6">
             </div>
             <!-- /.col -->
-            <div class="col-xs-4">
+            <div class="col-xs-6">
                 <button type="submit" class="btn btn-primary btn-block btn-flat">{{ trans('app.login_btn') }}</button>
             </div>
             <!-- /.col -->

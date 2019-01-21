@@ -45,7 +45,7 @@
 
       					@foreach ($items as $item)
       						<tr>
-                      <td><a href="{{ route(ADMIN . '.adminsettings.edit', $item->id) }}">{{ $item->penalty }}</a></td>
+                      <td>{{ $item->penalty }}</td>
                       
                       <td>
                           {{ $item->interest_rate }}

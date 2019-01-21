@@ -1,7 +1,7 @@
 @extends('admin.adminlayout')
 
 @section('page-header')
-  Laon Management <small>new</small>
+  Loan Management <small>new</small>
 @stop
 
 @section('content')

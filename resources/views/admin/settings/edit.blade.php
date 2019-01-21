@@ -17,7 +17,7 @@
             ])
         !!}
 
-        <div class="box-body" style="margin:10px;">
+        <div class="box-body number_class" style="margin:10px;">
           @include('admin.settings.form')
         </div>
        
@@ -51,6 +51,33 @@
             },
         }
     });
+        $("body").on('keypress', '.number_class', function (event) {
+            if(isNumberWithoutDot(event, this)){
+                return true;
+            }
+            else{
+                return false;
+            }
+        });
+
+        function isNumberWithoutDot(evt, element) {
+
+            var charCode = (evt.which) ? evt.which : event.keyCode;
+
+            if (charCode == 8){
+                return true;
+            }
+            if (
+                (charCode != 46 || $(element).val().indexOf('.') != -1) && // “.” CHECK DOT, AND ONLY ONE.
+                (charCode < 48 || charCode > 57)){
+                return false;
+            }
+
+            return true;
+        }
+
+
+
 });
 </script>
 

@@ -28,7 +28,7 @@ Route::group(['prefix' => ADMIN, 'as' => ADMIN . '.', 'middleware'=>['auth']], f
 });
 
 
-Route::group(['prefix' => ADMIN, 'as' => ADMIN . '.', 'middleware'=>['auth','Role:Superadmin']], function() {
+Route::group(['prefix' => ADMIN, 'as' => ADMIN . '.', 'middleware'=>['auth','Role:Superadmin|Admin']], function() {
 	/* Admin settings */
     Route::get('/adminsettings', 'admin\AdminSettingController@index')->name('adminsettings.index');
     Route::get('/adminsettings/{id}/edit', 'admin\AdminSettingController@edit')->name('adminsettings.edit');

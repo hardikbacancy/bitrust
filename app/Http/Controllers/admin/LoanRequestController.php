@@ -18,10 +18,12 @@ class LoanRequestController extends Controller
     public function index()
     {
         if(auth()->user()->hasRole('User')){
-            $loanRequest=LoanRequest::where('user_id','=',\Auth::user()->id)->get()->toArray();
+            $loanRequest=LoanRequest::where('user_id','=',\Auth::user()->id)->orderBy('updated_at', 'desc')->get()->toArray();
         }
         else {
-            $loanRequest = LoanRequest::all()->toArray();
+            $loanRequest = LoanRequest::orderBy('updated_at', 'desc')->get()->toArray();
+
+//            $loanRequest = LoanRequest::all()->toArray();
         }
         foreach ($loanRequest as $key => $value) {
             $loanRequests = User::find($value['user_id'])->toArray();
@@ -52,6 +54,12 @@ class LoanRequestController extends Controller
             $loanRequest[$key]['paidEmiAmount'] = floor($paidEmiAmount);
             $loanRequest[$key]['remainningEmiAmount'] = floor($laon_amount_including_interest-$paidEmiAmount);
         }
+
+//        echo "<pre>";
+//        print_r($loanRequest);
+//        die;
+//
+
         return view('admin.loan_request.index', get_defined_vars());
     }
 

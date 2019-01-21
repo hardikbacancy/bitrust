@@ -1,7 +1,7 @@
 @extends('admin.adminlayout')
 
 @section('page-header')
-  Laon Request <small>new</small>
+  Loan Request <small>new</small>
 @stop
 
 @section('content')
@@ -22,7 +22,7 @@
             ])
         !!}
 
-        <div class="box-body" style="margin:10px;">
+        <div class="box-body number_class" style="margin:10px;">
           @include('admin.loan_request.form')
         </div>
 
@@ -54,6 +54,24 @@
             },
         }
     });
+        $("body").on('keypress', '.number_class', function (event) {
+            if(isNumberWithoutDot(event, this)){
+                return true;
+            }
+            else{
+                return false;
+            }
+        });
+        function isNumberWithoutDot(evt, element) {
+            var charCode = (evt.which) ? evt.which : event.keyCode;
+            if (charCode == 8) {
+                return true;
+            }
+            if ((charCode < 48 || charCode > 57)) {
+                return false;
+            }
+            return true;
+        }
 
 
 

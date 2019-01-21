@@ -22,7 +22,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::orderBy('updated_at', 'desc')->get();
         $adminSettings=AdminSetting::all()->toArray();
         return view('admin.users.index',get_defined_vars());
     }
@@ -46,7 +46,11 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, User::rules());
-        $user=User::create($request->all());
+        $userloanDetails=new User();
+        $memebershipFee=$userloanDetails->getMembershipFees();
+        $requestAll=$request->all();
+        $requestAll['membership_fees']=$memebershipFee;
+        $user=User::create($requestAll);
 //        Mail::to($request->email)->send(new VerifyMail($user));
         return redirect()->route(ADMIN.'.users.index')->withSuccess("User Added Successfully");
     }

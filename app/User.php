@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role', 'active', 'avatar','mobile','verification_code','gender','email_verified_at'
+        'name', 'email', 'password', 'role', 'active', 'avatar','mobile','verification_code','gender','email_verified_at','membership_fees'
     ];
 
     /**
@@ -120,7 +120,9 @@ class User extends Authenticatable
         $adminSettings=AdminSetting::all()->toArray();
         $userCount=User::where('role','=',0)->count();
         $loanAmount=LoanRequest::where('request_status','=',1)->sum('loan_amount');
-        $availableBal=($adminSettings[0]['membership_fee']*$userCount)-$loanAmount;
+        $totalMembershipFees = User::where('role','=',0)->sum('membership_fees');
+
+        $availableBal=$totalMembershipFees-$loanAmount;
         return $availableBal;
     }
     public function getInterest(){
@@ -128,5 +130,9 @@ class User extends Authenticatable
         $interest_rate=$adminSettings[0]['interest_rate'];
         return $interest_rate;
     }
-
+    public function getMembershipFees(){
+        $adminSettings=AdminSetting::all()->toArray();
+        $membership_fee=$adminSettings[0]['membership_fee'];
+        return $membership_fee;
+    }
 }

@@ -27,7 +27,7 @@
                         <tr>
                             <th>Name</th>
                             <th>Loan Amount</th>
-                            <th>Tenuar Period</th>
+                            <th>Tenure Period</th>
                             <th>Interest Rate</th>
                             <th class='bool text-center'>Request Status</th>
                             <th class="no-sort">Action</th>

@@ -30,6 +30,8 @@ class DashboardController extends Controller
             $userCount = User::where('role', '=', '0')->count();
             $loanAmount = LoanRequest::where('request_status', '=', 1)->sum('loan_amount');
             $loanAmountDetails = LoanRequest::select('id','user_id','loan_amount','tenuar_period')->where('request_status', '=', 1)->get()->toArray();
+            $totalMembershipFees = User::where('role','=',0)->sum('membership_fees');
+
             $profit=0;
             if(!empty($loanAmountDetails)){
                foreach ($loanAmountDetails as $loanAmountDetail){

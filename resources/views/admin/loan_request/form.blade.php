@@ -11,7 +11,7 @@
 @endif
 {!! Form::myInput('text', 'loan_amount', 'Loan Amount') !!}
 <div class="form-group">
-    <label for="tenuar_period">Tenuar Period:</label>
+    <label for="tenuar_period">Tenure Period:</label>
     <select class="form-control" id="tenuar_period" name="tenuar_period">
         <option value="6" @if(isset($loanRequest)) @if($loanRequest['tenuar_period']=='6') selected @endif @endif>
             6-Month
@@ -27,7 +27,7 @@
 
 @if(isset($loanRequest))
     @if (auth()->user()->hasRole('Superadmin|Admin'))
-    {!! Form::mySelect('request_status', 'request_status', config('variables.boolean')) !!}
+    {!! Form::mySelect('request_status', 'Request Status', config('variables.boolean')) !!}
     @endif
 @endif
 

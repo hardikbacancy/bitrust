@@ -53,7 +53,7 @@
                                 <tbody>
                                 @foreach($userLoanMgmt as $userLoanMgmts)
                                     <tr>
-                                        <td class="checkbox_selection">{{$userLoanMgmts['id']}}></td>
+                                        <td class="checkbox_selection">{{$userLoanMgmts['id']}}</td>
                                         <td>{{floor($loanRequest[0]['loan_amount']/$loanRequest[0]['tenuar_period'])}}</td>
                                         <td>{{$userLoanMgmts['emi_amount']-floor($loanRequest[0]['loan_amount']/$loanRequest[0]['tenuar_period'])}}</td>
                                         <td>{{$userLoanMgmts['emi_amount']}}</td>
@@ -71,7 +71,7 @@
                                                 <span class="slider round"></span>
                                             </label>
                                         </td>
-                                        <td id="emi_paid_date_{{$userLoanMgmts['id']}}">{{$userLoanMgmts['emi_paid_date']}}</td>
+                                        <td id="emi_paid_date_{{$userLoanMgmts['id']}}">@if(isset($userLoanMgmts['emi_paid_date'])){{$userLoanMgmts['emi_paid_date']}} @else {{"-"}}@endif</td>
 
 
 
@@ -123,7 +123,7 @@
                                         <td>{{$userLoanMgmts['emi_amount']-floor($loanRequest[0]['loan_amount']/$loanRequest[0]['tenuar_period'])}}</td>
                                         <td>{{$userLoanMgmts['emi_amount']}}</td>
                                         <td>{{$userLoanMgmts['tenuar_date']}}</td>
-                                        <td>@if(isset($userLoanMgmts['penalty'])){{$userLoanMgmts['penalty']}} @endif</td>
+                                        <td>@if(isset($userLoanMgmts['penalty'])){{$userLoanMgmts['penalty']}} @else {{"-"}}@endif</td>
                                         <td>
 
                                            @if($userLoanMgmts['tenuar_status']=='1') <p>Paid</p>
@@ -132,7 +132,7 @@
                                             @endif
 
                                         </td>
-                                        <td>{{$userLoanMgmts['emi_paid_date']}}</td>
+                                        <td>@if(isset($userLoanMgmts['emi_paid_date'])){{$userLoanMgmts['emi_paid_date']}}@else {{"-"}} @endif</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -218,7 +218,13 @@
                     dataType: 'json',
                     type: 'post',
                     success: function (res) {
-                      $("#emi_paid_date_"+res.id).html(res.emi_paid_date);
+                        if(res.emi_paid_date) {
+                            $("#emi_paid_date_" + res.id).html(res.emi_paid_date);
+                        }
+                        else{
+                            $("#emi_paid_date_" + res.id).html("-");
+
+                        }
                     }
                 });
             });

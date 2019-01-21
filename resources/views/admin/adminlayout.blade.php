@@ -165,7 +165,6 @@
     <script src="{{ asset('js/select2.min.js') }} "></script>
     <script src="{{ asset('js/common.js') }}"></script>
     <script src="{{ asset('js/jquery.noty.packaged.min.js') }}"></script>
-
     <script src="{{ asset('js/dataTables.checkboxes.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/bootstrap-datepicker.js')}}"></script>
     @yield('js')

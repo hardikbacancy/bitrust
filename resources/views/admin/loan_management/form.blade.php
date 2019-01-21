@@ -8,7 +8,7 @@
 </div>
 
 {!! Form::myInput('text', 'loan_amount', 'Loan Amount') !!}
-{!! Form::myInput('text', 'tenuar_period', 'Tenuar Period') !!}
+{!! Form::myInput('text', 'tenuar_period', 'Tenure Period') !!}
 {!! Form::myInput('text', 'interest_rate', 'Interest Rate') !!}
 
 {!! Form::mySelect('request_status', 'request_status', config('variables.boolean')) !!}

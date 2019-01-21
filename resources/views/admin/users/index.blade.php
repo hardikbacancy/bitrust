@@ -32,7 +32,7 @@
                         <tr>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Membership Fee</th>
+                            <th>Membership Fee(in $)</th>
                             <th>Role</th>
                             <th class='bool text-center'>Active</th>
                             <th class='bool text-center'>Email Verified</th>
@@ -44,7 +44,7 @@
                             <tr>
                                 <td><a href="{{ route(ADMIN . '.users.edit', $user->id) }}">{{ $user->name }}</a></td>
                                 <td>{{ $user->email }}</td>
-                                <td>{{ $adminSettings[0]['membership_fee'] }}{{"$"}}</td>
+                                <td>{{ $user->membership_fees }}</td>
                                 <td>{{ Helper::getRolename($user->role)  }}</td>
                                 <td>{{ $user->active }}</td>
                                 <td>{{ $user->email_verified_at }}</td>
@@ -99,8 +99,8 @@
             var table = $('.data-tables').DataTable({
                 "columnDefs": [{
                     "targets": 'no-sort',
-                    "orderable": false,
                 }],
+                "order": []
             });
             //replace bool column to checkbox
             renderBoolColumn('#tbl', 'bool');
