@@ -37,6 +37,7 @@ Route::group(['prefix' => ADMIN, 'as' => ADMIN . '.', 'middleware'=>['auth','Rol
     Route::get('report', 'admin\ReportController@report')->name('report.report');
     Route::post('report','admin\ReportController@report')->name('report.reportPost');
     Route::post('report-list-ajax','admin\ReportController@reportList')->name('report.reportPostAjax');
+    Route::post('checkData','admin\ReportController@checkData')->name('checkData');
 
     Route::post('statusPenalty','admin\StatusPenaltyController@statusPenalty')->name('statusPenalty');
     Route::resource('non_loan_users', 'NonLoanUserController');

@@ -16,6 +16,23 @@
         !!}
         <div class="box-body" style="margin:10px;">
           @include('admin.users.form')
+            <div class="form-group">
+                <label for="photo">Photo<span>*</span>:</label>
+                <div class="col-md-12 pd-0 mt-10">
+                    <div class="col-md-3 pd-0">
+                        <div class="profile-file">
+                            Browse
+                            <input type="file" onchange="showProfileImage(this)" name="avatar" id="avatar" value="" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <img class="user-profile" id="show_profile_img" src="/img/avatar0.png" alt="image"/>
+
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="box-footer" style="background-color:#f5f5f5;border-top:1px solid #d2d6de;">
@@ -44,7 +61,10 @@
             },      
             mobile: {
                 required: true,
-                digits: true              
+                number: true,
+                minlength:10,
+                maxlength:10,
+
             },
             password: {
                 required: true               
@@ -54,12 +74,31 @@
             },
             avatar: {
                 required: true,
-                //extension: "jpeg|png"             
             },
         }
     });
 
 });
-</script>
+    function showProfileImage(fileInput) {
+        var files = fileInput.files;
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var imageType = /image.*/;
+            if (!file.type.match(imageType)) {
+                continue;
+            }
+            var img = document.getElementById("show_profile_img");
+            img.file = file;
+            var reader = new FileReader();
+            reader.onload = (function (aImg) {
+                return function (e) {
+                    aImg.src = e.target.result;
+                };
+            })(img);
+            reader.readAsDataURL(file);
+        }
+    }
+
+ </script>
 
 @stop

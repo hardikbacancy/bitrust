@@ -16,15 +16,19 @@
 ?>
 <input type="hidden" name="email_verified_at" value="1">
 <input type="hidden" name="verification_code" value={{$val}}>
-{!! Form::myInput('text', 'name', 'Name') !!}
+{!! Form::myInput('text', 'name', 'Name <span>*</span>') !!}
 
-{!! Form::myInput('email', 'email', 'Email') !!}
+{!! Form::myInput('email', 'email', 'Email <span>*</span>') !!}
+{!! Form::myInput('text', 'mobile', 'Mobile <span>*</span>') !!}
 
-{!! Form::myInput('text', 'mobile', 'Mobile') !!}
-
+@if(isset($item->id))
 {!! Form::myInput('password', 'password', 'Password') !!}
-
 {!! Form::myInput('password', 'password_confirmation', 'Password confirmation') !!}
+@else
+  {!! Form::myInput('password', 'password', 'Password <span>*</span>') !!}
+  {!! Form::myInput('password', 'password_confirmation', 'Password confirmation <span>*</span>') !!}
+@endif
+
 
 <div class="form-group">
   <label for="gender">Gender:</label>
@@ -37,5 +41,8 @@
 {!! Form::mySelect('role', 'Role', $allowedRoles) !!}
 
 {!! Form::mySelect('active', 'Active', config('variables.boolean')) !!}
-
-{!! Form::myFileImage('avatar', 'Photo', $img_url) !!}
+{{--@if(isset($item->id))--}}
+{{--{!! Form::myFileImage('avatar', 'Photo', $img_url) !!}--}}
+{{--@else--}}
+  {{--{!! Form::myFileImage('avatar', 'Photo <span>*</span>', $img_url) !!}--}}
+{{--@endif--}}

@@ -29,11 +29,11 @@
 
     @if (auth()->user()->hasRole('Superadmin|Admin'))
         <li class="<?php echo (starts_with($route, ADMIN . '.adminsettings')) ? "active" : '' ?>">
-            <a href="{{ route(ADMIN.'.adminsettings.index') }}"><i class="fa fa-cog"></i>Settings</a>
+            <a href="{{ route(ADMIN.'.adminsettings.index') }}"><i class="fa fa-cog"></i><span>Settings</span></a>
         </li>
 
         <li class="<?php  echo (starts_with($route, ADMIN . '.report'))  ? "active" : '' ?>">
-            <a href="{{ route(ADMIN.'.report.report') }}"><i class="fa fa-flag-o"></i>Report</a>
+            <a href="{{ route(ADMIN.'.report.report') }}"><i class="fa fa-flag-o"></i><span>Report</span></a>
         </li>
     @endif
 </ul>

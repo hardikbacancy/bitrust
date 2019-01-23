@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\admin;
-
 use App\Http\Controllers\Controller;
 use App\Models\admin\LoanRequest;
 use App\Models\admin\UserLoanMgmt;
@@ -91,5 +90,26 @@ class ReportController extends Controller
 
         return Datatables::of($loanRequest_1)
             ->make(true);
+    }
+
+    public function checkData(Request $request){
+        if (!empty($request->start_date) && !empty($request->end_date)) {
+            $start_date = $request->start_date;
+            $end_date = $request->end_date;
+            $start_date = date('Y-m-d', strtotime($start_date));
+            $end_date = date('Y-m-d', strtotime($end_date));
+            $loanRequest = LoanRequest::where('request_status', '=', 1)->whereDate('created_at', '>', $start_date)->whereDate('created_at', '<=', $end_date)->get()->toArray();
+        } else if (!empty($request->start_date)) {
+            $start_date = $request->start_date;
+            $start_date = date('Y-m-d', strtotime($start_date));
+            $loanRequest = LoanRequest::where('request_status', '=', 1)->whereDate('created_at', '>', $start_date)->get()->toArray();
+        } else if (!empty($request->end_date)) {
+            $end_date = $request->end_date;
+            $end_date = date('Y-m-d', strtotime($end_date));
+            $loanRequest = LoanRequest::where('request_status', '=', 1)->whereDate('created_at', '<=', $end_date)->get()->toArray();
+        } else {
+            $loanRequest = LoanRequest::where('request_status', '=', 1)->get()->toArray();
+        }
+        return json_encode($loanRequest);
     }
 }

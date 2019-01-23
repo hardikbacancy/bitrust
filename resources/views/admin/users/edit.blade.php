@@ -11,12 +11,28 @@
         {!! Form::model($item, [
                 'action' => ['UsersController@update', $item->id],
                 'method' => 'put',
-                'files' => true
+                'files' => true,
+                'id' => 'update-user',
             ])
         !!}
 
         <div class="box-body" style="margin:10px;">
           @include('admin.users.form')
+            <div class="form-group">
+                <label for="photo">Photo <span>*</span>:</label>
+                <div class="col-md-12 pd-0 mt-10">
+                    <div class="col-md-3 pd-0">
+                        <div class="profile-file">
+                            Browse
+                            <input type="file" onchange="showProfileImage(this)" name="avatar" id="avatar" value="" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <img class="user-profile" id="show_profile_img" src="{{$item->avatar}}" alt="image"/>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="box-footer" style="background-color:#f5f5f5;border-top:1px solid #d2d6de;">
@@ -28,4 +44,47 @@
     </div>
   </div>
 </div>
+@stop
+@section('js')
+
+
+    <script>
+        $(document).ready(function () {
+            $('#update-user').validate({ // initialize the plugin
+                rules: {
+                    name: {
+                        required: true
+                    },
+                    email: {
+                        required: true
+                    },
+                    mobile: {
+                        required: true,
+                        digits: true
+                    },
+                }
+            });
+        });
+        function showProfileImage(fileInput) {
+            var files = fileInput.files;
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                var imageType = /image.*/;
+                if (!file.type.match(imageType)) {
+                    continue;
+                }
+                var img = document.getElementById("show_profile_img");
+                img.file = file;
+                var reader = new FileReader();
+                reader.onload = (function (aImg) {
+                    return function (e) {
+                        aImg.src = e.target.result;
+                    };
+                })(img);
+                reader.readAsDataURL(file);
+            }
+        }
+
+    </script>
+
 @stop

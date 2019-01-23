@@ -96,23 +96,28 @@ class LoanRequestController extends Controller
             $userloanDetails=new User();
             $totalAvailBal=$userloanDetails->userLoanDetails();
             $interest=$userloanDetails->getInterest();
-            if($totalAvailBal>=($request->loan_amount)){
-                if(auth()->user()->hasRole('User')){
-                    $user_id=\Auth::user()->id;
-                    $requestAll=$request->all();
-                    $requestAll['user_id']=$user_id;
-                    $requestAll['interest_rate']=$interest;
-                    LoanRequest::create($requestAll);
+            $minLoanAmount=$userloanDetails->getMinLoanAmount();
+            if($request->loan_amount>=$minLoanAmount) {
+                if ($totalAvailBal >= ($request->loan_amount)) {
+                    if (auth()->user()->hasRole('User')) {
+                        $user_id = \Auth::user()->id;
+                        $requestAll = $request->all();
+                        $requestAll['user_id'] = $user_id;
+                        $requestAll['interest_rate'] = $interest;
+                        LoanRequest::create($requestAll);
+                    } else {
+                        $requestAll = $request->all();
+                        $requestAll['interest_rate'] = $interest;
+                        LoanRequest::create($requestAll);
+                    }
+                    return redirect()->route(ADMIN . '.loan_request.index')->withSuccess("Successfully Added");
+                } else {
+                    return redirect()->route(ADMIN . '.loan_request.create')->with('message', 'Balance is not available for loan');
                 }
-                else{
-                    $requestAll=$request->all();
-                    $requestAll['interest_rate']=$interest;
-                    LoanRequest::create($requestAll);
-                }
-                return redirect()->route(ADMIN . '.loan_request.index')->withSuccess("Successfully Added");
             }
             else{
-                return redirect()->route(ADMIN . '.loan_request.create')->with('message','Balance is not available for loan');
+                return redirect()->route(ADMIN . '.loan_request.create')->with('message', 'Min Loan Amount Must be'.' '.$minLoanAmount.'$');
+
             }
         }
     }

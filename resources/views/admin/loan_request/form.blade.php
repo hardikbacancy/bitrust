@@ -9,7 +9,7 @@
     </select>
 </div>
 @endif
-{!! Form::myInput('text', 'loan_amount', 'Loan Amount') !!}
+{!! Form::myInput('text', 'loan_amount', 'Loan Amount(in $) <span>*</span>') !!}
 <div class="form-group">
     <label for="tenuar_period">Tenure Period:</label>
     <select class="form-control" id="tenuar_period" name="tenuar_period">

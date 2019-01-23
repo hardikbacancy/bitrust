@@ -58,8 +58,8 @@
                                         <td>{{$userLoanMgmts['emi_amount']-floor($loanRequest[0]['loan_amount']/$loanRequest[0]['tenuar_period'])}}</td>
                                         <td>{{$userLoanMgmts['emi_amount']}}</td>
                                         <td>{{$userLoanMgmts['tenuar_date']}}</td>
-                                        <td><input type="text" name="penalty_{{$userLoanMgmts['id']}}" id="penalty_{{$userLoanMgmts['id']}}"
-                                                   value="{{$userLoanMgmts['penalty']}}"></td>
+                                        <td><input type="text" name="penalty" id="penalty_{{$userLoanMgmts['id']}}"
+                                                   value="{{$userLoanMgmts['penalty']}}" class="number_class"></td>
                                         <td>
                                             <label class="switch">
 
@@ -170,13 +170,14 @@
             var table_2 = $('#tb2').DataTable();
             $('#form-submit').on('submit', function (e) {
                 e.preventDefault();
-                var data = table.$('input').serializeArray();
+                //var data = table.$('input').serializeArray();
+
                 var rows_selected = table.column(0).checkboxes.selected();
                 var requestId=$("#requestId").val();
                 var check_select = [];
                 $.each(rows_selected, function(index, rowId){
                     var stripped = rowId.replace(/[^0-9]/g, '');
-                    var penalty=$("#penalty_"+stripped).val();
+                    var penalty = table.$('#penalty_'+stripped).val();
                     check_select.push(stripped+"_"+penalty);
                 });
 
@@ -274,6 +275,30 @@
                 }
             });
 
+            $("body").on('keypress', '.number_class', function (event) {
+                if(isNumberWithDot(event, this)){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            });
+
+            function isNumberWithDot(evt, element) {
+
+                var charCode = (evt.which) ? evt.which : event.keyCode;
+
+                if (charCode == 8){
+                    return true;
+                }
+                if (
+                    (charCode != 46 || $(element).val().indexOf('.') != -1) && // “.” CHECK DOT, AND ONLY ONE.
+                    (charCode < 48 || charCode > 57)){
+                    return false;
+                }
+
+                return true;
+            }
         })
 
     </script>

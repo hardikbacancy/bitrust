@@ -30,6 +30,7 @@
                     <th>Penalty(in $)</th>
                     <th>Interest Rate(in %)</th>
                     <th>Membership Fee(in $)</th>
+                    <th>Min Loan Amount(in $)</th>
                     <th>Updated At</th>
                     <th class="no-sort"></th>
                 </tr>
@@ -52,8 +53,11 @@
                       </td> 
                       <td>
                           {{ $item->membership_fee }}
-                      </td> 
-                       <td>
+                      </td>
+                                <td>
+                                    {{ $item->min_loan_amount }}
+                                </td>
+                                <td>
                           {{ $item->updated_at }}                      
                       </td>
                       <td class="actions">

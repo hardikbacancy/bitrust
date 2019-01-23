@@ -49,10 +49,13 @@
             membership_fee: {
                 required: true               
             },
+            min_loan_amount: {
+                required: true
+            },
         }
     });
         $("body").on('keypress', '.number_class', function (event) {
-            if(isNumberWithoutDot(event, this)){
+            if(isNumberWithDot(event, this)){
                 return true;
             }
             else{
@@ -60,7 +63,7 @@
             }
         });
 
-        function isNumberWithoutDot(evt, element) {
+        function isNumberWithDot(evt, element) {
 
             var charCode = (evt.which) ? evt.which : event.keyCode;
 

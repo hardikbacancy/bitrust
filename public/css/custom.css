@@ -81,3 +81,44 @@ table.dataTable tr th.select-checkbox.selected::after {
     text-align: center;
     text-shadow: rgb(176, 190, 217) 1px 1px, rgb(176, 190, 217) -1px -1px, rgb(176, 190, 217) 1px -1px, rgb(176, 190, 217) -1px 1px;
 }
+#show_profile_img{
+    width:80%;
+}
+.user-profile {
+    width: 100%;
+    min-height: 100%;
+    max-height: 120px;
+    display: table-cell;
+    vertical-align: middle;
+    border-radius: 6px;
+}
+.profile-file input[type="file"]{
+    opacity: 0;
+    top: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    border-radius: 100% !important;
+}
+.profile-file {
+    position: relative;
+    right: 0;
+    bottom: 0;
+    width: 120px;
+    height: 40px;
+    background: #fff;
+    border: solid 1px #c3c3c3;
+    text-align: center;
+    padding: 9px 9px;
+    font-size: 14px;
+    line-height: normal;
+    border-radius: 16px;
+}
+
+.pd-0 {padding:0 !important; ;}
+.mt-10 { margin-top: 10px !important;}
+
+#avatar-error { position: absolute;    width: 100%;    bottom: 0;    left: 0;
+    top: 44px;}

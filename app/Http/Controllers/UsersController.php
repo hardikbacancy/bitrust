@@ -22,7 +22,12 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('updated_at', 'desc')->get();
+        if(\Auth::user()->role=='5') {
+            $users = User::orderBy('updated_at', 'desc')->where('role', '=', 0)->orWhere('role','=',4)->get();
+        }
+        else{
+            $users = User::orderBy('updated_at', 'desc')->where('role', '=', 0)->get();
+        }
         $adminSettings=AdminSetting::all()->toArray();
         return view('admin.users.index',get_defined_vars());
     }

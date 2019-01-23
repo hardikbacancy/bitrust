@@ -8,7 +8,7 @@ return [
 	"success_destroy" => "Removed successfully",
 
 	// My Views
-	"manage"       => "manage",
+	"manage"       => "",
 	"edit_title"   => "Edit Item",
 	"delete_title" => "Delete Item",
 

@@ -17,16 +17,27 @@ class StatusPenaltyController extends Controller
     {
         foreach($request->check_select as $key=>$value){
             $partsId = explode('_',$value);
+            $emi_paid_date = date('Y-m-d');
             if(!empty($partsId[0])){
                 $userLoan = UserLoanMgmt::find($partsId[0]);
-                $emi_paid_date = date('Y-m-d');
-                $userLoan->emi_paid_date = $emi_paid_date;
-                $userLoan->tenuar_status = '1';
+                if($userLoan->tenuar_status=='1') {
+                    $userLoan->tenuar_status = '0';
+                    $userLoan->emi_paid_date = NULL;
+                }
+                else{
+                    $userLoan->tenuar_status = '1';
+                    $userLoan->emi_paid_date = $emi_paid_date;
+                }
                 $userLoan->save();
             }
-            if(!empty($partsId[1])) {
+            if(!empty($partsId[1]) || $partsId[1]!='') {
                 $userLoan = UserLoanMgmt::find($partsId[0]);
                 $userLoan->penalty = $partsId[1];
+                $userLoan->save();
+            }
+            else{
+                $userLoan = UserLoanMgmt::find($partsId[0]);
+                $userLoan->penalty =NULL;
                 $userLoan->save();
             }
         }
