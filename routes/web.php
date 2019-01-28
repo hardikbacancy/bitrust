@@ -43,4 +43,14 @@ Route::group(['prefix' => ADMIN, 'as' => ADMIN . '.', 'middleware'=>['auth','Rol
     Route::resource('non_loan_users', 'NonLoanUserController');
     Route::post('/loan_request/loanStatusUpdate', 'LoanRequestController@loanStatusUpdate')->name('loanStatusUpdate');
     Route::post('/deleteEmi', 'LoanRequestController@deleteEmi')->name('deleteEmi');
+
+    //Membership
+    Route::get('membership', 'admin\MembershipController@membership')->name('membership');
+    Route::get('membership/create', 'admin\MembershipController@membershipCreate')->name('membership.create');
+    Route::post('membership/store', 'admin\MembershipController@store')->name('membership.store');
+    Route::post('membership/membershipPostAjax', 'admin\MembershipController@membershipPostAjax')->name('membership.membershipPostAjax');
+    Route::get('membership/edit/{Id}', 'admin\MembershipController@editMembership')->name('membership.edit');
+    Route::post('membership-update', 'admin\MembershipController@updateMembership')->name('update-membership');
+    Route::post('membership-delete', 'admin\MembershipController@deleteMember')->name('membership.deleteMemberAjax');
+
 });

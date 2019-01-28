@@ -13,6 +13,10 @@
                 <form id="form-submit" method="POST">
                     <p style="margin-top:10px;">
                         @if (auth()->user()->hasRole('Superadmin|Admin'))
+                            <select id="paid_status" name="paid_status" class="paid_status_drop">
+                                <option value="1">Paid</option>
+                                <option value="0">Unpaid</option>
+                            </select>
                             <button type="submit" id="update_bulk" class="update-btn" disabled>Update</button>
                         @endif
                     </p>
@@ -33,7 +37,7 @@
                                     <th>Penalty(in $)</th>
                                     <th>EMI Status</th>
                                     <th>EMI Paid Date</th>
-                                    <th class="no-sort">Action</th>
+
                                 </tr>
                                 </thead>
                                 <tfoot>
@@ -46,7 +50,6 @@
                                     <th></th>
                                     <th></th>
                                     <th></th>
-                                    <th class="actions"></th>
 
                                 </tr>
                                 </tfoot>
@@ -72,19 +75,6 @@
                                             </label>
                                         </td>
                                         <td id="emi_paid_date_{{$userLoanMgmts['id']}}">@if(isset($userLoanMgmts['emi_paid_date'])){{$userLoanMgmts['emi_paid_date']}} @else {{"-"}}@endif</td>
-
-
-
-                                        <td class="actions">
-                                            <ul class="list-inline" style="margin-bottom:0px;">
-
-                                                        <li class="delete" data="{{$userLoanMgmts['id']}}">
-                                                            <button class="btn btn-danger btn-xs"
-                                                                    title="{{ trans('app.delete_title') }}"><i
-                                                                        class="fa fa-trash"></i></button>
-                                                        </li>
-                                            </ul>
-                                        </td>
 
                                     </tr>
                                 @endforeach
@@ -172,6 +162,7 @@
                 e.preventDefault();
                 //var data = table.$('input').serializeArray();
 
+                var paid_status_val=$("#paid_status").val();
                 var rows_selected = table.column(0).checkboxes.selected();
                 var requestId=$("#requestId").val();
                 var check_select = [];
@@ -187,6 +178,7 @@
                         data: {
                             check_select: check_select,
                             requestId: requestId,
+                            paid_status:paid_status_val,
                             "_token": "{{csrf_token()}}"
                         },
                         method: 'post',
@@ -231,33 +223,6 @@
             });
             renderBoolColumn('#tbl', 'bool');
             renderBoolColumn('#tb2', 'bool');
-            $(document.body).on('click', '.delete', function(e) {
-                e.preventDefault();
-                var id=$(this).attr('data');
-                var _this = $(this);
-                swal({
-                    title: 'Are you sure?',
-                    type: 'error',
-                    showCancelButton: true,
-                    confirmButtonColor: '#DD4B39',
-                    cancelButtonColor: '#00C0EF',
-                    confirmButtonText: 'Yes',
-                    cancelButtonText: 'No',
-                    closeOnConfirm: false
-                }).catch(swal.noop).then(function(isConfirm) {
-                    if (isConfirm) {
-                        _this.closest("tr").remove();
-                        $.ajax({
-                            url: '{{route(ADMIN.'.deleteEmi')}}',
-                            data: {id: id,"_token": "{{csrf_token()}}"},
-                            method: 'post',
-                            dataType: 'json',
-                            success: function (res) {
-                            }
-                        });
-                    }
-                });
-            });
 
             $(document.body).on('change', '.checkbox_selection', function(e) {
                 var rows_selected = table.column(0).checkboxes.selected();

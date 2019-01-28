@@ -42,7 +42,8 @@ class User extends Authenticatable
             'name' => 'required|min:2',
             'email'    => "required|email|unique:users,email,$id",
             'password' => 'nullable|confirmed',
-            'mobile' =>'required|digits:10'
+            'mobile' =>'required|digits:10',
+            'avatar' => 'image|mimes:jpeg,bmp,png|max:300',
         ];
 
         if ($update) {

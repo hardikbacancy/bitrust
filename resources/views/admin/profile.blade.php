@@ -10,8 +10,8 @@
     <div class="box" style="border:1px solid #d2d6de;">
         {!! Form::model($item, [
                 'action' => ['ProfileController@update', $item->id],
-                'method' => 'put',
                 'id'=>'profile_update',
+                'method' => 'put',
                 'files' => true,
 
             ])
@@ -30,7 +30,7 @@
             {!! Form::myInput('password', 'password', 'Password') !!}
             {!! Form::myInput('password', 'password_confirmation', 'Password confirmation') !!}
             <div class="form-group">
-                <label for="photo">Photo<span>*</span>:</label>
+                <label for="photo">Photo<span>*</span></label>
           <div class="col-md-12 pd-0 mt-10">
             <div class="col-md-3 pd-0">
                 <div class="profile-file">
@@ -43,13 +43,11 @@
                 @if(isset($item->avatar))
                     <img class="user-profile" id="show_profile_img" src="{{$item->avatar}}" alt="image"/>
                 @else
-                    <img class="user-profile" id="show_profile_img" src="/img/avatar0.png" alt="image"/>
+                    <img class="user-profile" id="show_profile_img" src="{{asset('img/avatar0.png')}}" alt="image"/>
                 @endif
             </div>
           </div>
             </div>
-
-            {{--{!! Form::myFileImage('avatar', 'Avatar', $item->avatar,onchange="showSwImage(this)") !!}--}}
         </div>
 
         <div class="box-footer" style="background-color:#f5f5f5;border-top:1px solid #d2d6de;">
@@ -78,6 +76,13 @@
                         number: true,
                         minlength:10,
                         maxlength:10,
+                    },
+                    password: {
+                        minlength: 6
+                    },
+                    password_confirmation: {
+                        equalTo : "#password"
+
                     },
                 }
             });

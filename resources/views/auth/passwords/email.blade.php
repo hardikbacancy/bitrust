@@ -35,7 +35,6 @@
             <a href="{{ url('/login') }}">{{ trans('app.connect') }}</a>
         </div><!-- /.col -->
         <div class="col-xs-6">
-            <a href="{{ url('/register') }}" class="text-right pull-right">Register</a>
         </div><!-- /.col -->
     </div>
 

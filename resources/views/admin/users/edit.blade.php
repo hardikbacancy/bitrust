@@ -60,7 +60,16 @@
                     },
                     mobile: {
                         required: true,
-                        digits: true
+                        digits: true,
+                        minlength:10,
+                        maxlength:10,
+                    },
+                    password: {
+                        minlength: 6
+                    },
+                    password_confirmation: {
+                        equalTo : "#password"
+
                     },
                 }
             });

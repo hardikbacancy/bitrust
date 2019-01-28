@@ -42,10 +42,7 @@
         </div>
 
         <div class="row" style="margin-top:30px;margin-bottom:20px;">
-            <div class="col-xs-6">
-            </div>
-            <!-- /.col -->
-            <div class="col-xs-6">
+            <div class="col-xs-12">
                 <button type="submit" class="btn btn-primary btn-block btn-flat">{{ trans('app.login_btn') }}</button>
             </div>
             <!-- /.col -->
@@ -56,7 +53,6 @@
 
     <div class="row">
         <div class="col-xs-6">
-            <a href="{{ url('/register') }}">Register</a>
         </div><!-- /.col -->
         <div class="col-xs-6">
             <a href="{{ url('/password/reset') }}" class="text-right pull-right">Forgot Password</a>

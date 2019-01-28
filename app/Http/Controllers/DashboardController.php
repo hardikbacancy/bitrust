@@ -43,7 +43,11 @@ class DashboardController extends Controller
                    $interestEmi=$interestEmi->emi_amount;
                    $emiCount = UserLoanMgmt::where('tenuar_status', '=', 1)->where('request_id', '=', $loanAmountDetail['id'])
                        ->count();
-                   $profit=$profit+($interestEmi-$originalEmi)*$emiCount;
+
+                   $penalty = UserLoanMgmt::where('tenuar_status', '=', 1)->where('request_id', '=', $loanAmountDetail['id'])
+                       ->sum('penalty');
+
+                   $profit=$profit+(($interestEmi-$originalEmi)*$emiCount)+$penalty;
                }
             }
         }

@@ -20,9 +20,11 @@
         <div class="col-xs-12">
             <div class="box" style="border:1px solid #d2d6de;">
                 <div class="box-header" style="background-color:#f5f5f5;border-bottom:1px solid #d2d6de;">
+
                     <a class="btn btn-info" href="{{ route(ADMIN . '.users.create') }}" title="Add User">
-                        <i class="fa fa-plus" style="vertical-align:middle"></i>
+                        <i class="fa fa-plus" style="vertical-align:middle"></i> Add User
                     </a>
+
                 </div>
 
                 <!-- /.box-header -->

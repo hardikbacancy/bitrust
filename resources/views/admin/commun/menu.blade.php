@@ -28,6 +28,11 @@
     </li>
 
     @if (auth()->user()->hasRole('Superadmin|Admin'))
+
+        <li class="<?php  echo (starts_with($route, ADMIN . '.membership'))  ? "active" : '' ?>">
+            <a href="{{ route(ADMIN.'.membership') }}"><i class="fa fa-flag-o"></i><span>Memberships</span></a>
+        </li>
+
         <li class="<?php echo (starts_with($route, ADMIN . '.adminsettings')) ? "active" : '' ?>">
             <a href="{{ route(ADMIN.'.adminsettings.index') }}"><i class="fa fa-cog"></i><span>Settings</span></a>
         </li>

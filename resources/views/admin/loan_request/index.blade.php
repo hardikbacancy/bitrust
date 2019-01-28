@@ -16,8 +16,8 @@
         <div class="col-xs-12">
             <div class="box" style="border:1px solid #d2d6de;">
                 <div class="box-header" style="background-color:#f5f5f5;border-bottom:1px solid #d2d6de;">
-                    <a class="btn btn-info" href="{{ route(ADMIN . '.loan_request.create') }}" title="Add Item">
-                        <i class="fa fa-plus" style="vertical-align:middle"></i>
+                    <a class="btn btn-info" href="{{ route(ADMIN . '.loan_request.create') }}" title="Create Loan">
+                        <i class="fa fa-plus" style="vertical-align:middle"></i> Create Loan
                     </a>
                 </div>
                 <!-- /.box-header -->

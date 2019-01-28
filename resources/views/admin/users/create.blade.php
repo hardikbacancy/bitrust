@@ -27,9 +27,7 @@
                     </div>
 
                     <div class="col-md-3">
-
-                        <img class="user-profile" id="show_profile_img" src="/img/avatar0.png" alt="image"/>
-
+                        <img class="user-profile" id="show_profile_img" src="{{asset('img/avatar0.png')}}" alt="image"/>
                     </div>
                 </div>
             </div>
@@ -67,10 +65,13 @@
 
             },
             password: {
-                required: true               
+                required: true,
+                minlength: 6
             },
             password_confirmation: {
-                required: true               
+                required: true,
+                equalTo : "#password"
+
             },
             avatar: {
                 required: true,

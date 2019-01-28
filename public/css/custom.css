@@ -122,3 +122,16 @@ table.dataTable tr th.select-checkbox.selected::after {
 
 #avatar-error { position: absolute;    width: 100%;    bottom: 0;    left: 0;
     top: 44px;}
+.paid_status_drop{
+    width: 8%;
+    height: 29px;
+    background: #337ab6;
+    color: #ffffff;
+    margin-left: 26px;
+}
+
+#membershipList tr td.test  { display: flex}
+
+#member-create .form-control {    margin-bottom: 10px;}
+#member-create .mb30 { margin-bottom: 30px !important;}
+.mt25 { margin-top: 25px !important;}
