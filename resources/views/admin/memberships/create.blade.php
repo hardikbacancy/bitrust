@@ -40,10 +40,10 @@
           <div class="col-md-2">
           </div>
           <div class="col-md-4">
-            <label for="fees">Fees</label>
+            <label for="fees">Fees(in $)</label>
           </div>
           <div class="col-md-4">
-            <label for="penalty">Penalty</label>
+            <label for="penalty">Penalty(in $)</label>
           </div>
         </div>
 
@@ -53,10 +53,10 @@
           <label for="jan">January</label>
           </div>
         <div class="col-md-4">
-          <input type="text" class="form-control number_class" placeholder="Jan Fee" id="jan_fees" name="jan_fees">
+          <input type="text" class="form-control number_class" placeholder="January Fee" id="jan_fees" name="jan_fees">
         </div>
         <div class="col-md-4">
-          <input type="text" class="form-control number_class" placeholder="Jan Penalty" id="jan_penalty" name="jan_penalty">
+          <input type="text" class="form-control number_class" placeholder="January Penalty" id="jan_penalty" name="jan_penalty">
         </div>
       </div>
       <div class="row">
@@ -64,10 +64,10 @@
           <label for="jan">February</label>
         </div>
         <div class="col-md-4">
-          <input type="text" class="form-control number_class" placeholder="Feb Fee" id="feb_fees" name="feb_fees">
+          <input type="text" class="form-control number_class" placeholder="February Fee" id="feb_fees" name="feb_fees">
         </div>
         <div class="col-md-4">
-          <input type="text" class="form-control number_class" placeholder="Feb Penalty" id="feb_penalty" name="feb_penalty">
+          <input type="text" class="form-control number_class" placeholder="February Penalty" id="feb_penalty" name="feb_penalty">
         </div>
       </div>
       <div class="row">
@@ -136,10 +136,10 @@
           <label for="jan">August</label>
         </div>
         <div class="col-md-4">
-          <input type="text" class="form-control number_class" placeholder="Aug Fees" id="aug_fees" name="aug_fees">
+          <input type="text" class="form-control number_class" placeholder="August Fees" id="aug_fees" name="aug_fees">
         </div>
         <div class="col-md-4">
-          <input type="text" class="form-control number_class"  placeholder="Aug Penalty" id="aug_penalty" name="aug_penalty">
+          <input type="text" class="form-control number_class"  placeholder="August Penalty" id="aug_penalty" name="aug_penalty">
         </div>
       </div>
       <div class="row">
@@ -147,10 +147,10 @@
           <label for="jan">September</label>
         </div>
         <div class="col-md-4">
-          <input type="text" class="form-control number_class" placeholder="Sep Fees" id="sep_fees" name="sep_fees">
+          <input type="text" class="form-control number_class" placeholder="September Fees" id="sep_fees" name="sep_fees">
         </div>
         <div class="col-md-4">
-          <input type="text" class="form-control number_class"  placeholder="Sep Penalty" id="sep_penalty" name="sep_penalty">
+          <input type="text" class="form-control number_class"  placeholder="September Penalty" id="sep_penalty" name="sep_penalty">
         </div>
       </div>
       <div class="row">
@@ -158,10 +158,10 @@
           <label for="jan">October</label>
         </div>
         <div class="col-md-4">
-          <input type="text" class="form-control number_class" placeholder="Oct Fees" id="oct_fees" name="oct_fees">
+          <input type="text" class="form-control number_class" placeholder="October Fees" id="oct_fees" name="oct_fees">
         </div>
         <div class="col-md-4">
-          <input type="text" class="form-control number_class"  placeholder="Oct Penalty" id="oct_penalty" name="oct_penalty">
+          <input type="text" class="form-control number_class"  placeholder="October Penalty" id="oct_penalty" name="oct_penalty">
         </div>
       </div>
       <div class="row">
@@ -169,10 +169,10 @@
           <label for="jan">November</label>
         </div>
         <div class="col-md-4">
-          <input type="text" class="form-control number_class" placeholder="Nov Fees" id="nov_fees" name="nov_fees">
+          <input type="text" class="form-control number_class" placeholder="November Fees" id="nov_fees" name="nov_fees">
         </div>
         <div class="col-md-4">
-          <input type="text" class="form-control number_class"  placeholder="Nov Penalty" id="nov_penalty" name="nov_penalty">
+          <input type="text" class="form-control number_class"  placeholder="November Penalty" id="nov_penalty" name="nov_penalty">
         </div>
       </div>
       <div class="row">
@@ -180,14 +180,17 @@
           <label for="jan">December</label>
         </div>
         <div class="col-md-4">
-          <input type="text" class="form-control number_class" placeholder="Dec Fees" id="dec_fees" name="dec_fees">
+          <input type="text" class="form-control number_class" placeholder="December Fees" id="dec_fees" name="dec_fees">
         </div>
         <div class="col-md-4">
-          <input type="text" class="form-control number_class"  placeholder="Dec Penalty" id="dec_penalty" name="dec_penalty">
+          <input type="text" class="form-control number_class"  placeholder="December Penalty" id="dec_penalty" name="dec_penalty">
         </div>
       </div>
+        <br>
       <div>
-        <button type="submit" value="Submit" class="btn btn-primary">Create</button>
+        <button type="submit" value="Submit" class="btn btn-primary" style="width:100px;">Create</button>
+        <a class="btn btn-warning" href="{{ route(ADMIN.'.membership') }}" style="width:100px;"><i class="fa fa-btn fa-back"></i>Cancel</a>
+
       </div>
       </form>
     </div>

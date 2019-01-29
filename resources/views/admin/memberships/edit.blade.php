@@ -40,10 +40,10 @@
             <div class="col-md-2">
             </div>
             <div class="col-md-4">
-              <label for="fees">Fees</label>
+              <label for="fees">Fees(in $)</label>
             </div>
             <div class="col-md-4">
-              <label for="penalty">Penalty</label>
+              <label for="penalty">Penalty(in $)</label>
             </div>
           </div>
 
@@ -185,8 +185,10 @@
               <input type="text" class="form-control number_class"  placeholder="Dec Penalty" id="dec_penalty" name="dec_penalty" value="{{$membershipData['dec_penalty']}}">
             </div>
           </div>
+          <br>
           <div>
-            <button type="submit" value="Submit" class="btn btn-primary">Update</button>
+            <button type="submit" value="Submit" class="btn btn-primary" style="width:100px;">Update</button>
+            <a class="btn btn-warning " href="{{ route(ADMIN.'.membership') }}" style="width:100px;"><i class="fa fa-btn fa-back"></i>Cancel</a>
           </div>
         </form>
       </div>

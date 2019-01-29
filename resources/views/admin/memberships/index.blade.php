@@ -10,7 +10,7 @@
 @stop
 
 @section('page-header')
-    Memberships
+    Membership
     <small>{{ trans('app.manage') }}</small>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @stop
@@ -52,9 +52,18 @@
                         </div>
 
                         <div class="col-md-3">
+                            <div class="row">
+                                <div class="col-md-4">
                             <button type="submit" class="btn btn-primary mt25">
                                 {{ __('Filter') }}
                             </button>
+                                </div>
+                                <div class="col-md-4">
+                            <button type="submit" id="reset" class="btn btn-primary mt25">
+                                {{ __('Reset') }}
+                            </button>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="col-md-3 mt25">
@@ -77,37 +86,12 @@
                            width="100%">
                         <thead>
                         <tr>
-                            <th>Id</th>
-                            <th>User Id</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Year</th>
-                            <th>Jan Fees</th>
-                            <th>Jan Penalty</th>
-                            <th>Feb Fees</th>
-                            <th>Feb Penalty</th>
-                            <th>March Fees</th>
-                            <th>March Penalty</th>
-                            <th>April Fees</th>
-                            <th>April Penalty</th>
-                            <th>May Fees</th>
-                            <th>May Penalty</th>
-                            <th>June Fees</th>
-                            <th>June Penalty</th>
-                            <th>July Fees</th>
-                            <th>July Penalty</th>
-                            <th>Aug Fees</th>
-                            <th>Aug Penalty</th>
-                            <th>Sep Fees</th>
-                            <th>Sep Penalty</th>
-                            <th>Oct Fees</th>
-                            <th>Oct Penalty</th>
-                            <th>Nov Fees</th>
-                            <th>Nov Penalty</th>
-                            <th>Dec Fees</th>
-                            <th>Dec Penalty</th>
-                            <th>Created Date</th>
-                            <th>Updated Date</th>
+                            <th>Total Fees(in $)</th>
+                            <th>Total Penalty(in $)</th>
+                            <th>Total Amount(fees including penalty in $)</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -121,10 +105,8 @@
 @section('js')
     <script>
     $(document).ready(function (e) {
-
         $("#user_id").select2();
         $("#year").select2();
-
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -134,6 +116,7 @@
             oLanguage: {
                 sProcessing: "<img src='{{asset('img/loading.gif')}}'>"
             },
+            "order": [],
             processing: true,
             serverSide: true,
             "scrollX": true,
@@ -142,41 +125,15 @@
                 type: 'POST',
             },
             columns: [
-                {data: 'id', name: 'id'},
-                {data: 'user_id', name: 'user_id'},
                 {data: 'name', name: 'name'},
                 {data: 'email', name: 'email'},
                 {data: 'year', name: 'year'},
-                {data: 'jan_fees', name: 'jan_fees', orderable: true},
-                {data: 'jan_penalty', name: 'jan_penalty'},
-                {data: 'feb_fees', name: 'feb_fees'},
-                {data: 'feb_penalty', name: 'feb_penalty', orderable: true},
-                {data: 'march_fees', name: 'march_fees'},
-                {data: 'march_penalty', name: 'march_penalty'},
-                {data: 'april_fees', name: 'april_fees', orderable: true},
-                {data: 'april_penalty', name: 'april_penalty'},
-                {data: 'may_fees', name: 'may_fees', orderable: true},
-                {data: 'may_penalty', name: 'may_penalty'},
-                {data: 'june_fees', name: 'june_fees', orderable: true},
-                {data: 'june_penalty', name: 'june_penalty'},
-                {data: 'july_fees', name: 'july_fees', orderable: true},
-                {data: 'july_penalty', name: 'july_penalty'},
-                {data: 'aug_fees', name: 'aug_fees', orderable: true},
-                {data: 'aug_penalty', name: 'aug_penalty'},
-                {data: 'sep_fees', name: 'sep_fees', orderable: true},
-                {data: 'sep_penalty', name: 'sep_penalty'},
-                {data: 'oct_fees', name: 'oct_fees', orderable: true},
-                {data: 'oct_penalty', name: 'oct_penalty'},
-                {data: 'nov_fees', name: 'nov_fees', orderable: true},
-                {data: 'nov_penalty', name: 'nov_penalty'},
-                {data: 'dec_fees', name: 'dec_fees', orderable: true},
-                {data: 'dec_penalty', name: 'dec_penalty'},
-                {data: 'created_at', name: 'created_at'},
-                {data: 'updated_at', name: 'updated_at'},
+                {data: 'total_fees', name: 'total_fees'},
+                {data: 'total_penalty', name: 'total_penalty'},
+                {data: 'total_amount', name: 'total_amount'},
                 {data: 'editDeleteAction', name: 'editDeleteAction',sClass:"test"},
             ]
         });
-
         $(document.body).on('click', '.delete-member', function () {
             var obj = $(this);
             var memberId = $(this).attr('data-memberId');
@@ -215,6 +172,7 @@
                 oLanguage: {
                     sProcessing: "<img src='{{asset('img/loading.gif')}}'>"
                 },
+                "order": [],
                 processing: true,
                 serverSide: true,
                 "scrollX": true,
@@ -225,42 +183,44 @@
                     data: {'user': user, 'year': year},
                 },
                 columns: [
-                    {data: 'id', name: 'id'},
-                    {data: 'user_id', name: 'user_id'},
                     {data: 'name', name: 'name'},
                     {data: 'email', name: 'email'},
                     {data: 'year', name: 'year'},
-                    {data: 'jan_fees', name: 'jan_fees', orderable: true},
-                    {data: 'jan_penalty', name: 'jan_penalty'},
-                    {data: 'feb_fees', name: 'feb_fees'},
-                    {data: 'feb_penalty', name: 'feb_penalty', orderable: true},
-                    {data: 'march_fees', name: 'march_fees'},
-                    {data: 'march_penalty', name: 'march_penalty'},
-                    {data: 'april_fees', name: 'april_fees', orderable: true},
-                    {data: 'april_penalty', name: 'april_penalty'},
-                    {data: 'may_fees', name: 'may_fees', orderable: true},
-                    {data: 'may_penalty', name: 'may_penalty'},
-                    {data: 'june_fees', name: 'june_fees', orderable: true},
-                    {data: 'june_penalty', name: 'june_penalty'},
-                    {data: 'july_fees', name: 'july_fees', orderable: true},
-                    {data: 'july_penalty', name: 'july_penalty'},
-                    {data: 'aug_fees', name: 'aug_fees', orderable: true},
-                    {data: 'aug_penalty', name: 'aug_penalty'},
-                    {data: 'sep_fees', name: 'sep_fees', orderable: true},
-                    {data: 'sep_penalty', name: 'sep_penalty'},
-                    {data: 'oct_fees', name: 'oct_fees', orderable: true},
-                    {data: 'oct_penalty', name: 'oct_penalty'},
-                    {data: 'nov_fees', name: 'nov_fees', orderable: true},
-                    {data: 'nov_penalty', name: 'nov_penalty'},
-                    {data: 'dec_fees', name: 'dec_fees', orderable: true},
-                    {data: 'dec_penalty', name: 'dec_penalty'},
-                    {data: 'created_at', name: 'created_at'},
-                    {data: 'updated_at', name: 'updated_at'},
+                    {data: 'total_fees', name: 'total_fees'},
+                    {data: 'total_penalty', name: 'total_penalty'},
+                    {data: 'total_amount', name: 'total_amount'},
                     {data: 'editDeleteAction', name: 'editDeleteAction',sClass:"test"},
                 ]
             });
         })
+        $("#reset").click(function (e) {
+            e.preventDefault();
+            $('#year').val('').trigger('change');
+            $('#user_id').val('').trigger('change');
+            $('#membershipList').DataTable({
+                oLanguage: {
+                    sProcessing: "<img src='{{asset('img/loading.gif')}}'>"
+                },
+                "order": [],
+                processing: true,
+                serverSide: true,
+                "scrollX": true,
+                "bDestroy": true,
+                "ajax": {
+                    url: '{{route(ADMIN.'.membership.membershipPostAjax')}}',
+                    type: 'POST',
+                },
+                columns: [
+                    {data: 'name', name: 'name'},
+                    {data: 'email', name: 'email'},
+                    {data: 'year', name: 'year'},
+                    {data: 'total_fees', name: 'total_fees'},
+                    {data: 'total_penalty', name: 'total_penalty'},
+                    {data: 'total_amount', name: 'total_amount'},
+                    {data: 'editDeleteAction', name: 'editDeleteAction',sClass:"test"},
+                ]
+            });
+        });
     });
-
     </script>
 @stop

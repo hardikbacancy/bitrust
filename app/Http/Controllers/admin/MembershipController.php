@@ -69,10 +69,21 @@ class MembershipController extends Controller
        if(!empty($request->year)){
            $query=$query->where('year','=',$request->year);
        }
-       $membershipData=$query->get();
+       $membershipData=$query->orderBy('memberships.updated_at', 'desc')->get();
 
        return Datatables::of($membershipData)
-           
+           ->addColumn('total_fees', function($membershipData) {
+               return $membershipData->jan_fees+$membershipData->feb_fees+$membershipData->march_fees+$membershipData->april_fees+$membershipData->may_fees+$membershipData->june_fees+$membershipData->july_fees+$membershipData->aug_fees+$membershipData->sep_fees+$membershipData->oct_fees+$membershipData->nov_fees+$membershipData->dec_fees;
+           })
+
+           ->addColumn('total_penalty', function($membershipData) {
+               return $membershipData->jan_penalty+$membershipData->feb_penalty+$membershipData->march_penalty+$membershipData->april_penalty+$membershipData->may_penalty+$membershipData->june_penalty+$membershipData->july_penalty+$membershipData->aug_penalty+$membershipData->sep_penalty+$membershipData->oct_penalty+$membershipData->nov_penalty+$membershipData->dec_penalty;
+           })
+
+           ->addColumn('total_amount', function($membershipData) {
+               return $membershipData->jan_penalty+$membershipData->feb_penalty+$membershipData->march_penalty+$membershipData->april_penalty+$membershipData->may_penalty+$membershipData->june_penalty+$membershipData->july_penalty+$membershipData->aug_penalty+$membershipData->sep_penalty+$membershipData->oct_penalty+$membershipData->nov_penalty+$membershipData->dec_penalty+$membershipData->jan_fees+$membershipData->feb_fees+$membershipData->march_fees+$membershipData->april_fees+$membershipData->may_fees+$membershipData->june_fees+$membershipData->july_fees+$membershipData->aug_fees+$membershipData->sep_fees+$membershipData->oct_fees+$membershipData->nov_fees+$membershipData->dec_fees;
+           })
+
            ->addColumn('editDeleteAction', function ($membershipData) {
                return ' <span style="margin-right: 2px;"  class="tooltips" title="Edit Membership Detail." data-placement="top">
                               <a href="'.route(ADMIN . '.membership.edit', $membershipData->id).'" class="btn btn-primary btn-xs" style="margin-left: 10%;">
@@ -96,7 +107,6 @@ class MembershipController extends Controller
    }
 
    public function updateMembership(Request $request){
-
            $memberData = array();
            $Id = $request->member_id;
            $memberData['jan_fees'] = !empty($request->jan_fees) ? $request->jan_fees : '0';
