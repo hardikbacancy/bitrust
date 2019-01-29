@@ -18,67 +18,6 @@
 @section('content')
 
     <div class="row">
-        <div class="col-xs-12">
-            <div class="box" style="border:1px solid #d2d6de;">
-                <div class="box-header" style="background-color:#f5f5f5;border-bottom:1px solid #d2d6de;">
-<form id="member-filter">
-                    <div class="row">
-
-                        <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="user_id">Select User:</label>
-                        <select class="form-control" id="user_id" name="user_id">
-                            <option value="">Select User</option>;
-                            @foreach($userDetails as $userDetail)
-                                <option value="{{$userDetail['id']}}">{{$userDetail['email']}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                        </div>
-                        <div class="col-md-3">
-                    <div class="form-group mb30">
-                        <label for="year">Select Year:</label>
-                        <select class="form-control" id="year" name="year">
-                            <option value="">Select Year</option>;
-                            <?php
-
-                            for($i=2000;$i<=date('Y');$i++)
-                            {
-                                echo '<option value='.$i.'>'.$i.'</option>';
-                            }
-                            ?>
-                        </select>
-                    </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="row">
-                                <div class="col-md-4">
-                            <button type="submit" class="btn btn-primary mt25">
-                                {{ __('Filter') }}
-                            </button>
-                                </div>
-                                <div class="col-md-4">
-                            <button type="submit" id="reset" class="btn btn-primary mt25">
-                                {{ __('Reset') }}
-                            </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3 mt25">
-                            <a class="btn btn-info pull-right" href="{{ route(ADMIN . '.membership.create') }}" title="Add Membership">
-                                <i class="fa fa-plus" style="vertical-align:middle"></i> Add Membership
-                            </a>
-                        </div>
-                    </div>
-</form>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-md-12">
             <div class="panel panel-white">
                 <div class="panel-body">
@@ -88,10 +27,6 @@
                         <tr>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Year</th>
-                            <th>Total Fees(in $)</th>
-                            <th>Total Penalty(in $)</th>
-                            <th>Total Amount(fees including penalty in $)</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -127,10 +62,6 @@
             columns: [
                 {data: 'name', name: 'name'},
                 {data: 'email', name: 'email'},
-                {data: 'year', name: 'year'},
-                {data: 'total_fees', name: 'total_fees'},
-                {data: 'total_penalty', name: 'total_penalty'},
-                {data: 'total_amount', name: 'total_amount'},
                 {data: 'editDeleteAction', name: 'editDeleteAction',sClass:"test"},
             ]
         });
@@ -185,10 +116,6 @@
                 columns: [
                     {data: 'name', name: 'name'},
                     {data: 'email', name: 'email'},
-                    {data: 'year', name: 'year'},
-                    {data: 'total_fees', name: 'total_fees'},
-                    {data: 'total_penalty', name: 'total_penalty'},
-                    {data: 'total_amount', name: 'total_amount'},
                     {data: 'editDeleteAction', name: 'editDeleteAction',sClass:"test"},
                 ]
             });
@@ -213,10 +140,6 @@
                 columns: [
                     {data: 'name', name: 'name'},
                     {data: 'email', name: 'email'},
-                    {data: 'year', name: 'year'},
-                    {data: 'total_fees', name: 'total_fees'},
-                    {data: 'total_penalty', name: 'total_penalty'},
-                    {data: 'total_amount', name: 'total_amount'},
                     {data: 'editDeleteAction', name: 'editDeleteAction',sClass:"test"},
                 ]
             });

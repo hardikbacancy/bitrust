@@ -15,24 +15,24 @@
     <div class="box" style="border:1px solid #d2d6de;">
       <form style="padding: 15px;" method="post" action="{{route(ADMIN.'.membership.store')}}">
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+        <input type="hidden" name="user_id" value="{{$userDetails->id}}">
 
-        <div class="form-group">
-        <label for="user_id">Select User:</label>
-        <select class="form-control" id="user_id" name="user_id">
-          @foreach($userDetails as $userDetail)
-            <option value="{{$userDetail['id']}}">{{$userDetail['email']}}</option>
-          @endforeach
-        </select>
+        <div class="row">
+          <div class="col-md-2">
+        <label for="user_id">User Email:</label>
+          </div>
+          <div class="col-md-6">
+        <span> {{$userDetails->email}}</span>
+          </div>
         </div>
+        <br>
       <div class="form-group mb30">
         <label for="year">Select Year:</label>
         <select class="form-control" id="year" name="year">
-            <?php
-            for($i=2000;$i<=date('Y');$i++)
-            {
-                echo '<option value='.$i.'>'.$i.'</option>';
-            }
-            ?>
+
+                     @foreach($year_output as $year_output)
+                     <option value={{$year_output}}>{{$year_output}}</option>;
+                     @endforeach
         </select>
       </div>
 
@@ -189,7 +189,7 @@
         <br>
       <div>
         <button type="submit" value="Submit" class="btn btn-primary" style="width:100px;">Create</button>
-        <a class="btn btn-warning" href="{{ route(ADMIN.'.membership') }}" style="width:100px;"><i class="fa fa-btn fa-back"></i>Cancel</a>
+        <a class="btn btn-warning" href="{{ route(ADMIN.'.users.index') }}" style="width:100px;"><i class="fa fa-btn fa-back"></i>Cancel</a>
 
       </div>
       </form>

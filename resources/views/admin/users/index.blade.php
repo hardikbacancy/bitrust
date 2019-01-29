@@ -34,7 +34,6 @@
                         <tr>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Membership Fee(in $)</th>
                             <th>Role</th>
                             <th class='bool text-center'>Active</th>
                             <th class='bool text-center'>Email Verified</th>
@@ -46,13 +45,19 @@
                             <tr>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td>{{ $user->membership_fees }}</td>
                                 <td>{{ Helper::getRolename($user->role)  }}</td>
                                 <td>{{ $user->active }}</td>
                                 <td>{{ $user->email_verified_at }}</td>
                                 <td class="actions">
                                     @if ( Auth::user()->rolename() === "Superadmin" || Auth::user()->role > $user->role)
                                         <ul class="list-inline" style="margin-bottom:0px;">
+
+                                            <li><a href="{{ route(ADMIN . '.membership.create',$user->id) }}"
+                                                   title="{{ "Add Membership" }}" class="btn btn-primary btn-xs"><i
+                                                            class="fa fa-plus-square"></i></a></li>
+                                            <li>
+
+
                                             <li><a href="{{ route(ADMIN . '.users.edit', $user->id) }}"
                                                    title="{{ trans('app.edit_title') }}" class="btn btn-primary btn-xs"><i
                                                             class="fa fa-pencil"></i></a></li>

@@ -16,7 +16,9 @@
         <form style="padding: 15px;" method="post" action="{{route(ADMIN.'.update-membership')}}">
           <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
           <input type="hidden" name="member_id" value="{{$membershipData['id']}}">
-           @foreach($userDetails as $userDetail)
+          <input type="hidden" name="user_id" value="{{$membershipData['user_id']}}">
+
+        @foreach($userDetails as $userDetail)
            @if($userDetail['id']==$membershipData['user_id'])
              <div class="row">
                <div class="col-md-2">
