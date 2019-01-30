@@ -3,8 +3,10 @@
 namespace App;
 use App\Models\admin\AdminSetting;
 use App\Models\admin\LoanRequest;
+use App\Models\admin\Membership;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 
@@ -122,7 +124,9 @@ class User extends Authenticatable
         $adminSettings=AdminSetting::all()->toArray();
         $userCount=User::where('role','=',0)->count();
         $loanAmount=LoanRequest::where('request_status','=',1)->sum('loan_amount');
-        $totalMembershipFees = User::where('role','=',0)->sum('membership_fees');
+        $totalMembershipFees1=Membership::value(DB::raw("SUM(jan_fees + jan_penalty + feb_fees + feb_penalty + march_fees +march_penalty + april_fees + april_penalty + may_fees + may_penalty + june_fees + june_penalty + july_fees + july_penalty + aug_fees + aug_penalty + sep_fees + sep_penalty + oct_fees)"));
+        $totalMembershipFees2=Membership::value(DB::raw("SUM(oct_penalty+nov_fees+nov_penalty+dec_fees+dec_penalty)"));
+        $totalMembershipFees=$totalMembershipFees1+$totalMembershipFees2;
 
         $availableBal=$totalMembershipFees-$loanAmount;
         return $availableBal;

@@ -59,22 +59,22 @@
 
 
                                             <li><a href="{{ route(ADMIN . '.users.edit', $user->id) }}"
-                                                   title="{{ trans('app.edit_title') }}" class="btn btn-primary btn-xs"><i
+                                                   title="{{ "Edit User" }}" class="btn btn-primary btn-xs"><i
                                                             class="fa fa-pencil"></i></a></li>
-                                            <li>
-                                                {!! Form::open([
-                                                    'class'=>'delete',
-                                                    'url'  => route(ADMIN . '.users.destroy', $user->id),
-                                                    'method' => 'DELETE',
-                                                    ])
-                                                !!}
+                                            {{--<li>--}}
+                                                {{--{!! Form::open([--}}
+                                                    {{--'class'=>'delete',--}}
+                                                    {{--'url'  => route(ADMIN . '.users.destroy', $user->id),--}}
+                                                    {{--'method' => 'DELETE',--}}
+                                                    {{--])--}}
+                                                {{--!!}--}}
 
-                                                <button class="btn btn-danger btn-xs"
-                                                        title="{{ trans('app.delete_title') }}"><i
-                                                            class="fa fa-trash"></i></button>
+                                                {{--<button class="btn btn-danger btn-xs"--}}
+                                                        {{--title="{{ trans('app.delete_title') }}"><i--}}
+                                                            {{--class="fa fa-trash"></i></button>--}}
 
-                                                {!! Form::close() !!}
-                                            </li>
+                                                {{--{!! Form::close() !!}--}}
+                                            {{--</li>--}}
                                         </ul>
                                     @elseif (Auth::user()->id === $user->id)
                                         <ul class="list-inline" style="margin-bottom:0px;">

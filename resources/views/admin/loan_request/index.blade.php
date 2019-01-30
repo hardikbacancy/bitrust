@@ -61,21 +61,21 @@
                                             </li>
 
                                                     @if (auth()->user()->hasRole('Superadmin|Admin'))
-                                                <li>
-                                                    {!! Form::open([
-                                                        'class'=>'delete',
-                                                        'url'  => route(ADMIN . '.loan_request.destroy', $loanRequests['id']),
-                                                        'method' => 'DELETE',
-                                                        ])
-                                                    !!}
+                                                {{--<li>--}}
+                                                    {{--{!! Form::open([--}}
+                                                        {{--'class'=>'delete',--}}
+                                                        {{--'url'  => route(ADMIN . '.loan_request.destroy', $loanRequests['id']),--}}
+                                                        {{--'method' => 'DELETE',--}}
+                                                        {{--])--}}
+                                                    {{--!!}--}}
 
-                                                    <button class="btn btn-danger btn-xs"
-                                                            title="{{ trans('app.delete_title') }}"><i
-                                                                class="fa fa-trash"></i></button>
+                                                    {{--<button class="btn btn-danger btn-xs"--}}
+                                                            {{--title="{{ trans('app.delete_title') }}"><i--}}
+                                                                {{--class="fa fa-trash"></i></button>--}}
 
-                                                    {!! Form::close() !!}
+                                                    {{--{!! Form::close() !!}--}}
 
-                                                </li>
+                                                {{--</li>--}}
                                                     @endif
 
                                             @endif
@@ -85,25 +85,25 @@
                                             <li>
 
                                                 <a href="{{ route(ADMIN . '.loan_request.edit', $loanRequests['id']) }}"
-                                                   title="{{ trans('app.edit_title') }}" class="btn btn-primary btn-xs"><i
+                                                   title="{{ "Edit Loan Request" }}" class="btn btn-primary btn-xs"><i
                                                             class="fa fa-pencil"></i></a>
                                             </li>
 
-                                                    <li>
-                                                        {!! Form::open([
-                                                            'class'=>'delete',
-                                                            'url'  => route(ADMIN . '.loan_request.destroy', $loanRequests['id']),
-                                                            'method' => 'DELETE',
-                                                            ])
-                                                        !!}
+                                                    {{--<li>--}}
+                                                        {{--{!! Form::open([--}}
+                                                            {{--'class'=>'delete',--}}
+                                                            {{--'url'  => route(ADMIN . '.loan_request.destroy', $loanRequests['id']),--}}
+                                                            {{--'method' => 'DELETE',--}}
+                                                            {{--])--}}
+                                                        {{--!!}--}}
 
-                                                        <button class="btn btn-danger btn-xs"
-                                                                title="{{ trans('app.delete_title') }}"><i
-                                                                    class="fa fa-trash"></i></button>
+                                                        {{--<button class="btn btn-danger btn-xs"--}}
+                                                                {{--title="{{ trans('app.delete_title') }}"><i--}}
+                                                                    {{--class="fa fa-trash"></i></button>--}}
 
-                                                        {!! Form::close() !!}
+                                                        {{--{!! Form::close() !!}--}}
 
-                                                    </li>
+                                                    {{--</li>--}}
                                             @endif
                                         </ul>
                                 </td>

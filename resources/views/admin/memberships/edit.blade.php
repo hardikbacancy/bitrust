@@ -190,7 +190,7 @@
           <br>
           <div>
             <button type="submit" value="Submit" class="btn btn-primary" style="width:100px;">Update</button>
-            <a class="btn btn-warning " href="{{ route(ADMIN.'.membership') }}" style="width:100px;"><i class="fa fa-btn fa-back"></i>Cancel</a>
+            <a class="btn btn-warning " href="{{ route(ADMIN.'.membership.membership_details',$membershipData['user_id']) }}" style="width:100px;"><i class="fa fa-btn fa-back"></i>Cancel</a>
           </div>
         </form>
       </div>

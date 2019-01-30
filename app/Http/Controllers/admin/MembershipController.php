@@ -83,14 +83,9 @@ $yearArray=array();
 
        return Datatables::of($membershipData)
            ->addColumn('editDeleteAction', function ($membershipData) {
-               return ' <span style="margin-right: 2px;"  class="tooltips" title="View Membership Detail." data-placement="top">
+               return ' <span style="margin-right: 2px;"  class="tooltips" title="View Membership Detail" data-placement="top">
                               <a href="'.route(ADMIN . '.membership.membership_details', $membershipData->id).'" class="btn btn-primary btn-xs" style="margin-left: 10%;">
                                 <i class="fa fa-eye"></i>
-                              </a>
-                            </span>
-                            <span class="tooltips" title="Delete Member." data-placement="top">
-                              <a data-memberId="' . $membershipData->id . '" class="btn btn-danger delete-member btn-xs" style="margin-left: 10%;">
-                                <i class="fa fa-trash-o"></i>
                               </a>
                             </span>
                            ';
@@ -160,9 +155,6 @@ $yearArray=array();
    }
     public function membershipDetailsPostAjax(Request $request){
         $query=Membership::select('memberships.*','users.name','users.email')->join('users','users.id','memberships.user_id')->where('memberships.user_id','=',$request->userId);
-        if(!empty($request->year)){
-            $query=$query->where('year','=',$request->year);
-        }
         $membershipData=$query->orderBy('memberships.updated_at', 'desc')->get();
 
         return Datatables::of($membershipData)
@@ -179,14 +171,9 @@ $yearArray=array();
             })
 
             ->addColumn('editDeleteAction', function ($membershipData) {
-                return ' <span style="margin-right: 2px;"  class="tooltips" title="Edit Membership Detail." data-placement="top">
+                return ' <span style="margin-right: 2px;"  class="tooltips" title="Edit Membership Detail" data-placement="top">
                               <a href="'.route(ADMIN . '.membership.edit', $membershipData->id).'" class="btn btn-primary btn-xs" style="margin-left: 10%;">
                                 <i class="fa fa-pencil-square-o"></i>
-                              </a>
-                            </span>
-                            <span class="tooltips" title="Delete Member." data-placement="top">
-                              <a data-memberId="' . $membershipData->id . '" class="btn btn-danger delete-member btn-xs" style="margin-left: 10%;">
-                                <i class="fa fa-trash-o"></i>
                               </a>
                             </span>
                            ';

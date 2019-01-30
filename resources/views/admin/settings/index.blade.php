@@ -29,7 +29,6 @@
                 <tr>
                     <th>Penalty(in $)</th>
                     <th>Interest Rate(in %)</th>
-                    <th>Membership Fee(in $)</th>
                     <th>Min Loan Amount(in $)</th>
                     <th>Updated At</th>
                     <th class="no-sort"></th>
@@ -50,9 +49,6 @@
                       
                       <td>
                           {{ $item->interest_rate }}
-                      </td> 
-                      <td>
-                          {{ $item->membership_fee }}
                       </td>
                                 <td>
                                     {{ $item->min_loan_amount }}
@@ -62,7 +58,7 @@
                       </td>
                       <td class="actions">
                             <ul class="list-inline" style="margin-bottom:0px;">
-                                <li><a href="{{ route(ADMIN . '.adminsettings.edit', $item->id) }}" title="{{ trans('app.edit_title') }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a></li>
+                                <li><a href="{{ route(ADMIN . '.adminsettings.edit', $item->id) }}" title="{{ "Edit Setting" }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a></li>
                                
                             </ul>
                         </td>

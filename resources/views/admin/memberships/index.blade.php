@@ -40,8 +40,6 @@
 @section('js')
     <script>
     $(document).ready(function (e) {
-        $("#user_id").select2();
-        $("#year").select2();
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -51,7 +49,6 @@
             oLanguage: {
                 sProcessing: "<img src='{{asset('img/loading.gif')}}'>"
             },
-            "order": [],
             processing: true,
             serverSide: true,
             "scrollX": true,
@@ -65,85 +62,7 @@
                 {data: 'editDeleteAction', name: 'editDeleteAction',sClass:"test"},
             ]
         });
-        $(document.body).on('click', '.delete-member', function () {
-            var obj = $(this);
-            var memberId = $(this).attr('data-memberId');
-            swal({
-                title: 'Are you sure?',
-                type: 'error',
-                showCancelButton: true,
-                confirmButtonColor: '#DD4B39',
-                cancelButtonColor: '#00C0EF',
-                confirmButtonText: 'Yes',
-                cancelButtonText: 'No',
-                closeOnConfirm: false
-            }).catch(swal.noop).then(function(isConfirm) {
-                if (isConfirm) {
-                    $.ajax({
-                        url: '{{route(ADMIN.'.membership.deleteMemberAjax')}}',
-                        type: 'POST',
-                        dataType: 'json',
-                        data: {
-                            memberId: memberId,
-                        },
-                        success: function (response) {
-                            $('#membershipList').DataTable().ajax.reload(null, false);
-                            notification("Deleted successfully.!", "success");
-                        }
-                    });
-                }
-            });
-        });
-        $("#member-filter").submit(function (e) {
-            e.preventDefault();
-            var user = $("#user_id").val();
-            var year = $("#year").val();
 
-            $('#membershipList').DataTable({
-                oLanguage: {
-                    sProcessing: "<img src='{{asset('img/loading.gif')}}'>"
-                },
-                "order": [],
-                processing: true,
-                serverSide: true,
-                "scrollX": true,
-                "bDestroy": true,
-                "ajax": {
-                    url: '{{route(ADMIN.'.membership.membershipPostAjax')}}',
-                    type: 'POST',
-                    data: {'user': user, 'year': year},
-                },
-                columns: [
-                    {data: 'name', name: 'name'},
-                    {data: 'email', name: 'email'},
-                    {data: 'editDeleteAction', name: 'editDeleteAction',sClass:"test"},
-                ]
-            });
-        })
-        $("#reset").click(function (e) {
-            e.preventDefault();
-            $('#year').val('').trigger('change');
-            $('#user_id').val('').trigger('change');
-            $('#membershipList').DataTable({
-                oLanguage: {
-                    sProcessing: "<img src='{{asset('img/loading.gif')}}'>"
-                },
-                "order": [],
-                processing: true,
-                serverSide: true,
-                "scrollX": true,
-                "bDestroy": true,
-                "ajax": {
-                    url: '{{route(ADMIN.'.membership.membershipPostAjax')}}',
-                    type: 'POST',
-                },
-                columns: [
-                    {data: 'name', name: 'name'},
-                    {data: 'email', name: 'email'},
-                    {data: 'editDeleteAction', name: 'editDeleteAction',sClass:"test"},
-                ]
-            });
-        });
     });
     </script>
 @stop

@@ -52,9 +52,7 @@ class UsersController extends Controller
     {
         $this->validate($request, User::rules());
         $userloanDetails=new User();
-        $memebershipFee=$userloanDetails->getMembershipFees();
         $requestAll=$request->all();
-        $requestAll['membership_fees']=$memebershipFee;
         $user=User::create($requestAll);
 //        Mail::to($request->email)->send(new VerifyMail($user));
         return redirect()->route(ADMIN.'.users.index')->withSuccess("User Added Successfully");

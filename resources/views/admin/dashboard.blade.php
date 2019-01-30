@@ -22,7 +22,7 @@
                 <span class="info-box-icon"><i class="fa fa-money"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">Total Fund(in $)</span>
-                    <span class="info-box-number">{{$totalMembershipFees}}</span>
+                    <span class="info-box-number">{{$totalMembershipFees+$profit}}</span>
                 </div>
             </div>
         </div>
@@ -31,7 +31,7 @@
                 <span class="info-box-icon"><i class="fa fa-money"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text" style="font-size: 13px;">Total Available Balance(in $)</span>
-                    <span class="info-box-number">{{$totalMembershipFees-$loanAmount}}</span>
+                    <span class="info-box-number">{{$totalMembershipFees+$profit-$loanAmount}}</span>
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
             <div class="info-box bg-yellow">
                 <span class="info-box-icon"><i class="fa fa-money"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text">Total Profit(in $)</span>
+                    <span class="info-box-text">Total Loan Profit(in $)</span>
                     <span class="info-box-number">{{$profit}}</span>
                 </div>
             </div>
