@@ -43,7 +43,7 @@
 
 
         <li class="<?php  echo (starts_with($route, ADMIN . '.import'))  ? "active" : '' ?>">
-            <a href="{{ route(ADMIN.'.import') }}"><i class="fa fa-flag-o"></i><span>Import</span></a>
+            <a href="{{ route(ADMIN.'.import') }}"><i class="fa fa-upload"></i><span>Import</span></a>
         </li>
 
     @endif

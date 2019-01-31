@@ -1,7 +1,7 @@
 @extends('admin.adminlayout')
 @section('page-header')
     Membership
-    <small>Update</small>
+    <small>View</small>
 @stop
 
 @section('content')
@@ -11,32 +11,34 @@
             {!! session('message') !!}
         </div>
     @endif
+
+    <div class="box-header" style="background-color:#f5f5f5;border-bottom:1px solid #d2d6de;">
+        <div class="row">
+            <div class="col-md-2">
+                <label>User Email:</label>
+            </div>
+            <div class="col-md-4">
+                @foreach($userDetails as $userDetail)
+                    @if($userDetail['id']==$membershipData['user_id'])
+                        <span>{{$userDetail['email']}}</span>
+                    @endif
+                @endforeach
+            </div>
+            <div class="col-md-2">
+                <label>Year</label> :
+            </div>
+            <div class="col-md-4">
+                <span>{{$membershipData['year']}}</span>
+            </div>
+        </div>
+    </div>
+
+
     <div class="row" id="member-view">
         <div class="col-md-12">
-            <div class="box" style="border:1px solid #d2d6de;">
+            <div class="box" style="border:1px solid #d2d6de;margin-top:0px !important;">
                 <form style="padding: 15px;">
-
-                    @foreach($userDetails as $userDetail)
-                        @if($userDetail['id']==$membershipData['user_id'])
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label>User Email</label>:
-                                </div>
-                                <div class="col-md-4">
-                                    <span>{{$userDetail['email']}}</span>
-                                </div>
-                                <div class="col-md-2">
-                                    <label>Year</label> :
-                                </div>
-                                <div class="col-md-4">
-                                    <span>{{$membershipData['year']}}</span>
-                                </div>
-                            </div>
-                        @endif
-                    @endforeach
-                    <br>
-
-                    <div class="row mb30">
+                    <div class="row">
                         <div class="col-md-2">
                         </div>
                         <div class="col-md-4">
@@ -187,8 +189,10 @@
                             {{$membershipData['dec_penalty']}}
                         </div>
                     </div>
-                        <br>
-                        <a class="btn btn-warning " href="{{ route(ADMIN.'.membership.membership_details',$membershipData['user_id']) }}" style="width:100px;"><i class="fa fa-btn fa-back"></i>Cancel</a>
+                    <br>
+                    <a class="btn btn-warning "
+                       href="{{ route(ADMIN.'.membership.membership_details',$membershipData['user_id']) }}"
+                       style="width:100px;"><i class="fa fa-btn fa-back"></i>Cancel</a>
                 </form>
             </div>
         </div>

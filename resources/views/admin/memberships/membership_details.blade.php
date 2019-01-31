@@ -19,10 +19,10 @@
     <div class="box-header" style="background-color:#f5f5f5;border-bottom:1px solid #d2d6de;">
         <div class="row">
             <div class="col-md-2">
-        <label>User Email:</label>
+                <label>User Email:</label>
             </div>
             <div class="col-md-4">
-        {{$users->email}}
+                {{$users->email}}
             </div>
         </div>
     </div>
@@ -51,34 +51,34 @@
 
 @section('js')
     <script>
-     var userId='{{$users['id']}}';
-    $(document).ready(function (e) {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+        var userId = '{{$users['id']}}';
+        $(document).ready(function (e) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $('#membershipDetailList').DataTable({
+                oLanguage: {
+                    sProcessing: "<img src='{{asset('img/loading.gif')}}'>"
+                },
+                "order": [],
+                processing: true,
+                serverSide: true,
+                "scrollX": true,
+                "ajax": {
+                    url: '{{route(ADMIN.'.membership.membershipDetailsPostAjax')}}',
+                    type: 'POST',
+                    data: {'userId': userId}
+                },
+                columns: [
+                    {data: 'year', name: 'year'},
+                    {data: 'total_fees', name: 'total_fees'},
+                    {data: 'total_penalty', name: 'total_penalty'},
+                    {data: 'total_amount', name: 'total_amount'},
+                    {data: 'editDeleteAction', name: 'editDeleteAction', sClass: "test"},
+                ]
+            });
         });
-        $('#membershipDetailList').DataTable({
-            oLanguage: {
-                sProcessing: "<img src='{{asset('img/loading.gif')}}'>"
-            },
-            "order": [],
-            processing: true,
-            serverSide: true,
-            "scrollX": true,
-            "ajax": {
-                url: '{{route(ADMIN.'.membership.membershipDetailsPostAjax')}}',
-                type: 'POST',
-                data:{'userId':userId}
-            },
-            columns: [
-                {data: 'year', name: 'year'},
-                {data: 'total_fees', name: 'total_fees'},
-                {data: 'total_penalty', name: 'total_penalty'},
-                {data: 'total_amount', name: 'total_amount'},
-                {data: 'editDeleteAction', name: 'editDeleteAction',sClass:"test"},
-            ]
-        });
-    });
     </script>
 @stop
