@@ -171,7 +171,12 @@ $yearArray=array();
             })
 
             ->addColumn('editDeleteAction', function ($membershipData) {
-                return ' <span style="margin-right: 2px;"  class="tooltips" title="Edit Membership Detail" data-placement="top">
+                return ' <span style="margin-right: 2px;"  class="tooltips" title="View Membership Detail" data-placement="top">
+                              <a href="'.route(ADMIN . '.membership.view', $membershipData->id).'" class="btn btn-primary btn-xs" style="margin-left: 10%;">
+                                <i class="fa fa-eye"></i>
+                              </a>
+                            </span>
+                            <span style="margin-right: 2px;"  class="tooltips" title="Edit Membership Detail" data-placement="top">
                               <a href="'.route(ADMIN . '.membership.edit', $membershipData->id).'" class="btn btn-primary btn-xs" style="margin-left: 10%;">
                                 <i class="fa fa-pencil-square-o"></i>
                               </a>
@@ -179,5 +184,10 @@ $yearArray=array();
                            ';
             })
             ->make(true);
+    }
+    public function viewMembership(Request $request,$Id){
+        $userDetails = User::where('role','=',0)->get()->toArray();
+        $membershipData=Membership::select('memberships.*')->leftJoin("users","users.id","=","memberships.user_id")->where('memberships.id','=',$Id)->first();
+        return view('admin.memberships.view',get_defined_vars());
     }
 }

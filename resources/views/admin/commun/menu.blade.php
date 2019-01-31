@@ -40,5 +40,11 @@
         <li class="<?php  echo (starts_with($route, ADMIN . '.report'))  ? "active" : '' ?>">
             <a href="{{ route(ADMIN.'.report.report') }}"><i class="fa fa-flag-o"></i><span>Report</span></a>
         </li>
+
+
+        <li class="<?php  echo (starts_with($route, ADMIN . '.import'))  ? "active" : '' ?>">
+            <a href="{{ route(ADMIN.'.import') }}"><i class="fa fa-flag-o"></i><span>Import</span></a>
+        </li>
+
     @endif
 </ul>

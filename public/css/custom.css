@@ -135,3 +135,6 @@ table.dataTable tr th.select-checkbox.selected::after {
 #member-create .form-control {    margin-bottom: 10px;}
 #member-create .mb30 { margin-bottom: 30px !important;}
 .mt25 { margin-top: 25px !important;}
+
+
+#member-view label {    margin-bottom: 12px; }

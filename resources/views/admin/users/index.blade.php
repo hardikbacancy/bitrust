@@ -37,7 +37,7 @@
                             <th>Role</th>
                             <th class='bool text-center'>Active</th>
                             <th class='bool text-center'>Email Verified</th>
-                            <th class="no-sort"></th>
+                            <th class="no-sort">Action</th>
                         </tr>
                         </thead>
                         <tbody>

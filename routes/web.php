@@ -50,13 +50,12 @@ Route::group(['prefix' => ADMIN, 'as' => ADMIN . '.', 'middleware'=>['auth','Rol
     Route::post('membership/store', 'admin\MembershipController@store')->name('membership.store');
     Route::post('membership/membershipPostAjax', 'admin\MembershipController@membershipPostAjax')->name('membership.membershipPostAjax');
     Route::get('membership/membershipDetails/edit/{Id}', 'admin\MembershipController@editMembership')->name('membership.edit');
+    Route::get('membership/membershipDetails/view/{Id}', 'admin\MembershipController@viewMembership')->name('membership.view');
     Route::post('membership-update', 'admin\MembershipController@updateMembership')->name('update-membership');
     Route::post('membership-delete', 'admin\MembershipController@deleteMember')->name('membership.deleteMemberAjax');
     Route::get('membership/membershipDetails/{Id}', 'admin\MembershipController@membershipDetails')->name('membership.membership_details');
     Route::post('membership/membershipDetailsAjax', 'admin\MembershipController@membershipDetailsPostAjax')->name('membership.membershipDetailsPostAjax');
-
-
-
-
+    Route::get('import', 'admin\ImportController@import')->name('import');
+    Route::post('importMembership', 'admin\ImportController@importMembership')->name('membership.importMembership');
 
 });
