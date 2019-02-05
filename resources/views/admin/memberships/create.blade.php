@@ -189,7 +189,7 @@
         <br>
       <div>
         <button type="submit" value="Submit" class="btn btn-primary" style="width:100px;">Create</button>
-        <a class="btn btn-warning" href="{{ route(ADMIN.'.users.index') }}" style="width:100px;"><i class="fa fa-btn fa-back"></i>Cancel</a>
+        <a class="btn btn-warning" href="{{ URL::previous() }}" style="width:100px;"><i class="fa fa-btn fa-back"></i>Cancel</a>
 
       </div>
       </form>

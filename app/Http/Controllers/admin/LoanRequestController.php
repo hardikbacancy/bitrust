@@ -3,9 +3,11 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\admin\AdminSetting;
 use App\Models\admin\LoanRequest;
+use App\Models\admin\Membership;
 use App\Models\admin\UserLoanMgmt;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class LoanRequestController extends Controller
@@ -18,12 +20,17 @@ class LoanRequestController extends Controller
     public function index()
     {
         if(auth()->user()->hasRole('User')){
+            $count = Membership::
+            join('users', 'users.id', '=', 'memberships.user_id')
+                ->select('users.*')
+                ->where('users.role', '=', 0)
+                ->where('users.id', '=', \Auth::user()->id)
+                ->count();
             $loanRequest=LoanRequest::where('user_id','=',\Auth::user()->id)->orderBy('updated_at', 'desc')->get()->toArray();
         }
         else {
+            $count=1;
             $loanRequest = LoanRequest::orderBy('updated_at', 'desc')->get()->toArray();
-
-//            $loanRequest = LoanRequest::all()->toArray();
         }
         foreach ($loanRequest as $key => $value) {
             $loanRequests = User::find($value['user_id'])->toArray();
@@ -50,15 +57,18 @@ class LoanRequestController extends Controller
             else{
                 $loanRequest[$key]['completed'] = "Processing";
             }
-            $paidEmiAmount = $emi_amount * $i;
-            $loanRequest[$key]['paidEmiAmount'] = floor($paidEmiAmount);
-            $loanRequest[$key]['remainningEmiAmount'] = floor($laon_amount_including_interest-$paidEmiAmount);
-        }
+//            $paidEmiAmount = $emi_amount * $i;
+//            $loanRequest[$key]['paidEmiAmount'] = floor($paidEmiAmount);
+//            $loanRequest[$key]['remainningEmiAmount'] = floor($laon_amount_including_interest-$paidEmiAmount);
 
-//        echo "<pre>";
-//        print_r($loanRequest);
-//        die;
-//
+
+            $loanRequest[$key]['paidEmiAmount']=DB::table('user_loan_mgmts')
+                ->where('user_id','=',$value['user_id'])->where('request_id','=',$value['id'])->where('tenuar_status','=',1)->sum('emi_amount');
+
+            $loanRequest[$key]['remainningEmiAmount']=DB::table('user_loan_mgmts')
+                ->where('user_id','=',$value['user_id'])->where('request_id','=',$value['id'])->where('tenuar_status','=',0)->sum('emi_amount');
+
+        }
 
         return view('admin.loan_request.index', get_defined_vars());
     }
@@ -70,7 +80,20 @@ class LoanRequestController extends Controller
      */
     public function create()
     {
-        $userDetails = User::where('role','=',0)->get()->toArray();
+        if(\Auth::user()->role!=0) {
+            $userDetails = Membership::
+            join('users', 'users.id', '=', 'memberships.user_id')
+                ->select('users.*')
+                ->where('users.role', '=', 0)
+                ->groupBy('memberships.user_id')
+                ->get()->toArray();
+        }
+        else{
+            $count=checkLoanMenu();
+            if($count==0){
+                return redirect()->route(ADMIN . '.loan_request.index')->with('message','You do not have membership yet');
+            }
+        }
         $adminSettings = AdminSetting::all()->toArray();
         return view('admin.loan_request.create', get_defined_vars());
     }
@@ -106,13 +129,31 @@ class LoanRequestController extends Controller
                         $requestAll['interest_rate'] = $interest;
                         LoanRequest::create($requestAll);
                     } else {
+                        $period = $request->tenuar_period;
+                        $loan_amount = $request->loan_amount;
+                        $interest_rate = $interest;
                         $requestAll = $request->all();
                         $requestAll['interest_rate'] = $interest;
-                        LoanRequest::create($requestAll);
+                        $loanRequest=LoanRequest::create($requestAll);
+                        if ($request->request_status == 1) {
+                            $emi_amount = ($loan_amount * $interest_rate) / 100 + $loan_amount;
+                            $emi_amount_per_month = $emi_amount / $period;
+
+                            for ($i = 1; $i <= $period; $i++) {
+                                $firstDay = date('Y-m-d', strtotime("first day of this month"));
+                                $emi_date = date('Y-m-d', strtotime($i . 'month', strtotime($firstDay)));
+                                $userLoanMgmtData['user_id'] = $loanRequest->user_id;
+                                $userLoanMgmtData['request_id'] = $loanRequest->id;
+                                $userLoanMgmtData['emi_amount'] = $emi_amount_per_month;
+                                $userLoanMgmtData['tenuar_date'] = $emi_date;
+                                $userLoanMgmt = UserLoanMgmt::create($userLoanMgmtData);
+                            }
+                        }
+
                     }
                     return redirect()->route(ADMIN . '.loan_request.index')->withSuccess("Successfully Added");
                 } else {
-                    return redirect()->route(ADMIN . '.loan_request.create')->with('message', 'Balance is not available for loan');
+                    return redirect()->route(ADMIN . '.loan_request.create')->with('message', 'Not sufficient available balance for loan request');
                 }
             }
             else{
@@ -204,7 +245,8 @@ class LoanRequestController extends Controller
                     }
                 }
                 else{
-                    return back()->withSuccess("Balance is not available for laon");
+                    return back()->with('message', 'Not sufficient available balance for loan request');
+
                 }
             }
             $loanRequest = LoanRequest::findOrFail($id);

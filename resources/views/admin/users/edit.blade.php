@@ -19,7 +19,7 @@
         <div class="box-body" style="margin:10px;">
           @include('admin.users.form')
             <div class="form-group">
-                <label for="photo">Photo <span>*</span>:</label>
+                <label for="photo">Photo  &nbsp;(Allow only jpeg,bmp,png up to 2MB)<span>*</span>:</label>
                 <div class="col-md-12 pd-0 mt-10">
                     <div class="col-md-3 pd-0">
                         <div class="profile-file">

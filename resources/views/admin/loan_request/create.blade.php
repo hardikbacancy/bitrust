@@ -2,9 +2,12 @@
 
 @section('page-header')
   Loan Request <small>new</small>
+
 @stop
 
 @section('content')
+    <span style="color: red;">* On Approval you can not change</span>
+
     @if(session()->has('message'))
         <div class="alert alert-danger">
             <button type="button" class="close" data-dismiss="alert">×</button>
@@ -13,7 +16,8 @@
     @endif
 
 <div class="row">
-  <div class="col-sm-12">
+
+    <div class="col-sm-12">
     <div class="box" style="border:1px solid #d2d6de;">
         {!! Form::open([
                 'action' => ['LoanRequestController@store'],
@@ -21,6 +25,7 @@
                 'id' => 'create-loan-req'
             ])
         !!}
+
 
         <div class="box-body number_class" style="margin:10px;">
           @include('admin.loan_request.form')

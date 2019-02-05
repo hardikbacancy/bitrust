@@ -25,11 +25,11 @@
     </select>
 </div>
 
-@if(isset($loanRequest))
+
     @if (auth()->user()->hasRole('Superadmin|Admin'))
-    {!! Form::mySelect('request_status', 'Request Status', config('variables.boolean')) !!}
+    {!! Form::mySelect('request_status', 'Approve Request Status', config('variables.boolean')) !!}
     @endif
-@endif
+
 
 
 

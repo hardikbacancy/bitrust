@@ -12,13 +12,33 @@
     <small>{{ trans('app.manage') }}</small>
 @stop
 @section('content')
+    @if(session()->has('message'))
+        <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {!! session('message') !!}
+        </div>
+    @endif
     <div class="row">
         <div class="col-xs-12">
             <div class="box" style="border:1px solid #d2d6de;">
                 <div class="box-header" style="background-color:#f5f5f5;border-bottom:1px solid #d2d6de;">
+                    @if(\Auth::user()->role!='0')
+
                     <a class="btn btn-info" href="{{ route(ADMIN . '.loan_request.create') }}" title="Create Loan">
                         <i class="fa fa-plus" style="vertical-align:middle"></i> Create Loan
                     </a>
+                     @else
+                        @if($count>0)
+                        <a class="btn btn-info" href="{{ route(ADMIN . '.loan_request.create') }}" title="Create Loan">
+                            <i class="fa fa-plus" style="vertical-align:middle"></i> Create Loan
+                        </a>
+                         @else
+                            <a class="btn btn-info" title="Create Loan">
+                                <i class="fa fa-plus" style="vertical-align:middle"></i> Create Loan
+                            </a>
+                           <span style="color:red;padding: 30px;"> {{"You do not have membership yet"}} </span>
+                         @endif
+                     @endif
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
@@ -44,7 +64,7 @@
                                 <td>{{$loanRequests['loan_amount']}}</td>
                                 <td>{{$loanRequests['tenuar_period']}}</td>
                                 <td>{{$loanRequests['interest_rate']}} </td>
-                                <td>{{$loanRequests['loan_amount']*$loanRequests['interest_rate']/100+$loanRequests['loan_amount']}}</td>
+                                <td>{{floor($loanRequests['loan_amount']*$loanRequests['interest_rate']/100+$loanRequests['loan_amount'])}}</td>
                                 <td>{{$loanRequests['paidEmiAmount']}}</td>
                                 <td>{{$loanRequests['remainningEmiAmount']}}</td>
                                 <td>{{$loanRequests['completed']}}</td>

@@ -35,3 +35,15 @@ if (! function_exists('move_file')) {
         return $image->save($destinationPath . '/' . $full_name)->basename;
     }
 }
+function checkLoanMenu()
+{
+    if(\Auth::user()->role==0) {
+        $userDetails = \App\Models\admin\Membership::
+        join('users', 'users.id', '=', 'memberships.user_id')
+            ->select('users.*')
+            ->where('users.role','=',0)
+            ->where('memberships.user_id','=',\Auth::user()->id)
+            ->count();
+        return $userDetails;
+    }
+}

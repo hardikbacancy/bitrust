@@ -17,7 +17,7 @@
             ])
         !!}
 
-        <div class="box-body number_class" style="margin:10px;">
+        <div class="box-body" style="margin:10px;">
           @include('admin.settings.form')
         </div>
        
@@ -78,9 +78,6 @@
 
             return true;
         }
-
-
-
 });
 </script>
 

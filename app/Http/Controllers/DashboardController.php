@@ -64,6 +64,12 @@ class DashboardController extends Controller
 
             $unpaidAmount=DB::table('user_loan_mgmts')
                 ->where('user_id','=',\Auth::user()->id)->where('tenuar_status','=',0)->sum('emi_amount');
+
+
+            $totalMembershipFees1=Membership::where('user_id','=',\Auth::user()->id)->value(DB::raw("SUM(jan_fees + jan_penalty + feb_fees + feb_penalty + march_fees +march_penalty + april_fees + april_penalty + may_fees + may_penalty + june_fees + june_penalty + july_fees + july_penalty + aug_fees + aug_penalty + sep_fees + sep_penalty + oct_fees)"));
+            $totalMembershipFees2=Membership::where('user_id','=',\Auth::user()->id)->value(DB::raw("SUM(oct_penalty+nov_fees+nov_penalty+dec_fees+dec_penalty)"));
+            $totalMembershipFees=$totalMembershipFees1+$totalMembershipFees2;
+
         }
         return view('admin.dashboard',get_defined_vars());
     }

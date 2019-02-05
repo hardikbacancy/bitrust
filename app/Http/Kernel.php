@@ -59,5 +59,7 @@ class Kernel extends HttpKernel
         'ApiToken' => \App\Http\Middleware\ApiToken::class,
         'Role' => \App\Http\Middleware\Role::class,
         'authcheck' => \App\Http\Middleware\AuthCheck::class,
+        'loanRequestCheck' => \App\Http\Middleware\LoanRequestCheck::class,
+
     ];
 }

@@ -5,7 +5,9 @@
 @stop
 
 @section('content')
-<div class="row">
+    <span style="color: red;">* On Approval you can not change</span>
+
+    <div class="row">
   <div class="col-sm-12">
     <div class="box" style="border:1px solid #d2d6de;">
         {!! Form::model($loanRequest, [

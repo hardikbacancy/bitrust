@@ -73,6 +73,16 @@
                 <div class="info-box bg-red">
                     <span class="info-box-icon"><i class="fa fa-money"></i></span>
                     <div class="info-box-content">
+                        <span class="info-box-text">Total Membership(in $)</span>
+                        <span class="info-box-number">{{$totalMembershipFees}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="info-box bg-gray">
+                    <span class="info-box-icon"><i class="fa fa-money"></i></span>
+                    <div class="info-box-content">
                         <span class="info-box-text">Total Loan Amount(in $)</span>
                         <span class="info-box-number">{{$loanAmount}}</span>
                     </div>

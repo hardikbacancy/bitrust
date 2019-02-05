@@ -24,6 +24,13 @@
             <div class="col-md-4">
                 {{$users->email}}
             </div>
+            @if(\Auth::user()->role!='0')
+            <div class="col-md-6 text-right">
+                <a style="line-height: 21px;" href="{{ route(ADMIN . '.membership.create',$users['id']) }}"
+                   title="{{ "Add Membership" }}" class="btn btn-primary btn-xs"><i
+                            class="fa fa-plus-square"></i> Add Membership</a>
+            </div>
+            @endif
         </div>
     </div>
 

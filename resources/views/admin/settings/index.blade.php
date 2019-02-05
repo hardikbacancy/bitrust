@@ -54,7 +54,9 @@
                                     {{ $item->min_loan_amount }}
                                 </td>
                                 <td>
-                          {{ $item->updated_at }}                      
+
+                                  {{  date('Y-m-d H:i:s', strtotime($item->updated_at)) }}
+
                       </td>
                       <td class="actions">
                             <ul class="list-inline" style="margin-bottom:0px;">

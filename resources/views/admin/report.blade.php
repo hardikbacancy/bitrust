@@ -85,6 +85,7 @@
                 oLanguage: {
                     sProcessing: "<img src='{{asset('img/loading.gif')}}'>"
                 },
+                "order": [],
                 processing: true,
                 serverSide: true,
                 "scrollX": true,
@@ -128,6 +129,7 @@
                                 oLanguage: {
                                     sProcessing: "<img src='{{asset('img/loading.gif')}}'>"
                                 },
+                                "order": [],
                                 processing: true,
                                 serverSide: true,
                                 "scrollX": true,
@@ -168,6 +170,7 @@
                                 oLanguage: {
                                     sProcessing: "<img src='{{asset('img/loading.gif')}}'>"
                                 },
+                                "order": [],
                                 processing: true,
                                 serverSide: true,
                                 "scrollX": true,

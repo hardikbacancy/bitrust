@@ -29,17 +29,17 @@ class ReportController extends Controller
             $end_date = $request->end_date;
             $start_date = date('Y-m-d', strtotime($start_date));
             $end_date = date('Y-m-d', strtotime($end_date));
-            $loanRequest = LoanRequest::where('request_status', '=', 1)->whereDate('created_at', '>', $start_date)->whereDate('created_at', '<=', $end_date)->get()->toArray();
+            $loanRequest = LoanRequest::where('request_status', '=', 1)->whereDate('created_at', '>=', $start_date)->whereDate('created_at', '<', $end_date)->orderBy('updated_at', 'desc')->get()->toArray();
         } else if (!empty($request->start_date)) {
             $start_date = $request->start_date;
             $start_date = date('Y-m-d', strtotime($start_date));
-            $loanRequest = LoanRequest::where('request_status', '=', 1)->whereDate('created_at', '>', $start_date)->get()->toArray();
+            $loanRequest = LoanRequest::where('request_status', '=', 1)->whereDate('created_at', '>=', $start_date)->orderBy('updated_at', 'desc')->get()->toArray();
         } else if (!empty($request->end_date)) {
             $end_date = $request->end_date;
             $end_date = date('Y-m-d', strtotime($end_date));
-            $loanRequest = LoanRequest::where('request_status', '=', 1)->whereDate('created_at', '<=', $end_date)->get()->toArray();
+            $loanRequest = LoanRequest::where('request_status', '=', 1)->whereDate('created_at', '<=', $end_date)->orderBy('updated_at', 'desc')->get()->toArray();
         } else {
-            $loanRequest = LoanRequest::where('request_status', '=', 1)->get()->toArray();
+            $loanRequest = LoanRequest::where('request_status', '=', 1)->orderBy('updated_at', 'desc')->get()->toArray();
         }
 
         foreach ($loanRequest as $key => $value) {
@@ -71,9 +71,14 @@ class ReportController extends Controller
             } else {
                 $loanRequest[$key]['completed'] = "Processing";
             }
-            $paidEmiAmount = $emi_amount * $i;
-            $loanRequest[$key]['paidEmiAmount'] = floor($paidEmiAmount);
-            $loanRequest[$key]['remainningEmiAmount'] = floor($laon_amount_including_interest - $paidEmiAmount);
+//            $paidEmiAmount = $emi_amount * $i;
+//            $loanRequest[$key]['paidEmiAmount'] = floor($paidEmiAmount);
+//            $loanRequest[$key]['remainningEmiAmount'] = floor($laon_amount_including_interest - $paidEmiAmount);
+            $loanRequest[$key]['paidEmiAmount']=DB::table('user_loan_mgmts')
+                ->where('user_id','=',$value['user_id'])->where('request_id','=',$value['id'])->where('tenuar_status','=',1)->sum('emi_amount');
+
+            $loanRequest[$key]['remainningEmiAmount']=DB::table('user_loan_mgmts')
+                ->where('user_id','=',$value['user_id'])->where('request_id','=',$value['id'])->where('tenuar_status','=',0)->sum('emi_amount');
         }
         function arrayToCollection($loanRequest)
         {

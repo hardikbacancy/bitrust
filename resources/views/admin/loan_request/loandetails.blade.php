@@ -60,7 +60,7 @@
                                         <td>{{floor($loanRequest[0]['loan_amount']/$loanRequest[0]['tenuar_period'])}}</td>
                                         <td>{{$userLoanMgmts['emi_amount']-floor($loanRequest[0]['loan_amount']/$loanRequest[0]['tenuar_period'])}}</td>
                                         <td>{{$userLoanMgmts['emi_amount']}}</td>
-                                        <td>{{$userLoanMgmts['tenuar_date']}}</td>
+                                        <td style="width:10%;">{{$userLoanMgmts['tenuar_date']}}</td>
                                         <td><input type="text" name="penalty" id="penalty_{{$userLoanMgmts['id']}}"
                                                    value="{{$userLoanMgmts['penalty']}}" class="number_class"></td>
                                         <td>
@@ -74,7 +74,7 @@
                                                 <span class="slider round"></span>
                                             </label>
                                         </td>
-                                        <td id="emi_paid_date_{{$userLoanMgmts['id']}}">@if(isset($userLoanMgmts['emi_paid_date'])){{$userLoanMgmts['emi_paid_date']}} @else {{"-"}}@endif</td>
+                                        <td style="width:10%;" id="emi_paid_date_{{$userLoanMgmts['id']}}">@if(isset($userLoanMgmts['emi_paid_date'])){{$userLoanMgmts['emi_paid_date']}} @else {{"-"}}@endif</td>
 
                                     </tr>
                                 @endforeach
@@ -112,7 +112,7 @@
                                         <td>{{floor($loanRequest[0]['loan_amount']/$loanRequest[0]['tenuar_period'])}}</td>
                                         <td>{{$userLoanMgmts['emi_amount']-floor($loanRequest[0]['loan_amount']/$loanRequest[0]['tenuar_period'])}}</td>
                                         <td>{{$userLoanMgmts['emi_amount']}}</td>
-                                        <td>{{$userLoanMgmts['tenuar_date']}}</td>
+                                        <td style="width:10%;">{{$userLoanMgmts['tenuar_date']}}</td>
                                         <td>@if(isset($userLoanMgmts['penalty'])){{$userLoanMgmts['penalty']}} @else {{"-"}}@endif</td>
                                         <td>
 
@@ -122,7 +122,7 @@
                                             @endif
 
                                         </td>
-                                        <td>@if(isset($userLoanMgmts['emi_paid_date'])){{$userLoanMgmts['emi_paid_date']}}@else {{"-"}} @endif</td>
+                                        <td style="width:10%;">@if(isset($userLoanMgmts['emi_paid_date'])){{$userLoanMgmts['emi_paid_date']}}@else {{"-"}} @endif</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

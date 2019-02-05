@@ -4,6 +4,7 @@ namespace App;
 use App\Models\admin\AdminSetting;
 use App\Models\admin\LoanRequest;
 use App\Models\admin\Membership;
+use App\Models\admin\UserLoanMgmt;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
@@ -45,7 +46,7 @@ class User extends Authenticatable
             'email'    => "required|email|unique:users,email,$id",
             'password' => 'nullable|confirmed',
             'mobile' =>'required|digits:10',
-            'avatar' => 'image|mimes:jpeg,bmp,png|max:300',
+            'avatar' => 'image|mimes:jpeg,bmp,png|max:2048',
         ];
 
         if ($update) {
@@ -127,8 +128,26 @@ class User extends Authenticatable
         $totalMembershipFees1=Membership::value(DB::raw("SUM(jan_fees + jan_penalty + feb_fees + feb_penalty + march_fees +march_penalty + april_fees + april_penalty + may_fees + may_penalty + june_fees + june_penalty + july_fees + july_penalty + aug_fees + aug_penalty + sep_fees + sep_penalty + oct_fees)"));
         $totalMembershipFees2=Membership::value(DB::raw("SUM(oct_penalty+nov_fees+nov_penalty+dec_fees+dec_penalty)"));
         $totalMembershipFees=$totalMembershipFees1+$totalMembershipFees2;
+        $profit=0;
+        $loanAmountDetails = LoanRequest::select('id','user_id','loan_amount','tenuar_period')->where('request_status', '=', 1)->get()->toArray();
+        if(!empty($loanAmountDetails)) {
+            foreach ($loanAmountDetails as $loanAmountDetail) {
+                $loanAm = $loanAmountDetail['loan_amount'];
+                $tenuarPeriod = $loanAmountDetail['tenuar_period'];
+                $originalEmi = floor($loanAm / $tenuarPeriod);
+                $interestEmi = UserLoanMgmt::select('emi_amount')
+                    ->where('request_id', '=', $loanAmountDetail['id'])->first();
+                $interestEmi = $interestEmi->emi_amount;
+                $emiCount = UserLoanMgmt::where('tenuar_status', '=', 1)->where('request_id', '=', $loanAmountDetail['id'])
+                    ->count();
 
-        $availableBal=$totalMembershipFees-$loanAmount;
+                $penalty = UserLoanMgmt::where('tenuar_status', '=', 1)->where('request_id', '=', $loanAmountDetail['id'])
+                    ->sum('penalty');
+
+                $profit = $profit + (($interestEmi - $originalEmi) * $emiCount) + $penalty;
+            }
+        }
+        $availableBal=$totalMembershipFees+$profit-$loanAmount;
         return $availableBal;
     }
     public function getInterest(){
