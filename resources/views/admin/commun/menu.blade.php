@@ -40,7 +40,9 @@
 
 
     @if (auth()->user()->hasRole('Superadmin|Admin'))
-
+        <li class="<?php echo (starts_with($route, ADMIN . '.expense')) ? "active" : '' ?>">
+            <a href="{{ route(ADMIN.'.expense') }}"><i class="fa fa-money"></i><span>Expense</span></a>
+        </li>
 
 
         <li class="<?php echo (starts_with($route, ADMIN . '.adminsettings')) ? "active" : '' ?>">

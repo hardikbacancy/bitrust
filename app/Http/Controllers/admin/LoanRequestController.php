@@ -265,12 +265,12 @@ class LoanRequestController extends Controller
     public function loanDetails(Request $request, $requestId)
     {
         if(auth()->user()->hasRole('Superadmin|Admin')){
-            $loanRequest = LoanRequest::where('id', $requestId)->get()->toArray();
+            $loanRequest = LoanRequest::select('loan_requests.*','users.email')->join('users','users.id','=','loan_requests.user_id')->where('loan_requests.id', $requestId)->get()->toArray();
             $userLoanMgmt = UserLoanMgmt::where('request_id', $requestId)->get()->toArray();
             return view('admin.loan_request.loandetails', get_defined_vars());
         }
         else{
-            $loanRequest = LoanRequest::where('id', $requestId)->where('user_id','=',\Auth::user()->id)->get()->toArray();
+            $loanRequest = LoanRequest::select('loan_requests.*','users.email')->join('users','users.id','=','loan_requests.user_id')->where('loan_requests.id', $requestId)->where('loan_requests.user_id','=',\Auth::user()->id)->get()->toArray();
             $userLoanMgmt = UserLoanMgmt::where('request_id', $requestId)->where('user_id','=',\Auth::user()->id)->get()->toArray();
             if(!empty($userLoanMgmt) && !empty($loanRequest)){
                 return view('admin.loan_request.loandetails', get_defined_vars());

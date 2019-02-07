@@ -188,7 +188,7 @@
       </div>
         <br>
       <div>
-        <button type="submit" value="Submit" class="btn btn-primary" style="width:100px;">Create</button>
+        <button type="submit" value="Submit" class="btn btn-primary" style="width:100px;">Save</button>
         <a class="btn btn-warning" href="{{ URL::previous() }}" style="width:100px;"><i class="fa fa-btn fa-back"></i>Cancel</a>
 
       </div>
@@ -212,21 +212,17 @@
            });
 
            function isNumberWithDot(evt, element) {
-
                var charCode = (evt.which) ? evt.which : event.keyCode;
-
                if (charCode == 8){
                    return true;
                }
-               if (
+               if(
                    (charCode != 46 || $(element).val().indexOf('.') != -1) && // “.” CHECK DOT, AND ONLY ONE.
                    (charCode < 48 || charCode > 57)){
                    return false;
                }
-
                return true;
            }
-
        })
   </script>
 @stop

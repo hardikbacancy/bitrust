@@ -7,9 +7,24 @@
     <small>{{ trans('app.manage') }}</small>
 @stop
 @section('content')
-    <div class="row">
+
+    <div class="box-header" style="background-color:#f5f5f5;border-bottom:1px solid #d2d6de;">
+        <div class="row">
+            <div class="col-md-2">
+                <label>User Email:</label>
+            </div>
+
+            <div class="col-md-4">
+                <span>{{$loanRequest[0]['email']}}</span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row" style="margin-top: -12px;">
         <div class="col-xs-12">
             <div class="box" style="border:1px solid #d2d6de;">
+
                 <form id="form-submit" method="POST">
                     <p style="margin-top:10px;">
                         @if (auth()->user()->hasRole('Superadmin|Admin'))
@@ -135,7 +150,11 @@
                 <!-- /.box-body -->
             </div>
             <!-- /.box -->
+            <a class="btn btn-warning "
+               href="{{ URL::previous() }}"
+               style="width:100px;"><i class="fa fa-btn fa-back"></i>Cancel</a>
         </div>
+
     </div>
 @stop
 @section('js')

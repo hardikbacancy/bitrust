@@ -146,8 +146,11 @@ class User extends Authenticatable
 
                 $profit = $profit + (($interestEmi - $originalEmi) * $emiCount) + $penalty;
             }
+
+
         }
-        $availableBal=$totalMembershipFees+$profit-$loanAmount;
+        $expense = ExpenseDetail::sum('expense');
+        $availableBal=$totalMembershipFees+$profit-$loanAmount-$expense;
         return $availableBal;
     }
     public function getInterest(){

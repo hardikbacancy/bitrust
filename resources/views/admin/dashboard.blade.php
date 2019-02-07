@@ -21,7 +21,7 @@
             <div class="info-box bg-red">
                 <span class="info-box-icon"><i class="fa fa-money"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text">Total Fund(in $)</span>
+                    <span class="info-box-text">Total Fund&nbsp;(in $)</span>
                     <span class="info-box-number">{{$totalMembershipFees+$profit}}</span>
                 </div>
             </div>
@@ -30,8 +30,8 @@
             <div class="info-box bg-blue">
                 <span class="info-box-icon"><i class="fa fa-money"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text" style="font-size: 13px;">Total Available Balance(in $)</span>
-                    <span class="info-box-number">{{$totalMembershipFees+$profit-$loanAmount}}</span>
+                    <span class="info-box-text" style="font-size: 13px;">Total Available Balance&nbsp;(in $)</span>
+                    <span class="info-box-number">{{$totalMembershipFees+$profit-$loanAmount-$expense}}</span>
                 </div>
             </div>
         </div>
@@ -39,7 +39,7 @@
             <div class="info-box bg-green">
                 <span class="info-box-icon"><i class="fa fa-money"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text">Total Loan Amount(in $)</span>
+                    <span class="info-box-text">Total Loan Amount&nbsp;(in $)</span>
                     <span class="info-box-number">{{$loanAmount}}</span>
                 </div>
             </div>
@@ -51,8 +51,17 @@
             <div class="info-box bg-yellow">
                 <span class="info-box-icon"><i class="fa fa-money"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text">Total Loan Profit(in $)</span>
+                    <span class="info-box-text">Total Loan Profit&nbsp;(in $)</span>
                     <span class="info-box-number">{{$profit}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="info-box bg-orange">
+                <span class="info-box-icon"><i class="fa fa-money"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Total Expense&nbsp;(in $)</span>
+                    <span class="info-box-number">{{$expense}}</span>
                 </div>
             </div>
         </div>
@@ -73,7 +82,7 @@
                 <div class="info-box bg-red">
                     <span class="info-box-icon"><i class="fa fa-money"></i></span>
                     <div class="info-box-content">
-                        <span class="info-box-text">Total Membership(in $)</span>
+                        <span class="info-box-text">Total Membership&nbsp;(in $)</span>
                         <span class="info-box-number">{{$totalMembershipFees}}</span>
                     </div>
                 </div>
@@ -83,7 +92,7 @@
                 <div class="info-box bg-gray">
                     <span class="info-box-icon"><i class="fa fa-money"></i></span>
                     <div class="info-box-content">
-                        <span class="info-box-text">Total Loan Amount(in $)</span>
+                        <span class="info-box-text">Total Loan Amount&nbsp;(in $)</span>
                         <span class="info-box-number">{{$loanAmount}}</span>
                     </div>
                 </div>
@@ -92,7 +101,7 @@
                 <div class="info-box bg-blue">
                     <span class="info-box-icon"><i class="fa fa-money"></i></span>
                     <div class="info-box-content">
-                        <span class="info-box-text">EMI Paid Amount(in $)</span>
+                        <span class="info-box-text">EMI Paid Amount&nbsp;(in $)</span>
                         <span class="info-box-number">{{$paidAmount}}</span>
                     </div>
                 </div>
@@ -101,7 +110,7 @@
                 <div class="info-box bg-green">
                     <span class="info-box-icon"><i class="fa fa-money"></i></span>
                     <div class="info-box-content">
-                        <span class="info-box-text" style="font-size: 13px;">EMI Remainning Amount(in $)</span>
+                        <span class="info-box-text" style="font-size: 13px;">EMI Remainning Amount&nbsp;(in $)</span>
                         <span class="info-box-number">{{$unpaidAmount}}</span>
                     </div>
                 </div>

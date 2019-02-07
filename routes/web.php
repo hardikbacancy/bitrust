@@ -40,6 +40,10 @@ Route::group(['prefix' => ADMIN, 'as' => ADMIN . '.', 'middleware'=>['auth','Rol
     // Route::delete('/adminsettings/{id}', 'admin\AdminSettingController@destroy')->name('adminsettings.destroy');
     Route::get('report', 'admin\ReportController@report')->name('report.report');
     Route::post('report','admin\ReportController@report')->name('report.reportPost');
+
+//    Route::get('report', 'admin\ReportController@report')->name('report.report');
+//    Route::post('report','admin\ReportController@report')->name('report.report');
+
     Route::post('report-list-ajax','admin\ReportController@reportList')->name('report.reportPostAjax');
     Route::post('checkData','admin\ReportController@checkData')->name('checkData');
 
@@ -58,5 +62,19 @@ Route::group(['prefix' => ADMIN, 'as' => ADMIN . '.', 'middleware'=>['auth','Rol
     Route::post('membership-delete', 'admin\MembershipController@deleteMember')->name('membership.deleteMemberAjax');
     Route::get('import', 'admin\ImportController@import')->name('import');
     Route::post('importMembership', 'admin\ImportController@importMembership')->name('membership.importMembership');
+
+    //Expense
+    Route::get('expense', 'admin\ExpenseController@expense')->name('expense');
+    Route::post('expense/expensePostAjax', 'admin\ExpenseController@expensePostAjax')->name('expense.expensePostAjax');
+    Route::get('expense/create', 'admin\ExpenseController@expenseCreate')->name('expense.create');
+    Route::post('expense/store', 'admin\ExpenseController@store')->name('expense.store');
+    Route::get('expense/edit/{Id}', 'admin\ExpenseController@editExpense')->name('expense.edit');
+    Route::post('expense/update', 'admin\ExpenseController@updateExpense')->name('expense.update');
+
+
+
+
+
+
 
 });

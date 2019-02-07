@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Models\admin\AdminSetting;
+use App\Models\admin\ExpenseDetail;
 use App\Models\admin\LoanRequest;
 use App\Models\admin\Membership;
 use App\Models\admin\UserLoanMgmt;
@@ -52,6 +53,7 @@ class DashboardController extends Controller
                    $profit=$profit+(($interestEmi-$originalEmi)*$emiCount)+$penalty;
                }
             }
+            $expense = ExpenseDetail::sum('expense');
         }
         else{
             $profit=0;
