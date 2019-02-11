@@ -10,12 +10,27 @@
 
     <div class="box-header" style="background-color:#f5f5f5;border-bottom:1px solid #d2d6de;">
         <div class="row">
-            <div class="col-md-2">
-                <label>User Email:</label>
+            <div class="col-md-4">
+                <label>User Email:</label>&nbsp;
+                <span>{{$loanRequest[0]['email']}}</span>
+            </div>
+            <?php
+            $emiArray = array();
+            foreach ($userLoanMgmt as $userLoanMgmts) {
+                $emiArray[] = $userLoanMgmts['tenuar_date'];
+            }
+
+            $first = current($emiArray);
+            $last = end($emiArray);
+            ?>
+            <div class="col-md-4">
+                <label>EMI Start Date:</label>&nbsp;
+                <span>{{$first}}</span>
             </div>
 
-            <div class="col-md-4">
-                <span>{{$loanRequest[0]['email']}}</span>
+            <div class="col-md-3">
+                <label>EMI End Date:</label>&nbsp;
+                <span>{{$last}}</span>
             </div>
         </div>
     </div>
@@ -81,21 +96,22 @@
                                         <td>
                                             <label class="switch">
 
-                                                    <input type="checkbox" value="{{$userLoanMgmts['id']}}"
-                                                           name="loan_switch_{{$userLoanMgmts['id']}}"
-                                                           class="loan_switch_class"
-                                                           @if($userLoanMgmts['tenuar_status']=='1') checked @endif>
+                                                <input type="checkbox" value="{{$userLoanMgmts['id']}}"
+                                                       name="loan_switch_{{$userLoanMgmts['id']}}"
+                                                       class="loan_switch_class"
+                                                       @if($userLoanMgmts['tenuar_status']=='1') checked @endif>
 
                                                 <span class="slider round"></span>
                                             </label>
                                         </td>
-                                        <td style="width:10%;" id="emi_paid_date_{{$userLoanMgmts['id']}}">@if(isset($userLoanMgmts['emi_paid_date'])){{$userLoanMgmts['emi_paid_date']}} @else {{"-"}}@endif</td>
+                                        <td style="width:10%;"
+                                            id="emi_paid_date_{{$userLoanMgmts['id']}}">@if(isset($userLoanMgmts['emi_paid_date'])){{$userLoanMgmts['emi_paid_date']}} @else {{"-"}}@endif</td>
 
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
-                                @else
+                        @else
                             <table id="tb2" class="table data-tables table-striped table-hover display select"
                                    cellspacing="0" width="100%">
                                 <thead>
@@ -131,9 +147,9 @@
                                         <td>@if(isset($userLoanMgmts['penalty'])){{$userLoanMgmts['penalty']}} @else {{"-"}}@endif</td>
                                         <td>
 
-                                           @if($userLoanMgmts['tenuar_status']=='1') <p>Paid</p>
-                                           @else
-                                               <p>Unpaid</p>
+                                            @if($userLoanMgmts['tenuar_status']=='1') <p>Paid</p>
+                                            @else
+                                                <p>Unpaid</p>
                                             @endif
 
                                         </td>
@@ -181,23 +197,23 @@
                 e.preventDefault();
                 //var data = table.$('input').serializeArray();
 
-                var paid_status_val=$("#paid_status").val();
+                var paid_status_val = $("#paid_status").val();
                 var rows_selected = table.column(0).checkboxes.selected();
-                var requestId=$("#requestId").val();
+                var requestId = $("#requestId").val();
                 var check_select = [];
-                $.each(rows_selected, function(index, rowId){
+                $.each(rows_selected, function (index, rowId) {
                     var stripped = rowId.replace(/[^0-9]/g, '');
-                    var penalty = table.$('#penalty_'+stripped).val();
-                    check_select.push(stripped+"_"+penalty);
+                    var penalty = table.$('#penalty_' + stripped).val();
+                    check_select.push(stripped + "_" + penalty);
                 });
 
-                if(check_select.length>0) {
+                if (check_select.length > 0) {
                     $.ajax({
                         url: '{{route(ADMIN.'.statusPenalty')}}',
                         data: {
                             check_select: check_select,
                             requestId: requestId,
-                            paid_status:paid_status_val,
+                            paid_status: paid_status_val,
                             "_token": "{{csrf_token()}}"
                         },
                         method: 'post',
@@ -207,7 +223,7 @@
                         }
                     });
                 }
-                else{
+                else {
                     alert("please select at least one checkbox");
                 }
             });
@@ -215,25 +231,25 @@
                 var val = $(this).is(":checked");
                 if (val) {
                     var id = $(this).attr('value');
-                    var penalty=$("#penalty_"+id).val();
+                    var penalty = $("#penalty_" + id).val();
                     var check_val = 1;
                 }
                 else {
                     var id = $(this).attr('value');
                     var check_val = 0;
-                    var penalty=$("#penalty_"+id).val();
+                    var penalty = $("#penalty_" + id).val();
                 }
 
                 $.ajax({
                     url: '{{route(ADMIN.'.loanStatusUpdate')}}',
-                    data: {'id': id, 'check_value': check_val,'penalty':penalty,"_token": "{{csrf_token()}}"},
+                    data: {'id': id, 'check_value': check_val, 'penalty': penalty, "_token": "{{csrf_token()}}"},
                     dataType: 'json',
                     type: 'post',
                     success: function (res) {
-                        if(res.emi_paid_date) {
+                        if (res.emi_paid_date) {
                             $("#emi_paid_date_" + res.id).html(res.emi_paid_date);
                         }
-                        else{
+                        else {
                             $("#emi_paid_date_" + res.id).html("-");
 
                         }
@@ -243,27 +259,27 @@
             renderBoolColumn('#tbl', 'bool');
             renderBoolColumn('#tb2', 'bool');
 
-            $(document.body).on('change', '.checkbox_selection', function(e) {
+            $(document.body).on('change', '.checkbox_selection', function (e) {
                 var rows_selected = table.column(0).checkboxes.selected();
                 var check_select = [];
-                $.each(rows_selected, function(index, rowId){
+                $.each(rows_selected, function (index, rowId) {
                     var stripped = rowId.replace(/[^0-9]/g, '');
                     check_select.push(stripped);
                 });
 
-                if(check_select.length>0){
-                    $('#update_bulk').attr('disabled' , false);
+                if (check_select.length > 0) {
+                    $('#update_bulk').attr('disabled', false);
                 }
-                else{
-                    $('#update_bulk').attr('disabled' , true);
+                else {
+                    $('#update_bulk').attr('disabled', true);
                 }
             });
 
             $("body").on('keypress', '.number_class', function (event) {
-                if(isNumberWithDot(event, this)){
+                if (isNumberWithDot(event, this)) {
                     return true;
                 }
-                else{
+                else {
                     return false;
                 }
             });
@@ -272,12 +288,12 @@
 
                 var charCode = (evt.which) ? evt.which : event.keyCode;
 
-                if (charCode == 8){
+                if (charCode == 8) {
                     return true;
                 }
                 if (
                     (charCode != 46 || $(element).val().indexOf('.') != -1) && // “.” CHECK DOT, AND ONLY ONE.
-                    (charCode < 48 || charCode > 57)){
+                    (charCode < 48 || charCode > 57)) {
                     return false;
                 }
 

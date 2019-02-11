@@ -8,8 +8,11 @@
     </style>
 @stop
 @section('page-header')
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     Loan Request
     <small>{{ trans('app.manage') }}</small>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 @stop
 @section('content')
     @if(session()->has('message'))
@@ -39,6 +42,7 @@
                            <span style="color:red;padding: 30px;"> {{"You do not have membership yet"}} </span>
                          @endif
                      @endif
+                    <p><i class="material-icons" style="font-size:20px;color:red">error</i> <span style="color: red;">Click to See Pending EMI Below</span></p>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
@@ -80,7 +84,20 @@
                                                 </a>
                                             </li>
 
-                                                    @if (auth()->user()->hasRole('Superadmin|Admin'))
+                                                @if($loanRequests['emi_count']>0)
+
+                                                <li>
+                                                    <a  data-toggle="modal" data-target="#emiPendingModel" data-requestId="{{$loanRequests['id']}}"
+                                                       title="{{ "View Pending Loan" }}" class="btn emi-pending-click"><i class="material-icons" style="font-size:20px;color:red">error</i>
+                                                    </a>
+                                                </li>
+                                                @endif
+
+
+
+
+
+                                                    {{--@if (auth()->user()->hasRole('Superadmin|Admin'))--}}
                                                 {{--<li>--}}
                                                     {{--{!! Form::open([--}}
                                                         {{--'class'=>'delete',--}}
@@ -96,7 +113,7 @@
                                                     {{--{!! Form::close() !!}--}}
 
                                                 {{--</li>--}}
-                                                    @endif
+                                                    {{--@endif--}}
 
                                             @endif
 
@@ -137,6 +154,38 @@
             <!-- /.box -->
         </div>
     </div>
+
+    <div class="modal fade" id="emiPendingModel" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                   <h5> <b>User Name:</b> &nbsp;&nbsp; <span id="user_email"></span></h5>
+                    <h4 class="modal-title text-center">EMI Pending List</h4>
+
+                </div>
+                <div class="modal-body">
+                    <table id="emiPendingList" class="table"
+                           width="100%">
+                        <thead>
+                        <tr>
+                            <th>EMI AMOUNT(IN $)</th>
+                            <th>EMI DATE</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
 @stop
 @section('js')
     <script>
@@ -150,5 +199,37 @@
             //replace bool column to checkbox
             renderBoolColumn('#tbl', 'bool');
         })(jQuery);
+
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $(".emi-pending-click").click(function (e) {
+                e.preventDefault();
+                var requestId = $(this).attr('data-requestId');
+                $('#emiPendingList').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    "bDestroy": true,
+                    "ajax": {
+                        url: '{{route(ADMIN.'.loan_request.emiPendingPostAjax')}}',
+                        type: 'POST',
+                        data: {'requestId': requestId},
+
+                    },
+                    columns: [
+                        {data: 'emi_amount', name: 'emi_amount'},
+                        {data: 'tenuar_date', name: 'tenuar_date'}
+                    ],
+                    "initComplete":function(settings, json){
+                       $("#user_email").html(json.data[0].name);
+                    }
+
+
+                });
+            })
+        });
     </script>
 @stop

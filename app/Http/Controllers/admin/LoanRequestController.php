@@ -7,8 +7,10 @@ use App\Models\admin\Membership;
 use App\Models\admin\UserLoanMgmt;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Yajra\Datatables\Datatables;
 
 class LoanRequestController extends Controller
 {
@@ -67,8 +69,12 @@ class LoanRequestController extends Controller
 
             $loanRequest[$key]['remainningEmiAmount']=DB::table('user_loan_mgmts')
                 ->where('user_id','=',$value['user_id'])->where('request_id','=',$value['id'])->where('tenuar_status','=',0)->sum('emi_amount');
+            $today_date = date('Y-m-d');
+            $loanRequest[$key]['emi_count'] = UserLoanMgmt::where('request_id', $value['id'])->where('tenuar_status','=',0)->whereDate('tenuar_date', '<', $today_date)->count();
+
 
         }
+
 
         return view('admin.loan_request.index', get_defined_vars());
     }
@@ -299,6 +305,15 @@ class LoanRequestController extends Controller
     public function deleteEmi(Request $request){
         UserLoanMgmt::where("id","=",$request->id)->delete();
         return json_encode("1");
+    }
+
+    public function emiPendingPostAjax(Request $request){
+        $today_date = date('Y-m-d');
+
+        $userLoanMgmt = UserLoanMgmt::select('user_loan_mgmts.*','users.name')->join('users','user_loan_mgmts.user_id','=','users.id')->where('request_id', $request->requestId)->where('tenuar_status','=',0)->whereDate('tenuar_date', '<', $today_date)->get();
+        return Datatables::of($userLoanMgmt)
+               ->make(true);
+
     }
 
 }

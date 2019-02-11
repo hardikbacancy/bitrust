@@ -7,6 +7,7 @@ use App\Models\admin\Membership;
 use App\Models\admin\UserLoanMgmt;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
@@ -54,6 +55,7 @@ class DashboardController extends Controller
                }
             }
             $expense = ExpenseDetail::sum('expense');
+
         }
         else{
             $profit=0;

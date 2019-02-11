@@ -48,6 +48,7 @@
 
     <div class="row">
         <div class="col-md-4">
+            <a href="{{route(ADMIN.'.loanProfit')}}">
             <div class="info-box bg-yellow">
                 <span class="info-box-icon"><i class="fa fa-money"></i></span>
                 <div class="info-box-content">
@@ -55,8 +56,11 @@
                     <span class="info-box-number">{{$profit}}</span>
                 </div>
             </div>
+            </a>
         </div>
+
         <div class="col-md-4">
+            <a href="{{route(ADMIN.'.expense')}}">
             <div class="info-box bg-orange">
                 <span class="info-box-icon"><i class="fa fa-money"></i></span>
                 <div class="info-box-content">
@@ -64,6 +68,7 @@
                     <span class="info-box-number">{{$expense}}</span>
                 </div>
             </div>
+            </a>
         </div>
         <div class="col-md-4">
             <div class="info-box bg-gray">
