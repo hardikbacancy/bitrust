@@ -33,6 +33,8 @@
 	<!-- /.login-box -->
 
 	<script src="{{ asset('js/admin-vendor.js') }} "></script>
+	<script src="{{ asset('js/jquery.validate.min.js') }} "></script>
+
 
 	<script>
 		$(function () {
@@ -43,5 +45,6 @@
 			});
 		});
 	</script>
+	@yield('js')
 </body>
 </html>

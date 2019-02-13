@@ -309,10 +309,34 @@ class LoanRequestController extends Controller
 
     public function emiPendingPostAjax(Request $request){
         $today_date = date('Y-m-d');
+        $userPenalty=new User();
+        $penalty=$userPenalty->getPenalty();
 
-        $userLoanMgmt = UserLoanMgmt::select('user_loan_mgmts.*','users.name')->join('users','user_loan_mgmts.user_id','=','users.id')->where('request_id', $request->requestId)->where('tenuar_status','=',0)->whereDate('tenuar_date', '<', $today_date)->get();
+        $userLoanMgmt = UserLoanMgmt::select('user_loan_mgmts.*','users.email')->join('users','user_loan_mgmts.user_id','=','users.id')->where('request_id', $request->requestId)->where('tenuar_status','=',0)->whereDate('tenuar_date', '<', $today_date)->get()->toArray();
+
+        foreach($userLoanMgmt as $key=>$value){
+            $userLoanMgmt[$key]['penalty']=$penalty;
+        }
+
+        function arrayToCollection($userLoanMgmt)
+        {
+            foreach ($userLoanMgmt as $key => $value) {
+                if (is_array($value)) {
+                    $value = arrayToCollection($value);
+                    $userLoanMgmt[$key] = $value;
+                }
+            }
+            return collect($userLoanMgmt);
+        }
+        $userLoanMgmt = arrayToCollection($userLoanMgmt);
         return Datatables::of($userLoanMgmt)
-               ->make(true);
+            ->addColumn('penalty', function ($userLoanMgmt) {
+                return $userLoanMgmt['penalty'];
+            })
+            ->addColumn('total_emi', function ($userLoanMgmt) {
+                return $userLoanMgmt['penalty']+$userLoanMgmt['emi_amount'];
+            })
+            ->make(true);
 
     }
 

@@ -18,6 +18,13 @@
                 <span>Users</span>
             </a>
         </li>
+
+        <li class="<?php echo (starts_with($route, ADMIN . '.pending_users')) ? "active" : '' ?>">
+            <a href="{{ route(ADMIN.'.pending_users.index') }}">
+                <i class="fa fa-users"></i>
+                <span>Unapprove Users</span>
+            </a>
+        </li>
     @endif
 
     @if (auth()->user()->hasRole('Superadmin|Admin'))

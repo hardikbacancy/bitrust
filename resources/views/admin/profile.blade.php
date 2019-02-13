@@ -18,15 +18,19 @@
         !!}
         <div class="box-body" style="margin:10px;">
             {!! Form::myInput('text', 'name', 'Name <span>*</span>') !!}
+            <div class="form-group">
+                <label for="username">Username<span>*</span></label>
+                <input class="form-control" type="text" name="username" id="username" value="@if(isset($item->username)){{$item->username}}@endif">
+            </div>
             {!! Form::myInput('email', 'email', 'Email<span>*</span>') !!}
             {!! Form::myInput('mobile', 'mobile', 'Mobile<span>*</span>') !!}
-            <div class="form-group">
-                <label for="gender">Gender:</label>
-                <select class="form-control" id="gender" name="gender">
-                    <option value="male" @if(isset($item)) @if($item['gender']=='male') selected @endif @endif>MALE</option>
-                    <option value="female" @if(isset($item)) @if($item['gender']=='female') selected @endif @endif>FEMALE</option>
-                </select>
-            </div>
+            {{--<div class="form-group">--}}
+                {{--<label for="gender">Gender:</label>--}}
+                {{--<select class="form-control" id="gender" name="gender">--}}
+                    {{--<option value="male" @if(isset($item)) @if($item['gender']=='male') selected @endif @endif>MALE</option>--}}
+                    {{--<option value="female" @if(isset($item)) @if($item['gender']=='female') selected @endif @endif>FEMALE</option>--}}
+                {{--</select>--}}
+            {{--</div>--}}
             {!! Form::myInput('password', 'password', 'Password') !!}
             {!! Form::myInput('password', 'password_confirmation', 'Password confirmation') !!}
             <div class="form-group">

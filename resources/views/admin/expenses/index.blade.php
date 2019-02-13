@@ -16,6 +16,7 @@
     <a class="btn btn-info" href="{{ route(ADMIN . '.expense.create') }}" title="Create Expense">
         <i class="fa fa-plus" style="vertical-align:middle"></i> Create Expense
     </a>
+
 @stop
 
 @section('content')
@@ -105,6 +106,7 @@
             </div>
         </div>
     </div>
+
 @stop
 
 @section('js')

@@ -21,7 +21,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role', 'active', 'avatar','mobile','verification_code','gender','email_verified_at','membership_fees'
+        'name', 'email', 'password', 'role', 'active', 'avatar','mobile','verification_code','gender','email_verified_at','membership_fees','username'
     ];
 
     /**
@@ -43,6 +43,11 @@ class User extends Authenticatable
     {
         $commun = [
             'name' => 'required|min:2',
+//            'username' => [
+//                'required|unique:users',
+//                'regex:/^[a-zA-Z0-9]*([a-zA-Z][0-9]|[0-9][a-zA-Z])[a-zA-Z0-9]*$/'
+//            ],
+            'username' => "required|string|max:20|regex:/^\S*$/u|unique:users,username,$id",
             'email'    => "required|email|unique:users,email,$id",
             'password' => 'nullable|confirmed',
             'mobile' =>'required|digits:10',
@@ -167,5 +172,10 @@ class User extends Authenticatable
         $adminSettings=AdminSetting::all()->toArray();
         $min_loan_amount=$adminSettings[0]['min_loan_amount'];
         return $min_loan_amount;
+    }
+    public function getPenalty(){
+        $adminSettings=AdminSetting::all()->toArray();
+        $penalty=$adminSettings[0]['penalty'];
+        return $penalty;
     }
 }

@@ -22,7 +22,7 @@
     <form role="form" method="POST" action="{{ url('/login') }}">
         {{ csrf_field() }}
         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }} has-feedback">
-            <input type="email" class="form-control" placeholder="Email" name="email" value="{{ old('email') }}">
+            <input type="text" class="form-control" placeholder="Email" name="email" value="{{ old('email') }}">
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 
             @if ($errors->has('email'))
@@ -50,9 +50,9 @@
 
 
     </form>
-
     <div class="row">
         <div class="col-xs-6">
+            <a href="{{ url('/register') }}">Register</a>
         </div><!-- /.col -->
         <div class="col-xs-6">
             <a href="{{ url('/password/reset') }}" class="text-right pull-right">Forgot Password</a>

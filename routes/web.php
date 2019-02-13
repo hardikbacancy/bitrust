@@ -25,6 +25,8 @@ Route::group(['prefix' => ADMIN, 'as' => ADMIN . '.', 'middleware'=>['auth']], f
     Route::get('loan_request/loandetails/{requestId}', 'LoanRequestController@loanDetails')->name('loan_request.loan_details');
     Route::resource('loan_request', 'LoanRequestController');
     Route::resource('users', 'UsersController')->middleware('Role:Superadmin|Admin');
+    Route::resource('pending_users', 'PendingUsersController')->middleware('Role:Superadmin|Admin');
+
     Route::get('profileedit/{id}', 'ProfileController@edit')->middleware('authcheck');
     Route::put('profileupdate/{id}', 'ProfileController@update')->middleware('authcheck');
     Route::get('membership/membershipDetails/{Id}', 'admin\MembershipController@membershipDetails')->name('membership.membership_details');
@@ -74,14 +76,15 @@ Route::group(['prefix' => ADMIN, 'as' => ADMIN . '.', 'middleware'=>['auth','Rol
     Route::post('expense/store', 'admin\ExpenseController@store')->name('expense.store');
     Route::get('expense/edit/{Id}', 'admin\ExpenseController@editExpense')->name('expense.edit');
     Route::post('expense/update', 'admin\ExpenseController@updateExpense')->name('expense.update');
+    Route::post('expense/update', 'admin\ExpenseController@updateExpense')->name('expense.update');
+    Route::post('expense/addExpenseType', 'admin\ExpenseController@addExpenseType')->name('expense.addExpenseType');
 
     //Loan Profit
     Route::get('loanProfit', 'admin\LoanProfitController@loanProfit')->name('loanProfit');
     Route::post('loanProfit/loanProfitPostAjax', 'admin\LoanProfitController@loanProfitPostAjax')->name('loanProfit.loanProfitPostAjax');
 
-
-
-
+    //Send EMI Pending Email
+    Route::post('emiPendingEmail', 'admin\EmiPendingEmailController@emiPendingEmail')->name('emiPendingEmail');
 
 
 

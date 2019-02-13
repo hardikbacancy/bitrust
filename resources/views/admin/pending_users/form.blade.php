@@ -17,12 +17,10 @@
 <input type="hidden" name="email_verified_at" value="1">
 <input type="hidden" name="verification_code" value={{$val}}>
 {!! Form::myInput('text', 'name', 'Name <span>*</span>') !!}
-
 <div class="form-group">
-<label for="username">Username<span>*</span></label>
-<input class="form-control" type="text" name="username" id="username" value="@if(isset($item['username'])){{$item['username']}}@endif">
+  <label for="username">Username:</label>
+  <input class="form-control" type="text" name="username" id="username" value="{{$item['username']}}">
 </div>
-
 {!! Form::myInput('email', 'email', 'Email <span>*</span>') !!}
 {!! Form::myInput('text', 'mobile', 'Mobile <span>*</span>') !!}
 
@@ -35,20 +33,7 @@
 @endif
 
 
-{{--<div class="form-group">--}}
-  {{--<label for="gender">Gender:</label>--}}
-  {{--<select class="form-control" id="gender" name="gender">--}}
-    {{--<option value="male" @if(isset($item)) @if($item['gender']=='male') selected @endif @endif>MALE</option>--}}
-    {{--<option value="female" @if(isset($item)) @if($item['gender']=='female') selected @endif @endif>FEMALE</option>--}}
-  {{--</select>--}}
-{{--</div>--}}
-
-{{--{!! Form::mySelect('role', 'Role', $allowedRoles) !!}--}}
-@if(isset($item->id))
-  @else
-  {!! Form::mySelect('active', 'Active', config('variables.boolean')) !!}
-@endif
-
+{!! Form::mySelect('active', 'Active', config('variables.boolean')) !!}
 {{--@if(isset($item->id))--}}
 {{--{!! Form::myFileImage('avatar', 'Photo', $img_url) !!}--}}
 {{--@else--}}

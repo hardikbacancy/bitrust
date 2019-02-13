@@ -11,6 +11,9 @@
             {!! session('message') !!}
         </div>
     @endif
+
+
+
     <div class="row" id="expense-create">
         <div class="col-md-12">
             <div class="box" style="border:1px solid #d2d6de;">
@@ -18,7 +21,9 @@
                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 
                     <div class="form-group">
-                        <label for="year">Expense Type</label>
+                        <label for="year">Expense Type <a class="btn btn-info" href="" title="Add Expense Type"  data-toggle="modal" data-target="#expenseModal">
+                                <i class="fa fa-plus" style="vertical-align:middle"></i> Add More Expense Type
+                            </a></label>
                         <select class="form-control" id="expense_id" name="expense_id">
                             @foreach($expenses as $expense)
                                 <option value={{$expense['id']}}>{{$expense['expense_type']}}</option>;
@@ -72,6 +77,28 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <div id="expenseModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center">Add Expense Type</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="usr">Expense Type Name</label>
+                        <input type="text" class="form-control" name="add_expense_type" id="add_expense_type" value="" placeholder="Add Expense Type">
+                    </div>
+                    <button type="button" id="expense_type_button" class="btn btn-primary">Save</button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
 @stop
 @section('js')
     <script>
@@ -92,6 +119,33 @@
                 }
                 else {
                     return false;
+                }
+            });
+
+            $("#expense_type_button").click(function(e){
+                e.preventDefault();
+                if($("#add_expense_type").val()==""){
+                    notification("Please enter expense type","success");
+                }else{
+                    var expense_type=$("#add_expense_type").val();
+                    $.ajax({
+                        url: '{{route(ADMIN.'.expense.addExpenseType')}}',
+                        data: {
+                            expense_type: expense_type,
+                            "_token": "{{csrf_token()}}"
+                        },
+                        method: 'post',
+                        dataType: 'json',
+                        success: function (res) {
+                            var div_data = "";
+                            $.each(res, function (i, obj) {
+                                div_data += "<option value=" + obj.id + ">" + obj.expense_type + "</option>";
+                            });
+                            $("#expense_id").html(div_data);
+                            $('#expenseModal').modal('hide');
+                            notification("Added Successfully","success");
+                        }
+                    });
                 }
             });
 

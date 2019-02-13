@@ -16,7 +16,7 @@ class ExpenseController extends Controller
         return view('admin.expenses.index',get_defined_vars());
     }
     public function expensePostAjax(Request $request){
-        $query=ExpenseDetail::join('expenses','expense_details.expense_id','=','expenses.id');
+        $query=ExpenseDetail::select('expense_details.*','expenses.expense_type')->join('expenses','expense_details.expense_id','=','expenses.id');
         if(!empty($request->expense_id)){
             $query=$query->where('expense_id','=',$request->expense_id);
         }
@@ -84,6 +84,13 @@ class ExpenseController extends Controller
                 }
 
         }
+    }
+    public function addExpenseType(Request $request){
+         $expense=new Expense();
+         $expense->expense_type = $request->expense_type;
+         $expense->save();
+         $expenses_details=Expense::all()->toArray();
+         return json_encode($expenses_details);
     }
 
 }

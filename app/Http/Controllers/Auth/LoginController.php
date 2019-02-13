@@ -68,8 +68,10 @@ class LoginController extends Controller
             return $this->sendLockoutResponse($request);
         }
 
-        $user = \App\User::where('email', '=', $request->email)
-                          ->get();
+        $user = \App\User::where(function($query) use ($request) {
+            return $query->where('email', '=', $request->email)
+                ->orWhere('username', '=', $request->username);
+        })->get();
 
         if ($user->isEmpty()) {
             // The user is doesnt exist
@@ -78,10 +80,20 @@ class LoginController extends Controller
                 ->withWarning('Your account is not registered');
         }
 
-        $user = \App\User::where('email', '=', $request->email)
-                          ->where('active', '=', 1)
+        $user = \App\User::where('active', '=', 1)
+
+               ->where(function($query) use ($request) {
+                return $query->where('email', '=', $request->email)
+                    ->orWhere('username', '=', $request->username);
+                 })
                           ->where('email_verified_at', '=', 1)
                           ->get();
+
+
+
+
+
+
         if ($user->isEmpty()) {
             // The user is exist but inactive
             return redirect("/login")
@@ -100,6 +112,17 @@ class LoginController extends Controller
         $this->incrementLoginAttempts($request);
 
         return $this->sendFailedLoginResponse($request);
+    }
+    protected function credentials(Request $request)
+    {
+        $field = filter_var($request->get($this->username()), FILTER_VALIDATE_EMAIL)
+            ? $this->username()
+            : 'username';
+
+        return [
+            $field => $request->get($this->username()),
+            'password' => $request->password,
+        ];
     }
 
 }

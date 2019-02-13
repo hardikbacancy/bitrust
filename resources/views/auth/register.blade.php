@@ -9,10 +9,10 @@
         </div>
     @endif
   <?php $val=str_random(40);  ?>
-    <form role="form" method="POST" action="{{ url('/register') }}">
+    <form role="form" method="POST" action="{{ url('/register') }}" id="reg_form">
         {{csrf_field()}}
         <input type="hidden" name="verification_code" value={{$val}}>
-        <input type="hidden" name="active" value="1">
+        <input type="hidden" name="active" value="0">
         <input type="hidden" name="email_verified_at" value="1">
 
 
@@ -26,6 +26,21 @@
                     </span>
             @endif
         </div>
+
+
+        <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }} has-feedback">
+            <input type="text" class="form-control" placeholder="User name" name="username" value="{{ old('username') }}">
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+
+            @if ($errors->has('username'))
+                <span class="help-block">
+                            <strong>{{ $errors->first('username') }}</strong>
+                    </span>
+            @endif
+        </div>
+
+
+
         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }} has-feedback">
             <input type="email" class="form-control" placeholder="Email" name="email" value="{{ old('email') }}">
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -85,3 +100,44 @@
       <a href="{{url('login')}}" class="text-center" >I already have a membership</a>
     </div>
 @endsection
+@section('js')
+    <script>
+        // $(document).ready(function () {
+        //     $.validator.addMethod("alphanumeric", function(value, element) {
+        //         return this.optional(element) || /^[a-zA-Z0-9]+$/.test(value);
+        //     },"wrong format");
+        //     $('#reg_form').validate({ // initialize the plugin
+        //         rules: {
+        //             // name: {
+        //             //     required: true
+        //             // },
+        //             // email: {
+        //             //     required: true
+        //             // },
+        //             // mobile: {
+        //             //     required: true,
+        //             //     number: true,
+        //             //     minlength:10,
+        //             //     maxlength:10,
+        //             //
+        //             // },
+        //             // password: {
+        //             //     required: true,
+        //             //     minlength: 6
+        //             // },
+        //             // password_confirmation: {
+        //             //     required: true,
+        //             //     equalTo : "#password"
+        //             //
+        //             // },
+        //             username: {
+        //                 alphanumeric: true,
+        //             }
+        //         },
+        //
+        //     });
+        // });
+
+    </script>
+
+@stop

@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Mail\AdminConfirmMail;
 use App\Mail\VerifyMail;
 use App\Models\admin\AdminSetting;
 use Illuminate\Http\Request;
@@ -23,11 +24,12 @@ class UsersController extends Controller
     public function index()
     {
         if(\Auth::user()->role=='5') {
-            $users = User::orderBy('updated_at', 'desc')->where('role', '=', 0)->orWhere('role','=',4)->get();
+            $users = User::whereIn('role', [0,4])->where('active', '=', 1)->orderBy('updated_at', 'desc')->get();
         }
         else{
-            $users = User::orderBy('updated_at', 'desc')->where('role', '=', 0)->get();
+            $users = User::whereIn('role', [0])->where('active', '=', 1)->orderBy('updated_at', 'desc')->get();
         }
+
         $adminSettings=AdminSetting::all()->toArray();
         return view('admin.users.index',get_defined_vars());
     }
@@ -54,7 +56,10 @@ class UsersController extends Controller
         $userloanDetails=new User();
         $requestAll=$request->all();
         $user=User::create($requestAll);
-//        Mail::to($request->email)->send(new VerifyMail($user));
+
+        if($request->active=='1'){
+            Mail::to($user->email)->send(new AdminConfirmMail($user));
+        }
         return redirect()->route(ADMIN.'.users.index')->withSuccess("User Added Successfully");
     }
     /**
