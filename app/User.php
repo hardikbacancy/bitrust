@@ -21,7 +21,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role', 'active', 'avatar','mobile','verification_code','gender','email_verified_at','membership_fees','username'
+        'name', 'email', 'password', 'role', 'active', 'avatar','mobile','verification_code','gender','email_verified_at','membership_fees','username','address','birthdate','social_insurance_number'
     ];
 
     /**
@@ -49,6 +49,8 @@ class User extends Authenticatable
 //            ],
             'username' => "required|string|max:20|regex:/^\S*$/u|unique:users,username,$id",
             'email'    => "required|email|unique:users,email,$id",
+            'address'    => "required",
+            'birthdate'    => "required",
             'password' => 'nullable|confirmed',
             'mobile' =>'required|digits:10',
             'avatar' => 'image|mimes:jpeg,bmp,png|max:2048',

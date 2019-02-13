@@ -24,6 +24,24 @@
             </div>
             {!! Form::myInput('email', 'email', 'Email<span>*</span>') !!}
             {!! Form::myInput('mobile', 'mobile', 'Mobile<span>*</span>') !!}
+
+
+            <div class="form-group">
+                <label for="address">Address<span>*</span></label>
+                <input class="form-control" type="text" name="address" id="address" value="@if(isset($item->address)){{$item->address}}@endif">
+            </div>
+
+            <div class="form-group">
+                <label for="birthdate">Birthdate<span>*</span></label>
+                <input class="form-control" type="date" name="birthdate" id="birthdate" value="@if(isset($item->birthdate)){{$item->birthdate}}@endif">
+            </div>
+
+            <div class="form-group">
+                <label for="social_insurance_number">Social Insurance Number</label>
+                <input class="form-control" type="text" name="social_insurance_number" id="social_insurance_number" value="@if(isset($item->social_insurance_number)){{$item->social_insurance_number}}@endif">
+            </div>
+
+
             {{--<div class="form-group">--}}
                 {{--<label for="gender">Gender:</label>--}}
                 {{--<select class="form-control" id="gender" name="gender">--}}
@@ -80,6 +98,12 @@
                         number: true,
                         minlength:10,
                         maxlength:10,
+                    },
+                    address: {
+                        required: true,
+                    },
+                    birthdate: {
+                        required: true,
                     },
                     password: {
                         minlength: 6

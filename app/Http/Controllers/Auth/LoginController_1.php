@@ -82,20 +82,25 @@ class LoginController extends Controller
 
         $user = \App\User::where('active', '=', 1)
 
-            ->where(function($query) use ($request) {
+               ->where(function($query) use ($request) {
                 return $query->where('email', '=', $request->email)
                     ->orWhere('username', '=', $request->username);
-            })
-            ->where('email_verified_at', '=', 1)
-            ->get();
+                 })
+                          ->where('email_verified_at', '=', 1)
+                          ->get();
+
+
+
+
+
 
         if ($user->isEmpty()) {
             // The user is exist but inactive
             return redirect("/login")
-                ->withInput($request->only('username', 'remember'))
+                ->withInput($request->only('email', 'remember'))
                 ->withWarning('Your account is inactive or email not verified');
         }
-
+        
         //try login with password
         if ($this->attemptLogin($request)) {
             return $this->sendLoginResponse($request);
@@ -118,10 +123,6 @@ class LoginController extends Controller
             $field => $request->get($this->username()),
             'password' => $request->password,
         ];
-    }
-    public function username()
-    {
-        return 'username';
     }
 
 }

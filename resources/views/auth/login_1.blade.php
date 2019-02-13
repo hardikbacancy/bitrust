@@ -21,13 +21,13 @@
 
     <form role="form" method="POST" action="{{ url('/login') }}">
         {{ csrf_field() }}
-        <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }} has-feedback">
-            <input type="text" class="form-control" placeholder="Username" name="username" value="{{ old('username') }}">
+        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }} has-feedback">
+            <input type="text" class="form-control" placeholder="Email" name="email" value="{{ old('email') }}">
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 
-            @if ($errors->has('username'))
+            @if ($errors->has('email'))
                     <span class="help-block">
-                            <strong>{{ $errors->first('username') }}</strong>
+                            <strong>{{ $errors->first('email') }}</strong>
                     </span>
             @endif
         </div>

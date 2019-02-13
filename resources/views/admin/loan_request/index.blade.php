@@ -250,9 +250,7 @@
                 e.preventDefault();
                 var request_id=$("#emi_request_id").val();
                 var email=$("#emi_user_email").val();
-
                 $.ajax({
-
                     url: '{{route(ADMIN.'.emiPendingEmail')}}',
                     data: {
                         requestId: request_id,

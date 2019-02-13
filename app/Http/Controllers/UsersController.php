@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Mail\AdminAlertMail;
 use App\Mail\AdminConfirmMail;
 use App\Mail\VerifyMail;
 use App\Models\admin\AdminSetting;
@@ -59,6 +60,13 @@ class UsersController extends Controller
 
         if($request->active=='1'){
             Mail::to($user->email)->send(new AdminConfirmMail($user));
+        }
+        else if($request->active=='0'){
+            $adminEmail="shashi.sagar@bacancytechnology.com";
+            Mail::to($adminEmail)->send(new AdminAlertMail($user));
+        }
+        else{
+
         }
         return redirect()->route(ADMIN.'.users.index')->withSuccess("User Added Successfully");
     }

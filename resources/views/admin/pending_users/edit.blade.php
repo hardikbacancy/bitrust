@@ -1,7 +1,7 @@
 @extends('admin.adminlayout')
 
 @section('page-header')
-  Pending User <small>update</small>
+    Unverified User <small>update</small>
 @stop
 
 @section('content')
@@ -48,6 +48,12 @@
                         digits: true,
                         minlength:10,
                         maxlength:10,
+                    },
+                    address: {
+                        required: true,
+                    },
+                    birthdate: {
+                        required: true,
                     },
                     password: {
                         minlength: 6

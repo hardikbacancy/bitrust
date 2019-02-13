@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+use App\Mail\AdminAlertMail;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -57,6 +58,10 @@ class RegisterController extends Controller
     {
         $this->validate($request, User::rules());
         $user=User::create($request->all());
+        if($request->active=='0'){
+            $adminEmail="shashi.sagar@bacancytechnology.com";
+            Mail::to($adminEmail)->send(new AdminAlertMail($user));
+        }
 //        Mail::to($request->email)->send(new VerifyMail($user));
         return redirect('login')->with('status', 'Registered Successfully,Please login');
     }

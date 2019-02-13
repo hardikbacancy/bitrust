@@ -24,6 +24,22 @@
 {!! Form::myInput('email', 'email', 'Email <span>*</span>') !!}
 {!! Form::myInput('text', 'mobile', 'Mobile <span>*</span>') !!}
 
+<div class="form-group">
+  <label for="address">Address<span>*</span></label>
+  <input class="form-control" type="text" name="address" id="address" value="@if(isset($item['address'])){{$item['address']}}@endif">
+</div>
+
+<div class="form-group">
+  <label for="birthdate">Birthdate<span>*</span></label>
+  <input class="form-control" type="date" name="birthdate" id="birthdate" value="@if(isset($item['birthdate'])){{$item['birthdate']}}@endif">
+</div>
+
+<div class="form-group">
+  <label for="social_insurance_number">Social Insurance Number</label>
+  <input class="form-control" type="text" name="social_insurance_number" id="social_insurance_number" value="@if(isset($item['social_insurance_number'])){{$item['social_insurance_number']}}@endif">
+</div>
+
+
 @if(isset($item->id))
 {!! Form::myInput('password', 'password', 'Password') !!}
 {!! Form::myInput('password', 'password_confirmation', 'Password confirmation') !!}

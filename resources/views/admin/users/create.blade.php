@@ -64,6 +64,12 @@
                 maxlength:10,
 
             },
+            address: {
+                required: true,
+            },
+            birthdate: {
+                required: true,
+            },
             password: {
                 required: true,
                 minlength: 6

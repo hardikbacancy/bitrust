@@ -10,7 +10,7 @@
 @stop
 
 @section('page-header')
-    Pending Users
+    Unverified Users
     <small>{{ trans('app.manage') }}</small>
 @stop
 
