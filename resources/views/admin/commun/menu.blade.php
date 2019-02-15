@@ -1,5 +1,6 @@
 <?php $r = \Route::current()->getAction() ?>
 <?php $route = (isset($r['as'])) ? $r['as'] : ''; ?>
+<?php $pendingUserCount=countUnverifiedUser();?>
 
 <ul class="sidebar-menu">
     <li class="header">MENU</li>
@@ -22,7 +23,7 @@
         <li class="<?php echo (starts_with($route, ADMIN . '.pending_users')) ? "active" : '' ?>">
             <a href="{{ route(ADMIN.'.pending_users.index') }}">
                 <i class="fa fa-users"></i>
-                <span>Unverified Users</span>
+                <span>Unverified Users({{$pendingUserCount}})</span>
             </a>
         </li>
     @endif

@@ -143,3 +143,14 @@ margin-top: 15px;
 padding: 7px;
 background: white;}
 
+#expenseModal .custom-model { width: 430px;}
+
+/*#loanProfitList tr td.test5  { display: flex}*/
+/*!*#loanProfitList tr td.emi_paid_class  { display: flex}*!*/
+
+/*.test5{*/
+    /*width:100%;*/
+/*}*/
+/*.emi_paid_class{*/
+    /*width:100%;*/
+/*}*/

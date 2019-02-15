@@ -12,8 +12,6 @@
         </div>
     @endif
 
-
-
     <div class="row" id="expense-create">
         <div class="col-md-12">
             <div class="box" style="border:1px solid #d2d6de;">
@@ -21,8 +19,9 @@
                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 
                     <div class="form-group">
-                        <label for="year">Expense Type <a class="btn btn-info" href="" title="Add Expense Type"  data-toggle="modal" data-target="#expenseModal">
-                                <i class="fa fa-plus" style="vertical-align:middle"></i> Add More Expense Type
+                        <label for="year">Expense Type <a style="margin-left: 10px;
+    margin-bottom: 7px;" class="btn btn-info" href="" title="Add Expense Type"  data-toggle="modal" data-target="#expenseModal">
+                                <i class="fa fa-plus" style="vertical-align:middle;"></i> Add More Expense Type
                             </a></label>
                         <select class="form-control" id="expense_id" name="expense_id">
                             @foreach($expenses as $expense)
@@ -79,7 +78,7 @@
     </div>
     <!-- Modal -->
     <div id="expenseModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog custom-model">
 
             <!-- Modal content-->
             <div class="modal-content">
@@ -90,11 +89,12 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="usr">Expense Type Name</label>
-                        <input type="text" class="form-control" name="add_expense_type" id="add_expense_type" value="" placeholder="Add Expense Type">
+                        <input style="margin-top:6px;" type="text" class="form-control" name="add_expense_type" id="add_expense_type" value="" placeholder="Add Expense Type">
                     </div>
+                    <div class="form-group text-right" style="margin-bottom: 0">
                     <button type="button" id="expense_type_button" class="btn btn-primary">Save</button>
 
-                </div>
+                </div>  </div>
             </div>
 
         </div>
@@ -143,6 +143,7 @@
                             });
                             $("#expense_id").html(div_data);
                             $('#expenseModal').modal('hide');
+                            $('#add_expense_type').val(" ");
                             notification("Added Successfully","success");
                         }
                     });

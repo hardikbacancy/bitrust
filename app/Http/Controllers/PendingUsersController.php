@@ -63,6 +63,8 @@ class PendingUsersController extends Controller
 
         if($request->active=='1') {
             Mail::to($user->email)->send(new AdminConfirmMail($user));
+            return redirect()->route(ADMIN.'.users.index')->withSuccess("Verified Successfully,email sent to username ".' '.$user->username);
+
         }
         return redirect()->route(ADMIN.'.pending_users.index')->withSuccess(trans('app.success_update'));
     }

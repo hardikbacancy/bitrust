@@ -36,6 +36,7 @@
             </div>
         </div>
         <div class="col-md-4">
+            <a href="{{route(ADMIN.'.loan_request.index')}}">
             <div class="info-box bg-green">
                 <span class="info-box-icon"><i class="fa fa-money"></i></span>
                 <div class="info-box-content">
@@ -43,6 +44,7 @@
                     <span class="info-box-number">{{$loanAmount}}</span>
                 </div>
             </div>
+            </a>
         </div>
     </div>
 
@@ -71,6 +73,7 @@
             </a>
         </div>
         <div class="col-md-4">
+            <a href="{{route(ADMIN.'.users.index')}}">
             <div class="info-box bg-gray">
                 <span class="info-box-icon"><i class="fa fa-user-o"></i></span>
                 <div class="info-box-content">
@@ -78,6 +81,7 @@
                     <span class="info-box-number">{{$userCount}}</span>
                 </div>
             </div>
+            </a>
         </div>
     </div>
 

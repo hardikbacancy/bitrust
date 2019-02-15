@@ -49,16 +49,25 @@ class LoanProfitController extends Controller
         } else {
             $loanEmiDetails = $query->orderBy('user_loan_mgmts.updated_at', 'desc')->get();
         }
+        $profit=0;
+        foreach($loanEmiDetails as $key=>$value){
+            $profit_1=$value->emi_amount -(floor(($value->loan_amount / $value->tenuar_period)))+ $value->penalty;
+            $profit=$profit+$profit_1;
+        }
+
+        foreach($loanEmiDetails as $key=>$value){
+            $value->total_profit=$profit;
+        }
 
         return Datatables::of($loanEmiDetails)
             ->addColumn('amount_per_month', function ($loanEmiDetails) {
-                return ceil($loanEmiDetails->loan_amount / $loanEmiDetails->tenuar_period);
+                return floor($loanEmiDetails->loan_amount / $loanEmiDetails->tenuar_period);
             })
             ->addColumn('interest_amount', function ($loanEmiDetails) {
-                return ceil($loanEmiDetails->emi_amount - ($loanEmiDetails->loan_amount / $loanEmiDetails->tenuar_period));
+                return $loanEmiDetails->emi_amount - floor($loanEmiDetails->loan_amount / $loanEmiDetails->tenuar_period);
             })
             ->addColumn('profit_amount', function ($loanEmiDetails) {
-                return ceil($loanEmiDetails->emi_amount - ($loanEmiDetails->loan_amount / $loanEmiDetails->tenuar_period) + $loanEmiDetails->penalty);
+                return $loanEmiDetails->emi_amount -(floor(($loanEmiDetails->loan_amount / $loanEmiDetails->tenuar_period)))+ $loanEmiDetails->penalty;
             })
             ->addColumn('penalty', function ($loanEmiDetails) {
                 if (!empty($loanEmiDetails->penalty)) {
@@ -66,7 +75,6 @@ class LoanProfitController extends Controller
                 } else {
                     return "-";
                 }
-
             })
             ->make(true);
     }

@@ -47,3 +47,7 @@ function checkLoanMenu()
         return $userDetails;
     }
 }
+function countUnverifiedUser(){
+    $count=\App\User::where('active','=',0)->count();
+    return $count;
+}

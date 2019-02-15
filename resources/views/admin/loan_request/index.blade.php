@@ -9,7 +9,9 @@
 @stop
 @section('page-header')
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    Loan Request
+    Loan Request  @if(\Auth::user()->role!='0') <span style=" margin-left: 10px;position: relative;top: 3px;" ><i class="material-icons" style="font-size:20px;color:red">error</i> <span style="    color: red;
+    font-size: 14px;    position: relative;top: -5px;">Click to See Pending EMI Below</span>
+    </span> @endif
     <small>{{ trans('app.manage') }}</small>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -43,8 +45,7 @@
                             <span style="color:red;padding: 30px;"> {{"You do not have membership yet"}} </span>
                         @endif
                     @endif
-                    <p><i class="material-icons" style="font-size:20px;color:red">error</i> <span style="color: red;">Click to See Pending EMI Below</span>
-                    </p>
+
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
@@ -167,18 +168,19 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <div id="loading">
+                    <div id="loading" style="display:none;">
                         <!-- You can add gif image here
                         for this demo we are just using text -->
                         <h4 style="color:darkgreen;">Sending...</h4>
                     </div>
+                    <button type="button" class="btn btn-primary" id="send_pending_email">Send Emi Remainder Email</button>
+
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h5><b>User Email:</b> &nbsp;&nbsp; <span id="user_email"></span></h5>
                     <h4 class="modal-title text-center">EMI Pending List</h4>
                      <input type="hidden" id="emi_request_id" value="">
                     <input type="hidden" id="emi_user_email" value="">
 
-                    <button type="button" class="btn btn-default" id="send_pending_email">Send Emi Remainder Email</button>
 
                 </div>
                 <div class="modal-body">
@@ -194,9 +196,7 @@
                         </thead>
                     </table>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+
             </div>
         </div>
     </div>
@@ -250,6 +250,7 @@
                 e.preventDefault();
                 var request_id=$("#emi_request_id").val();
                 var email=$("#emi_user_email").val();
+                $("#loading").show();
                 $.ajax({
                     url: '{{route(ADMIN.'.emiPendingEmail')}}',
                     data: {
@@ -260,15 +261,11 @@
                     method: 'post',
                     dataType: 'json',
                     success: function (res) {
+                        $("#loading").hide();
                         notification("Email Sent Successfully","success");
                     }
                 });
             })
-            $(document).ajaxStart(function() {
-                $("#loading").show();
-            }).ajaxStop(function() {
-                $("#loading").hide();
-            });
         });
     </script>
 @stop

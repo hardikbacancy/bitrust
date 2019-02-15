@@ -2,6 +2,7 @@
 
 namespace App;
 use App\Models\admin\AdminSetting;
+use App\Models\admin\ExpenseDetail;
 use App\Models\admin\LoanRequest;
 use App\Models\admin\Membership;
 use App\Models\admin\UserLoanMgmt;
@@ -153,8 +154,6 @@ class User extends Authenticatable
 
                 $profit = $profit + (($interestEmi - $originalEmi) * $emiCount) + $penalty;
             }
-
-
         }
         $expense = ExpenseDetail::sum('expense');
         $availableBal=$totalMembershipFees+$profit-$loanAmount-$expense;
@@ -180,4 +179,5 @@ class User extends Authenticatable
         $penalty=$adminSettings[0]['penalty'];
         return $penalty;
     }
+
 }

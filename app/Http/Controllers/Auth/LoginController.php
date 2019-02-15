@@ -93,7 +93,7 @@ class LoginController extends Controller
             // The user is exist but inactive
             return redirect("/login")
                 ->withInput($request->only('username', 'remember'))
-                ->withWarning('Your account is inactive or email not verified');
+                ->withWarning('Your account is inactive or username not verified');
         }
 
         //try login with password

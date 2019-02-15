@@ -15,7 +15,7 @@
     <div class="box-header" style="background-color:#f5f5f5;border-bottom:1px solid #d2d6de;">
 
         <div class="row">
-            <h5 style="margin-left: 20px;">Total Loan Profit Amount ( Interest amount including penalty in $ ) : &nbsp;&nbsp;<span id="profit_amount_value"></span></h5> <br>
+            <h5 style="margin-left: 20px;"><b>Total Loan Profit Amount ( Interest amount including penalty in $ ) : &nbsp;</b>&nbsp;<span class="profit_amount_value"></span></h5> <br>
             <div class="col-md-4">
                 <label>EMI Paid Start Date</label>
                 <div class="form-group">
@@ -90,7 +90,7 @@
                 oLanguage: {
                     sProcessing: "<img src='{{asset('img/loading.gif')}}'>"
                 },
-                order:[],
+                "order": [],
                 processing: true,
                 serverSide: true,
                 "scrollX": true,
@@ -106,16 +106,12 @@
                     {data: 'emi_amount', name: 'emi_amount'},
                     {data: 'interest_amount', name: 'interest_amount'},
                     {data: 'penalty', name: 'penalty'},
-                    {data: 'tenuar_date', name: 'tenuar_date'},
-                    {data: 'emi_paid_date', name: 'emi_paid_date'},
+                    {data: 'tenuar_date', name: 'tenuar_date',sClass:"test5"},
+                    {data: 'emi_paid_date', name: 'emi_paid_date',sClass:"emi_paid_class"},
                     {data: 'profit_amount', name: 'profit_amount'},
                 ],
                 "initComplete":function(settings, json){
-                    var profit_amount_val=0;
-                    json.data.forEach(function (value, index) {
-                        profit_amount_val=profit_amount_val+value.profit_amount;
-                    });
-                    $("#profit_amount_value").html(profit_amount_val);
+                    $(".profit_amount_value").html(json.data[0].total_profit);
                 }
             });
 
@@ -145,16 +141,12 @@
                         {data: 'emi_amount', name: 'emi_amount'},
                         {data: 'interest_amount', name: 'interest_amount'},
                         {data: 'penalty', name: 'penalty'},
-                        {data: 'tenuar_date', name: 'tenuar_date'},
-                        {data: 'emi_paid_date', name: 'emi_paid_date'},
+                        {data: 'tenuar_date', name: 'tenuar_date',sClass:"test5"},
+                        {data: 'emi_paid_date', name: 'emi_paid_date',sClass:"emi_paid_class"},
                         {data: 'profit_amount', name: 'profit_amount'},
                     ],
                     "initComplete":function(settings, json){
-                        var profit_amount_val=0;
-                        json.data.forEach(function (value, index) {
-                            profit_amount_val=profit_amount_val+value.profit_amount;
-                        });
-                        $("#profit_amount_value").html(profit_amount_val);
+                        $(".profit_amount_value").html(json.data[0].total_profit);
                     }
                 });
             })
@@ -183,22 +175,15 @@
                         {data: 'emi_amount', name: 'emi_amount'},
                         {data: 'interest_amount', name: 'interest_amount'},
                         {data: 'penalty', name: 'penalty'},
-                        {data: 'tenuar_date', name: 'tenuar_date'},
-                        {data: 'emi_paid_date', name: 'emi_paid_date'},
+                        {data: 'tenuar_date', name: 'tenuar_date',sClass:"test5"},
+                        {data: 'emi_paid_date', name: 'emi_paid_date',sClass:"emi_paid_class"},
                         {data: 'profit_amount', name: 'profit_amount'},
                     ],
                     "initComplete":function(settings, json){
-                        var profit_amount_val=0;
-                        json.data.forEach(function (value, index) {
-                            profit_amount_val=profit_amount_val+value.profit_amount;
-                        });
-                        $("#profit_amount_value").html(profit_amount_val);
+                        $(".profit_amount_value").html(json.data[0].total_profit);
                     }
                 });
             })
-
-
-
 
             $('#start_date').val('');
             $('#end_date').val('');

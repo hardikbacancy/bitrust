@@ -63,6 +63,6 @@ class RegisterController extends Controller
             Mail::to($adminEmail)->send(new AdminAlertMail($user));
         }
 //        Mail::to($request->email)->send(new VerifyMail($user));
-        return redirect('login')->with('status', 'Registered Successfully,Please login');
+        return redirect('login')->with('status', 'Registered Successfully, Once Admin will verify your account you will get verification mail');
     }
 }
