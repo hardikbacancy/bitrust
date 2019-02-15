@@ -9,9 +9,9 @@
 @stop
 @section('page-header')
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    Loan Request  @if(\Auth::user()->role!='0') <span style=" margin-left: 10px;position: relative;top: 3px;" ><i class="material-icons" style="font-size:20px;color:red">error</i> <span style="    color: red;
+    Loan Request  <span style=" margin-left: 10px;position: relative;top: 3px;" ><i class="material-icons" style="font-size:20px;color:red">error</i> <span style="    color: red;
     font-size: 14px;    position: relative;top: -5px;">Click to See Pending EMI Below</span>
-    </span> @endif
+    </span>
     <small>{{ trans('app.manage') }}</small>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -173,8 +173,9 @@
                         for this demo we are just using text -->
                         <h4 style="color:darkgreen;">Sending...</h4>
                     </div>
+                    @if(\Auth::user()->role!='0')
                     <button type="button" class="btn btn-primary" id="send_pending_email">Send Emi Remainder Email</button>
-
+                    @endif
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h5><b>User Email:</b> &nbsp;&nbsp; <span id="user_email"></span></h5>
                     <h4 class="modal-title text-center">EMI Pending List</h4>

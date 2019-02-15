@@ -47,6 +47,6 @@ class ResetPasswordController extends Controller
         User::where('id', $user->id)
             ->update(['password' => Hash::make($password)]);
         event(new PasswordReset($user));
-        $this->guard()->login($user);
+        //$this->guard()->login($user);
     }
 }

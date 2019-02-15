@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        '\App\Console\Commands\CronJob',
+
     ];
 
     /**
@@ -24,8 +25,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('migrate:refresh --seed')
-                 ->everyThirtyMinutes();
+//        $schedule->command('migrate:refresh --seed')
+//                 ->everyThirtyMinutes();
+        $schedule->command('CronJob:cronjob')
+            ->everyMinute();
     }
 
     /**

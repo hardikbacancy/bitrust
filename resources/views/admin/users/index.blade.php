@@ -50,7 +50,8 @@
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->mobile }}</td>
                                 {{--<td>{{ Helper::getRolename($user->role)  }}</td>--}}
-                                <td>{{ $user->active }}</td>
+                                {{--<td>{{ $user->active }}</td>--}}
+                                <td><div class="text-center text-success"><span class="fa fa-check-circle"></span></div></td>
                                 {{--<td>{{ $user->email_verified_at }}</td>--}}
                                 <td class="actions">
                                     @if ( Auth::user()->rolename() === "Superadmin" || Auth::user()->role > $user->role)
@@ -114,7 +115,7 @@
                 "order": []
             });
             //replace bool column to checkbox
-            renderBoolColumn('#tbl', 'bool');
+            //renderBoolColumn('#tbl', 'bool');
         })(jQuery);
     </script>
 @stop
