@@ -14,7 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         '\App\Console\Commands\CronJob',
-
+        '\App\Console\Commands\EmiRemainderJob',
+        '\App\Console\Commands\NextEmiRemainderJob',
     ];
 
     /**
@@ -25,10 +26,14 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-//        $schedule->command('migrate:refresh --seed')
-//                 ->everyThirtyMinutes();
         $schedule->command('CronJob:cronjob')
-            ->everyMinute();
+            ->everyMinute()->withoutOverlapping();
+
+        $schedule->command('EmiRemainderJob:emiRemainderJob')
+            ->everyMinute()->withoutOverlapping();
+
+        $schedule->command('NextEmiRemainderJob:nextEmiRemainderJob')
+            ->monthlyOn(20, '15:00')->withoutOverlapping();
     }
 
     /**

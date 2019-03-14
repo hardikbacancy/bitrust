@@ -18,7 +18,7 @@ class CronJob extends Command
      *
      * @var string
      */
-    protected $description = 'User Name Change Successfully';
+    protected $description = 'Running Cron Job successfully';
 
     /**
      * Create a new command instance.
@@ -37,10 +37,10 @@ class CronJob extends Command
      */
     public function handle()
     {
-        \DB::table('users')
-            ->where('id', 2)
-            ->update(['name' => str_random(10)]);
+//        \DB::table('users')
+//            ->where('id', 2)
+//            ->update(['name' => str_random(10)]);
 
-        $this->info('User Name Change Successfully!');
+        $this->info('Running Cron Job!');
     }
 }

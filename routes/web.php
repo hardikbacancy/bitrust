@@ -1,9 +1,20 @@
 <?php
 
 Route::get('/', function () {
-    //return view('home');
-    return view('auth.login');
+    return view('landing_page');
+    //return view('auth.login');
 });
+Route::get('/about-us', function () {
+    return view('about-us');
+});
+Route::get('/who-we-are', function () {
+    return view('who-we-are');
+});
+Route::get('/contact-us', function () {
+    return view('contact-us');
+});
+
+Route::post('/send_message','SendMessageController@sendMessage');
 
 Route::get('login', function () {
     return view('auth.login');
