@@ -30,14 +30,14 @@
         </div>
         <div class="top-column-right mt-1">
             <ul class="contact-line">
-                <li><i class="fa fa-phone"></i><a href="tel:+6494461709"> 123.567.8978 </a></li>
+                <li><i class="fa fa-phone"></i><a href="tel:++15198354546"> +1 519 835 4546 </a></li>
                 <li><i class="fa fa-envelope"></i><a href="mailto: info@bitrust.ca"> info@bitrust.ca </a></li>
             </ul>
-            <div class="top-social-network">
+            <!-- <div class="top-social-network">
                 <a href="#"><i class="fa fa-facebook"></i></a>
                 <a href="#"><i class="fa fa-linkedin"></i></a>
                 <a href="#"><i class="fa fa-twitter"></i></a>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

@@ -54,6 +54,7 @@ class User extends Authenticatable
             'birthdate'    => "required",
             'password' => 'nullable|confirmed',
             'mobile' =>'required|digits:10',
+            'social_insurance_number' => "required",
             'avatar' => 'image|mimes:jpeg,bmp,png|max:2048',
         ];
 

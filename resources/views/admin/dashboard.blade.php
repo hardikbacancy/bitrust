@@ -85,6 +85,31 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-md-4">
+            
+            <div class="info-box bg-yellow">
+                <span class="info-box-icon"><i class="fa fa-money"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Total Interest&nbsp;(in $)</span>
+                    <span class="info-box-number">{{$totalInterest}}</span>
+                </div>
+            </div>
+           
+        </div>
+        <div class="col-md-4">
+           
+            <div class="info-box bg-yellow">
+                <span class="info-box-icon"><i class="fa fa-money"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Total Penalty&nbsp;(in $)</span>
+                    <span class="info-box-number">{{$totalPenalty}}</span>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+
     @else
         <div class="row">
             <div class="col-md-4">

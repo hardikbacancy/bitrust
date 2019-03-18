@@ -36,6 +36,11 @@ class DashboardController extends Controller
             $totalMembershipFees1=Membership::value(DB::raw("SUM(jan_fees + jan_penalty + feb_fees + feb_penalty + march_fees +march_penalty + april_fees + april_penalty + may_fees + may_penalty + june_fees + june_penalty + july_fees + july_penalty + aug_fees + aug_penalty + sep_fees + sep_penalty + oct_fees)"));
             $totalMembershipFees2=Membership::value(DB::raw("SUM(oct_penalty+nov_fees+nov_penalty+dec_fees+dec_penalty)"));
             $totalMembershipFees=$totalMembershipFees1+$totalMembershipFees2;
+
+            $totalInterest = UserLoanMgmt::where('tenuar_status', '=', 1)->sum('emi_amount');
+
+            $totalPenalty = UserLoanMgmt::where('tenuar_status', '=', 1)->sum('penalty');
+
             $profit=0;
             if(!empty($loanAmountDetails)){
                foreach ($loanAmountDetails as $loanAmountDetail){
