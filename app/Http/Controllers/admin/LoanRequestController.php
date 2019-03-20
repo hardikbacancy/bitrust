@@ -302,6 +302,15 @@ class LoanRequestController extends Controller
         $userloanMgt->save();
         return json_encode($userloanMgt);
     }
+
+    public function penaltyUpdate(Request $request)
+    {
+        $userloanMgt = UserLoanMgmt::findOrFail($request->id);
+        $userloanMgt->penalty = $request->value;
+        $userloanMgt->save();
+        return json_encode($userloanMgt);
+    }
+
     public function deleteEmi(Request $request){
         UserLoanMgmt::where("id","=",$request->id)->delete();
         return json_encode("1");
@@ -312,10 +321,12 @@ class LoanRequestController extends Controller
         $userPenalty=new User();
         $penalty=$userPenalty->getPenalty();
 
-        $userLoanMgmt = UserLoanMgmt::select('user_loan_mgmts.*','users.email')->join('users','user_loan_mgmts.user_id','=','users.id')->where('request_id', $request->requestId)->where('tenuar_status','=',0)->whereDate('tenuar_date', '<', $today_date)->get()->toArray();
+        $userLoanMgmt = UserLoanMgmt::select('user_loan_mgmts.*','users.email','users.name','users.mobile')->join('users','user_loan_mgmts.user_id','=','users.id')->where('request_id', $request->requestId)->where('tenuar_status','=',0)->whereDate('tenuar_date', '<', $today_date)->get()->toArray();
 
         foreach($userLoanMgmt as $key=>$value){
-            $userLoanMgmt[$key]['penalty']=$penalty;
+            if(!isset($userLoanMgmt[$key]['penalty'])){
+                $userLoanMgmt[$key]['penalty']=$penalty; 
+            }
         }
 
         function arrayToCollection($userLoanMgmt)
@@ -331,7 +342,9 @@ class LoanRequestController extends Controller
         $userLoanMgmt = arrayToCollection($userLoanMgmt);
         return Datatables::of($userLoanMgmt)
             ->addColumn('penalty', function ($userLoanMgmt) {
-                return $userLoanMgmt['penalty'];
+                $pen = $userLoanMgmt['penalty'];
+                $penalty = '<input data-id="'.$userLoanMgmt["id"].'" data-column="penalty" type="text" value="'.$pen.'" class="update">';
+                return $penalty;
             })
             ->addColumn('total_emi', function ($userLoanMgmt) {
                 return $userLoanMgmt['penalty']+$userLoanMgmt['emi_amount'];

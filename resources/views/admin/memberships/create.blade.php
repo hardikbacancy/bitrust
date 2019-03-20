@@ -36,8 +36,18 @@
         </select>
       </div>
 
+      <div class="row">
+          <div class="form-group col-md-12">
+            <label for="year">Amount</label>
+            <input type="text" class="form-control number_class" placeholder="Fee" id="month_fees" name="amount">
+          </div>
+      </div>
+
         <div class="row mb30">
-          <div class="col-md-2">
+          <!-- <div class="col-md-1">
+            <input type="checkbox" id="selectall" class="selectall" >
+          </div> -->
+          <div class="col-md-3">
           </div>
           <div class="col-md-4">
             <label for="fees">Fees(in $)</label>
@@ -49,7 +59,10 @@
 
 
       <div class="row">
-          <div class="col-md-2">
+        <div class="col-md-1">
+            <input type="checkbox" id="jan_" class="month_chk" >
+        </div>
+        <div class="col-md-2">
           <label for="jan">January</label>
           </div>
         <div class="col-md-4">
@@ -57,9 +70,13 @@
         </div>
         <div class="col-md-4">
           <input type="text" class="form-control number_class" placeholder="January Penalty" id="jan_penalty" name="jan_penalty">
-        </div>
+        </div>        
       </div>
+
       <div class="row">
+        <div class="col-md-1">
+            <input type="checkbox" id="feb_" class="month_chk" >
+        </div>
         <div class="col-md-2">
           <label for="jan">February</label>
         </div>
@@ -70,7 +87,11 @@
           <input type="text" class="form-control number_class" placeholder="February Penalty" id="feb_penalty" name="feb_penalty">
         </div>
       </div>
+
       <div class="row">
+         <div class="col-md-1">
+            <input type="checkbox" id="march_" class="month_chk" >
+        </div>
         <div class="col-md-2">
           <label for="jan">March</label>
         </div>
@@ -78,10 +99,14 @@
           <input type="text" class="form-control number_class" placeholder="March Fee" id="march_fees" name="march_fees">
         </div>
         <div class="col-md-4">
-          <input type="text" class="form-control number_class" placeholder="March Penalty" id="march_fees" name="march_penalty">
+          <input type="text" class="form-control number_class" placeholder="March Penalty" id="march_penalty" name="march_penalty">
         </div>
       </div>
+
       <div class="row">
+        <div class="col-md-1">
+            <input type="checkbox" id="april_" class="month_chk" >
+        </div>
         <div class="col-md-2">
           <label for="jan">April</label>
         </div>
@@ -92,7 +117,11 @@
           <input type="text" class="form-control number_class" placeholder="April Penalty" id="april_penalty" name="april_penalty">
         </div>
       </div>
+
       <div class="row">
+        <div class="col-md-1">
+            <input type="checkbox" id="may_" class="month_chk" >
+        </div>
         <div class="col-md-2">
           <label for="jan">May</label>
         </div>
@@ -106,6 +135,9 @@
 
 
       <div class="row">
+         <div class="col-md-1">
+            <input type="checkbox" id="june_" class="month_chk" >
+        </div>
         <div class="col-md-2">
           <label for="jan">June</label>
         </div>
@@ -119,6 +151,9 @@
 
 
       <div class="row">
+         <div class="col-md-1">
+            <input type="checkbox" id="july_" class="month_chk" >
+        </div>
         <div class="col-md-2">
           <label for="jan">July</label>
         </div>
@@ -132,6 +167,9 @@
 
 
       <div class="row">
+         <div class="col-md-1">
+            <input type="checkbox" id="aug_" class="month_chk" >
+        </div>
         <div class="col-md-2">
           <label for="jan">August</label>
         </div>
@@ -142,7 +180,11 @@
           <input type="text" class="form-control number_class"  placeholder="August Penalty" id="aug_penalty" name="aug_penalty">
         </div>
       </div>
+
       <div class="row">
+         <div class="col-md-1">
+            <input type="checkbox" id="sep_" class="month_chk" >
+        </div>
         <div class="col-md-2">
           <label for="jan">September</label>
         </div>
@@ -153,7 +195,11 @@
           <input type="text" class="form-control number_class"  placeholder="September Penalty" id="sep_penalty" name="sep_penalty">
         </div>
       </div>
+
       <div class="row">
+        <div class="col-md-1">
+            <input type="checkbox" id="oct_" class="month_chk" >
+        </div>
         <div class="col-md-2">
           <label for="jan">October</label>
         </div>
@@ -164,7 +210,11 @@
           <input type="text" class="form-control number_class"  placeholder="October Penalty" id="oct_penalty" name="oct_penalty">
         </div>
       </div>
+
       <div class="row">
+        <div class="col-md-1">
+            <input type="checkbox" id="nov_" class="month_chk" >
+        </div>
         <div class="col-md-2">
           <label for="jan">November</label>
         </div>
@@ -175,7 +225,11 @@
           <input type="text" class="form-control number_class"  placeholder="November Penalty" id="nov_penalty" name="nov_penalty">
         </div>
       </div>
+
       <div class="row">
+         <div class="col-md-1">
+            <input type="checkbox" id="dec_" class="month_chk" >
+        </div>
         <div class="col-md-2">
           <label for="jan">December</label>
         </div>
@@ -223,6 +277,24 @@
                }
                return true;
            }
+
+
+           $('.month_chk').change(function() {
+              var chkid = $(this).attr('id');
+              if($(this).is(":checked")) {                  
+                  console.log(chkid);
+                  $('#'+chkid+'fees').val($('#month_fees').val());
+              }else{
+                  $('#'+chkid+'fees').val('');          
+              }
+              
+          });
+
        })
+
+      // $('.selectall').click(function() {
+      //       $('input:checkbox').not(this).prop('checked', this.checked);
+      // });
+
   </script>
 @stop

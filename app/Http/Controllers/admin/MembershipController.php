@@ -82,11 +82,37 @@ class MembershipController extends Controller
 
     public function membershipPostAjax(Request $request)
     {
-        $membershipData = DB::table('memberships')
-            ->join('users', 'users.id', '=', 'memberships.user_id')
-            ->select('users.*')
-            ->groupBy('memberships.user_id')
-            ->get();
+        $rname = $email = $phone ='';
+        if(!empty($request->name)){
+            $rname = $request->name;
+            //print_r($rname);die;
+        }
+        if(!empty($request->email)){
+            $email = $request->email;
+        }
+        if(!empty($request->phone)){
+            $phone = $request->phone;
+        }
+        // $membershipData = DB::table('memberships')
+        //     ->join('users', 'users.id', '=', 'memberships.user_id')
+        //     ->select('users.*')
+        //     ->groupBy('memberships.user_id')
+        //     ->get();
+
+        $query =  DB::table('memberships');
+            //$query->where('request_status', '=', 1);
+        $query->join('users', 'users.id', '=', 'memberships.user_id');
+
+        $query->select('users.*');
+
+        if($rname) $query->where('users.name', 'like','%'.$rname.'%');
+        if($email) $query->where('users.email', 'like','%'.$email.'%');
+        if($phone) $query->where('users.mobile', 'like','%'.$phone.'%');
+        $query->groupBy('memberships.user_id');
+
+        $membershipData = $query->get();
+        
+        //dd(DB::getQueryLog());
 
         return Datatables::of($membershipData)
             ->addColumn('editDeleteAction', function ($membershipData) {

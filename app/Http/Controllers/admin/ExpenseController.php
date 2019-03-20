@@ -5,6 +5,7 @@ use App\Models\admin\Expense;
 use App\Models\admin\ExpenseDetail;
 use App\Models\admin\UserLoanMgmt;
 use App\User;
+use Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\Datatables\Datatables;
@@ -26,12 +27,26 @@ class ExpenseController extends Controller
         if(!empty($request->month)){
             $query=$query->where('month','=',$request->month);
         }
-        $expenseData=$query->get();
+        $expenseData=$query->get()->toArray();
 
-        return Datatables::of($expenseData)
+        function arrayToCollection($expenseData)
+        {
+            foreach ($expenseData as $key => $value) {
+                if (is_array($value)) {
+                    $value = arrayToCollection($value);
+                    $expenseData[$key] = $value;
+                }
+            }
+            return collect($expenseData);
+        }
+
+        $expenseData_1 = arrayToCollection($expenseData);
+        //print_r($expenseData_1);die;
+
+        return Datatables::of($expenseData_1)
             ->addColumn('editDeleteAction', function ($expenseData) {
                 return ' <span style="margin-right: 2px;"  class="tooltips" title="View Membership Detail" data-placement="top">
-                              <a href="' . route(ADMIN . '.expense.edit', $expenseData->id) . '" class="btn btn-primary btn-xs" style="margin-left: 10%;">
+                              <a href="' . route(ADMIN . '.expense.edit', $expenseData['id']) . '" class="btn btn-primary btn-xs" style="margin-left: 10%;">
                                 <i class="fa fa-edit"></i>
                               </a>
                             </span>

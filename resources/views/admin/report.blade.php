@@ -11,7 +11,7 @@
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <label>Start Date</label>
                 <div class="form-group">
                     <input type="text" class="form-control" id="start_date" value=""
@@ -19,7 +19,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <label>End Date</label>
                 <div class="form-group">
                     <input type="text" class="form-control" id="end_date" value=""
@@ -27,11 +27,34 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-2">
+                <label>Name</label>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="name" value=""
+                           placeholder="Name" name="name" >
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <label>Email</label>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="email" value=""
+                           placeholder="Email" name="email" >
+                </div>
+            </div>
+
+
+            <div class="col-md-1">
                 <button type="submit" class="btn btn-primary export-btn-custom">
                     {{ __('Filter') }}
                 </button>
             </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-primary mt25" id="report-reset-button">
+                    {{ __('Reset') }}
+                </button>
+            </div>
+
         </div>
     </form>
 
@@ -43,7 +66,7 @@
                            width="100%">
                         <thead>
                         <tr>
-                            <th>Loan Id</th>
+                            <!-- <th>Loan Id</th> -->
                             <th>Name</th>
                             <th>Email</th>
                             <th>Loan Amount(in $)</th>
@@ -88,17 +111,18 @@
                 "order": [],
                 processing: true,
                 serverSide: true,
+                searching: false,
                 "scrollX": true,
                 "dom": 'Bfrtip',
                 buttons: [
-                    'csv', 'excel'
+                    'excel'
                 ],
                 "ajax": {
                     url: '{{route(ADMIN.'.report.reportPostAjax')}}',
                     type: 'POST',
                 },
                 columns: [
-                    {data: 'loan_id', name: 'loan_id'},
+                    // {data: 'loan_id', name: 'loan_id'},
                     {data: 'name', name: 'name'},
                     {data: 'email', name: 'email'},
                     {data: 'loan_amount', name: 'loan_amount', orderable: true},
@@ -116,6 +140,8 @@
                 e.preventDefault();
                 var start_date = $("#start_date").val();
                 var end_date = $("#end_date").val();
+                var name = $("#name").val();
+                var email = $("#email").val();
 
                 $.ajax({
                     url: '{{route(ADMIN.'.checkData')}}',
@@ -134,17 +160,18 @@
                                 serverSide: true,
                                 "scrollX": true,
                                 "bDestroy": true,
+                                searching: false,
                                 dom: 'Bfrtip',
                                 buttons: [
-                                    'csv', 'excel'
+                                   'excel'
                                 ],
                                 "ajax": {
                                     url: '{{route(ADMIN.'.report.reportPostAjax')}}',
                                     type: 'POST',
-                                    data: {'start_date': start_date, 'end_date': end_date},
+                                    data: {'start_date': start_date, 'end_date': end_date,'name':name,'email':email},
                                 },
                                 columns: [
-                                    {data: 'loan_id', name: 'loan_id'},
+                                    // {data: 'loan_id', name: 'loan_id'},
                                     {data: 'name', name: 'name'},
                                     {data: 'email', name: 'email'},
                                     {data: 'loan_amount', name: 'loan_amount', orderable: true},
@@ -181,7 +208,7 @@
                                     data: {'start_date': start_date, 'end_date': end_date},
                                 },
                                 columns: [
-                                    {data: 'loan_id', name: 'loan_id'},
+                                    // {data: 'loan_id', name: 'loan_id'},
                                     {data: 'name', name: 'name'},
                                     {data: 'email', name: 'email'},
                                     {data: 'loan_amount', name: 'loan_amount', orderable: true},
@@ -205,6 +232,63 @@
                     }
                 });
             })
+
+
+            /* Reset filter code  */
+
+            $("#report-reset-button").click(function (e) {
+                e.preventDefault();
+                //var start_date = $("#start_date").val();
+                //var end_date = $("#end_date").val();
+                $('#start_date').val('').trigger('change');
+                $('#end_date').val('').trigger('change');
+                $('#name').val('').trigger('change');
+                $('#email').val('').trigger('change');
+                      
+                    $('#reportList').DataTable({
+                        oLanguage: {
+                            sProcessing: "<img src='{{asset('img/loading.gif')}}'>"
+                        },
+                        "order": [],
+                        processing: true,
+                        serverSide: true,
+                        "scrollX": true,
+                        "bDestroy": true,
+                        dom: 'Bfrtip',
+                        buttons: [
+                           'excel'
+                        ],
+                        "ajax": {
+                            url: '{{route(ADMIN.'.report.reportPostAjax')}}',
+                            type: 'POST',
+                            // data: {'start_date': start_date, 'end_date': end_date},
+                        },
+                        columns: [
+                            // {data: 'loan_id', name: 'loan_id'},
+                            {data: 'name', name: 'name'},
+                            {data: 'email', name: 'email'},
+                            {data: 'loan_amount', name: 'loan_amount', orderable: true},
+                            {data: 'tenuar_period', name: 'tenuar_period'},
+                            {data: 'interest_rate', name: 'interest_rate'},
+                            {
+                                data: 'laon_amount_including_interest',
+                                name: 'laon_amount_including_interest',
+                                orderable: true
+                            },
+                            {data: 'emi_amount', name: 'emi_amount'},
+                            {data: 'paidEmiAmount', name: 'paidEmiAmount'},
+                            {data: 'remainningEmiAmount', name: 'remainningEmiAmount', orderable: true},
+                            {data: 'completed', name: 'completed'},
+                            {data: 'created_date', name: 'created_date'},
+
+                        ]
+                    });
+            });
+                       
+
+                   
+
+            /* End reset filter code */
 
             $('#start_date').val('');
             $('#end_date').val('');

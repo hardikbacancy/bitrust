@@ -8,6 +8,8 @@
 <?php $user=new \App\User();
    $penalty=$user->getPenalty();
 ?>
+<h2>Hello!</h2>
+<p>You </p>
 <table class="table">
     <thead>
     <tr>
@@ -22,7 +24,14 @@
     <tr>
         <td>{{$userLoan->emi_amount}}</td>
         <td>{{$userLoan->tenuar_date}}</td>
-        <td>{{$penalty}}</td>
+        <td>
+            @if(isset($userLoan->penalty))
+                {{$userLoan->penalty}}
+            @else
+                {{$penalty}}       
+            @endif 
+        </td>
+       <!--  <td>{{$penalty}}</td> -->
         <td>{{$userLoan->emi_amount+$penalty}}</td>
     </tr>
       @endforeach

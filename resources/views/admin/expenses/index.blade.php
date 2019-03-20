@@ -52,7 +52,7 @@
 
             <div class="col-md-3">
                 <div class="form-group mb30">
-                    <label for="year">Select Year</label>
+                    <label for="year">Select Month</label>
                     <select class="form-control" id="month" name="month">
                            <option value="">--Select Year--</option>;
                             <option value="January">January</option>
@@ -124,9 +124,15 @@
                 oLanguage: {
                     sProcessing: "<img src='{{asset('img/loading.gif')}}'>"
                 },
+                "order": [],
                 processing: true,
                 serverSide: true,
+                searching: false,
                 "scrollX": true,
+                "dom": 'Bfrtip',
+                buttons: [
+                    'excel'
+                ],
                 "ajax": {
                     url: '{{route(ADMIN.'.expense.expensePostAjax')}}',
                     type: 'POST',
@@ -149,10 +155,15 @@
                     oLanguage: {
                         sProcessing: "<img src='{{asset('img/loading.gif')}}'>"
                     },
+                    "order": [],
                     processing: true,
                     serverSide: true,
+                    searching: false,
                     "scrollX": true,
-                    "bDestroy": true,
+                    "dom": 'Bfrtip',
+                    buttons: [
+                        'excel'
+                    ],
                     "ajax": {
                         url: '{{route(ADMIN.'.expense.expensePostAjax')}}',
                         type: 'POST',

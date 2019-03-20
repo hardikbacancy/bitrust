@@ -32,6 +32,7 @@ Route::get('/user/verify/{verification_code}', 'Auth\VerificationController@veri
 Route::group(['prefix' => ADMIN, 'as' => ADMIN . '.', 'middleware'=>['auth']], function() {
     Route::get('/', ['uses'=>'DashboardController@index', 'as'=>'dash']);
     Route::post('loan_request/emiPendingPostAjax', 'LoanRequestController@emiPendingPostAjax')->name('loan_request.emiPendingPostAjax');
+    Route::post('/loan_request/penaltyUpdate', 'LoanRequestController@penaltyUpdate')->name('loan_request.penaltyUpdate');
 
     Route::get('loan_request/loandetails/{requestId}', 'LoanRequestController@loanDetails')->name('loan_request.loan_details');
     Route::resource('loan_request', 'LoanRequestController');

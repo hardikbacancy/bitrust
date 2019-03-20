@@ -177,7 +177,9 @@
                     <button type="button" class="btn btn-primary" id="send_pending_email">Send Emi Remainder Email</button>
                     @endif
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h5><b>User Email:</b> &nbsp;&nbsp; <span id="user_email"></span></h5>
+                    <h5><b>User Email :</b> &nbsp;&nbsp; <span id="user_email"></span></h5>
+                    <h5><b>User Name :</b> &nbsp;&nbsp; <span id="user_name"></span></h5>
+                    <h5><b>User Phone :</b> &nbsp;&nbsp; <span id="user_phone"></span></h5>
                     <h4 class="modal-title text-center">EMI Pending List</h4>
                      <input type="hidden" id="emi_request_id" value="">
                     <input type="hidden" id="emi_user_email" value="">
@@ -227,6 +229,7 @@
                 $('#emiPendingList').DataTable({
                     processing: true,
                     serverSide: true,
+                    searching:false,
                     "bDestroy": true,
                     "ajax": {
                         url: '{{route(ADMIN.'.loan_request.emiPendingPostAjax')}}',
@@ -242,6 +245,8 @@
                     ],
                     "initComplete": function (settings, json) {
                         $("#user_email").html(json.data[0].email);
+                        $("#user_name").html(json.data[0].name);
+                        $("#user_phone").html(json.data[0].mobile);
                         $("#emi_user_email").val(json.data[0].email);
                         $("#emi_request_id").val(json.data[0].request_id);
                     }
@@ -268,5 +273,34 @@
                 });
             })
         });
+
+
+    function update_data(id, column_name, value)
+    {
+        $("#loading").show();
+        $.ajax({
+        url: '{{route(ADMIN.'.loan_request.penaltyUpdate')}}',
+        dataType: 'json',
+        type: 'post',
+        data:{id:id, column_name:column_name, value:value},
+        success:function(data)
+        {
+            $("#loading").hide();
+            notification("Penalty Updated Successfully","success");
+            //$('#emiPendingList').DataTable().destroy();
+            //fetch_data();
+        }
+       });
+    }
+
+    $(document).on('blur', '.update', function(){
+       console.log('update');
+       var id = $(this).data("id");
+       var column_name = $(this).data("column");
+       var value = $(this).val();
+       update_data(id, column_name, value);
+    });
+
+
     </script>
 @stop

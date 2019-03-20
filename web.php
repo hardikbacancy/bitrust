@@ -40,6 +40,6 @@ Route::group(['prefix' => ADMIN, 'as' => ADMIN . '.', 'middleware'=>['auth','Rol
 
     Route::post('statusPenalty','admin\StatusPenaltyController@statusPenalty');
     Route::resource('non_loan_users', 'NonLoanUserController');
-    Route::post('/loan_request/loanStatusUpdate', 'LoanRequestController@loanStatusUpdate');
+    Route::post('/loan_request/loanStatusUpdate', 'LoanRequestController@loanStatusUpdate');   
     Route::post('/deleteEmi', 'LoanRequestController@deleteEmi');
 });

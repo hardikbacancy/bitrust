@@ -24,24 +24,39 @@ class ReportController extends Controller
 
     public function reportList(Request $request)
     {
-        if (!empty($request->start_date) && !empty($request->end_date)) {
-            $start_date = $request->start_date;
-            $end_date = $request->end_date;
-            $start_date = date('Y-m-d', strtotime($start_date));
-            $end_date = date('Y-m-d', strtotime($end_date));
-            $loanRequest = LoanRequest::where('request_status', '=', 1)->whereDate('created_at', '>=', $start_date)->whereDate('created_at', '<', $end_date)->orderBy('updated_at', 'desc')->get()->toArray();
-        } else if (!empty($request->start_date)) {
+        $start_date = $end_date = "";
+        if (!empty($request->start_date)) {
             $start_date = $request->start_date;
             $start_date = date('Y-m-d', strtotime($start_date));
-            $loanRequest = LoanRequest::where('request_status', '=', 1)->whereDate('created_at', '>=', $start_date)->orderBy('updated_at', 'desc')->get()->toArray();
-        } else if (!empty($request->end_date)) {
+        } 
+        if (!empty($request->end_date)) {
             $end_date = $request->end_date;
-            $end_date = date('Y-m-d', strtotime($end_date));
-            $loanRequest = LoanRequest::where('request_status', '=', 1)->whereDate('created_at', '<=', $end_date)->orderBy('updated_at', 'desc')->get()->toArray();
-        } else {
-            $loanRequest = LoanRequest::where('request_status', '=', 1)->orderBy('updated_at', 'desc')->get()->toArray();
+            $end_date = date('Y-m-d', strtotime($end_date));            
         }
+            // $loanRequest = LoanRequest::where('request_status', '=', 1)->orderBy('updated_at', 'desc')->get()->toArray();
+           
+            $rname = $email = '';
+            if(!empty($request->name)){
+                $rname = $request->name;
+            }
+            if(!empty($request->email)){
+                $email = $request->email;
+            }
+            $query =  LoanRequest::where('request_status', '=', 1);
+            //$query->where('request_status', '=', 1);
+            $query->join('users', 'users.id', '=', 'loan_requests.user_id');
 
+            //$query->where('name', 'like', 'bacancy');
+            if($start_date) $query->whereDate('loan_requests.created_at', '>=', $start_date);
+            if($end_date) $query->whereDate('loan_requests.created_at', '<=', $end_date);
+            if($rname) $query->where('users.name', 'like','%'.$rname.'%');
+            if($email) $query->where('users.email', 'like','%'.$email.'%');
+
+            $query->orderBy('loan_requests.updated_at', 'desc');
+
+            $loanRequest = $query->get()->toArray();
+       
+      
         foreach ($loanRequest as $key => $value) {
             $loanRequests = User::find($value['user_id'])->toArray();
             $loanRequest[$key]['loan_id'] = $value['id'];
@@ -80,6 +95,7 @@ class ReportController extends Controller
             $loanRequest[$key]['remainningEmiAmount']=DB::table('user_loan_mgmts')
                 ->where('user_id','=',$value['user_id'])->where('request_id','=',$value['id'])->where('tenuar_status','=',0)->sum('emi_amount');
         }
+        //print_r($loanRequest);die;
         function arrayToCollection($loanRequest)
         {
             foreach ($loanRequest as $key => $value) {
