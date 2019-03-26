@@ -8,8 +8,10 @@
 <?php $user=new \App\User();
    $penalty=$user->getPenalty();
 ?>
-<h2>Hello!</h2>
-<p></p>
+<p>Hello,</p>
+
+<p>This is reminder for your EMI which is still pending.</p>
+<p>Below is your EMI related detail.</p>
 <table class="table">
     <thead>
     <tr>
@@ -38,7 +40,7 @@
     </tbody>
 </table>
 
-
+<br>    
 kindest,<br>
 Brahmani Investement Trust!
 </body>

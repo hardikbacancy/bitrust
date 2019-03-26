@@ -174,12 +174,12 @@
                         <h4 style="color:darkgreen;">Sending...</h4>
                     </div>
                     @if(\Auth::user()->role!='0')
-                    <button type="button" class="btn btn-primary" id="send_pending_email">Send Emi Remainder Email</button>
+                    <button type="button" class="btn btn-primary" id="send_pending_email">Send Emi reminder Email</button>
                     @endif
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h5><b>User Email :</b> &nbsp;&nbsp; <span id="user_email"></span></h5>
-                    <h5><b>User Name :</b> &nbsp;&nbsp; <span id="user_name"></span></h5>
-                    <h5><b>User Phone :</b> &nbsp;&nbsp; <span id="user_phone"></span></h5>
+                    <h5><b>Email :</b>&nbsp;&nbsp;<span id="user_email"></span></h5>
+                    <h5><b>Name :</b>&nbsp;&nbsp;<span id="user_name"></span></h5>
+                    <h5><b>Phone :</b>&nbsp;&nbsp;<span id="user_phone"></span></h5>
                     <h4 class="modal-title text-center">EMI Pending List</h4>
                      <input type="hidden" id="emi_request_id" value="">
                     <input type="hidden" id="emi_user_email" value="">

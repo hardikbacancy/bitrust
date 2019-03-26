@@ -42,7 +42,7 @@
                 <label>Phone</label>
                 <div class="form-group">
                     <input type="text" class="form-control" id="phone" value=""
-                           placeholder="Email" name="phone" >
+                           placeholder="Phone" name="phone" >
                 </div>
             </div>
 
