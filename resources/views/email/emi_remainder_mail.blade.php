@@ -9,7 +9,7 @@
    $penalty=$user->getPenalty();
 ?>
 <h2>Hello!</h2>
-<p>You </p>
+<p></p>
 <table class="table">
     <thead>
     <tr>

@@ -42,7 +42,7 @@ class ReportController extends Controller
             if(!empty($request->email)){
                 $email = $request->email;
             }
-            $query =  LoanRequest::where('request_status', '=', 1);
+            $query =  LoanRequest::select('loan_requests.*','loan_requests.id as lid','users.*')->where('request_status', '=', 1);
             //$query->where('request_status', '=', 1);
             $query->join('users', 'users.id', '=', 'loan_requests.user_id');
 
@@ -108,8 +108,15 @@ class ReportController extends Controller
         }
 
         $loanRequest_1 = arrayToCollection($loanRequest);
-
+        //print_r($loanRequest_1);die;
         return Datatables::of($loanRequest_1)
+            ->addColumn('export', function ($loanRequest_1) {
+                return ' <span style="margin-right: 2px;"  class="tooltips" title="Detailed Loan Reports" data-placement="top">
+                              <a href="' . route(ADMIN . '.report.export', $loanRequest_1['lid']) . '" class="btn btn-primary btn-xs" style="margin-left: 10%;">
+                                 <span class="glyphicon glyphicon-export"></span>
+                              </a>
+                            </span>';
+            })
             ->make(true);
     }
 
@@ -132,5 +139,116 @@ class ReportController extends Controller
             $loanRequest = LoanRequest::where('request_status', '=', 1)->get()->toArray();
         }
         return json_encode($loanRequest);
+    }
+
+    public function exportRow(Request $request,$Id){
+
+        $type = 'xlsx';
+        $loanRdata = LoanRequest::where('id',$Id)->get()->toArray();
+        $userData = User::find($loanRdata['0']['user_id'])->toArray();
+        //print_r($userData['name']);die;
+        $emiData = UserLoanMgmt::where('request_id', $loanRdata['0']['id'])->get()->toArray();
+
+        $j = 0;
+        $emi_period = $loanRdata['0']['tenuar_period'];
+        foreach ($emiData as $LoanDetail) {
+            $status = $LoanDetail['tenuar_status'];
+            if ($status == 1) {
+                $j++;
+            }
+        }
+        if ($j == $emi_period) {
+            $loanRdata['0']['loan_status'] = "Completed";
+        } else {
+            $loanRdata['0']['loan_status'] = "Processing";
+        }
+        //print_r($loanRdata);die;
+
+        $fileName = 'detailed_loan_reports_'.time();
+
+        return Excel::create($fileName, function($excel) use ($loanRdata,$userData,$emiData) {
+            $excel->sheet('mySheet', function($sheet) use ($loanRdata,$userData,$emiData)
+            {
+                $sheet->cell('A1', function($cell) {$cell->setValue('Name');   });
+                $sheet->cell('B1', function($cell) {$cell->setValue('Email');   });
+                $sheet->cell('C1', function($cell) {$cell->setValue('Phone Number');   });
+                $sheet->cell('D1', function($cell) {$cell->setValue('Address');   });
+                if (!empty($userData)) {
+                    $i = 2;
+                    $sheet->cell('A'.$i, $userData['name']); 
+                    $sheet->cell('B'.$i, $userData['email']); 
+                    $sheet->cell('C'.$i, $userData['mobile']); 
+                    $sheet->cell('D'.$i, $userData['address']); 
+                    
+                }
+
+                $sheet->cell('A4', function($cell) {$cell->setValue('Loan Id');   });
+                $sheet->cell('B4', function($cell) {$cell->setValue('Loan Amount(in $)');   });
+                $sheet->cell('C4', function($cell) {$cell->setValue('EMI Period(in Month)');   });
+                $sheet->cell('D4', function($cell) {$cell->setValue('Interest Rate(In %)');   });
+                $sheet->cell('E4', function($cell) {$cell->setValue('Loan Amount(Including Interest in $)');   });
+                $sheet->cell('F4', function($cell) {$cell->setValue('EMI Amount(Per Month in $)');   });
+                $sheet->cell('G4', function($cell) {$cell->setValue('EMI Paid Amount(in $)');   });
+                $sheet->cell('H4', function($cell) {$cell->setValue('EMI Remainning Amount(in $)');   });
+                $sheet->cell('I4', function($cell) {$cell->setValue('Loan Status');   });
+                $sheet->cell('J4', function($cell) {$cell->setValue('Created Date');   });
+
+                if (!empty($loanRdata)) {
+                    foreach ($loanRdata as $key => $value) {
+                        $i= $key+5;
+
+                        $tlAmount = $value['loan_amount']+($value['loan_amount']*$value['interest_rate'])/100;
+                        $emipermonth = round($tlAmount/$value['tenuar_period'],2);
+
+                        $paidEmiAmount = DB::table('user_loan_mgmts')->where('request_id','=',$value['id'])->where('tenuar_status','=',1)->sum('emi_amount');
+
+                        $UnpaidEmiAmount = $tlAmount - $paidEmiAmount;
+
+                        $sheet->cell('A'.$i, $value['id']); 
+                        $sheet->cell('B'.$i, $value['loan_amount']); 
+                        $sheet->cell('C'.$i, $value['tenuar_period']); 
+                        $sheet->cell('D'.$i, $value['interest_rate']);
+                        $sheet->cell('E'.$i, $tlAmount);
+                        $sheet->cell('F'.$i, $emipermonth);
+
+                        $sheet->cell('G'.$i, $paidEmiAmount); 
+                        $sheet->cell('H'.$i, $UnpaidEmiAmount); 
+                        $sheet->cell('I'.$i, $value['loan_status']); 
+
+                        $sheet->cell('J'.$i, $value['created_at']); 
+                    }
+                }
+
+                $sheet->cell('A7', function($cell) {$cell->setValue('EMI Details');   });
+
+                $sheet->cell('A8', function($cell) {$cell->setValue('Sr. No');   });
+                $sheet->cell('B8', function($cell) {$cell->setValue('EMI Date');   });
+                $sheet->cell('C8', function($cell) {$cell->setValue('EMI Amount');   });
+                $sheet->cell('D8', function($cell) {$cell->setValue('EMI Penalty');   });
+                $sheet->cell('E8', function($cell) {$cell->setValue('EMI Status');   });
+
+
+                if (!empty($emiData)) {
+                    $srNo = 0;
+                    foreach ($emiData as $key => $value) {
+                        $srNo++;
+                        $i= $key+9;
+                        if($value['tenuar_status'] == 0){
+                            $emiStatus = "Unpaid";
+                        }else{
+                            $emiStatus = "Paid";
+                        }
+                        $sheet->cell('A'.$i, $srNo); 
+                        $sheet->cell('B'.$i, $value['tenuar_date']); 
+                        $sheet->cell('C'.$i, $value['emi_amount']); 
+                        $sheet->cell('D'.$i, $value['penalty']); 
+                        $sheet->cell('E'.$i, $emiStatus); 
+                    }
+                }
+
+
+            });
+        })->download($type);
+        
     }
 }

@@ -30,7 +30,7 @@
         </div>
         <div class="top-column-right mt-1">
             <ul class="contact-line">
-                <li><i class="fa fa-phone"></i><a href="tel:++15198354546"> +1 519 835 4546 </a></li>
+                <li><i class="fa fa-phone"></i><a href="tel:+15198354546"> +1 519 835 4546 </a></li>
                 <li><i class="fa fa-envelope"></i><a href="mailto: info@bitrust.ca"> info@bitrust.ca </a></li>
             </ul>
             <!-- <div class="top-social-network">
@@ -89,7 +89,7 @@
                 </ul>
                 <hr>
                 <ul class="contact">
-                    <li><i class="fa fa-phone"></i><a href="tel:123.567.8978">123.567.8978</a></li>
+                    <li><i class="fa fa-phone"></i><a href="tel:+15198354546"> +1 519 835 4546</a></li>
                     <li><i class="fa fa-envelope-o"></i><a href="emailto:info@bitrust.ca">info@bitrust.ca</a></li>
                 </ul>
             </div>

@@ -78,6 +78,7 @@
                             <th>EMI Remainning Amount(in $)</th>
                             <th>Loan Status</th>
                             <th>Created Date</th>
+                            <th>Export</th>
                         </tr>
                         </thead>
                     </table>
@@ -134,6 +135,8 @@
                     {data: 'remainningEmiAmount', name: 'remainningEmiAmount', orderable: true},
                     {data: 'completed', name: 'completed'},
                     {data: 'created_date', name: 'created_date'},
+                    {data: 'export', name: 'export'},
+
                 ]
             });
             $("#reportListSubmit").submit(function (e) {

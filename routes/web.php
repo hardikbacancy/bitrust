@@ -59,6 +59,8 @@ Route::group(['prefix' => ADMIN, 'as' => ADMIN . '.', 'middleware'=>['auth','Rol
     Route::get('report', 'admin\ReportController@report')->name('report.report');
     Route::post('report','admin\ReportController@report')->name('report.reportPost');
 
+    Route::get('report/export/{id}','admin\ReportController@exportRow')->name('report.export');
+
 //    Route::get('report', 'admin\ReportController@report')->name('report.report');
 //    Route::post('report','admin\ReportController@report')->name('report.report');
 

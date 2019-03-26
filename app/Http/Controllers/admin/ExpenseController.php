@@ -41,8 +41,7 @@ class ExpenseController extends Controller
         }
 
         $expenseData_1 = arrayToCollection($expenseData);
-        //print_r($expenseData_1);die;
-
+       
         return Datatables::of($expenseData_1)
             ->addColumn('editDeleteAction', function ($expenseData) {
                 return ' <span style="margin-right: 2px;"  class="tooltips" title="View Membership Detail" data-placement="top">

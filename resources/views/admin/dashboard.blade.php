@@ -88,7 +88,7 @@
     <div class="row">
         <div class="col-md-4">
             
-            <div class="info-box bg-yellow">
+            <div class="info-box bg-secondary">
                 <span class="info-box-icon"><i class="fa fa-money"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">Total Interest&nbsp;(in $)</span>
@@ -99,7 +99,7 @@
         </div>
         <div class="col-md-4">
            
-            <div class="info-box bg-yellow">
+            <div class="info-box bg-light">
                 <span class="info-box-icon"><i class="fa fa-money"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">Total Penalty&nbsp;(in $)</span>
