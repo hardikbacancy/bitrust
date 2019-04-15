@@ -87,8 +87,7 @@
 
     <div class="row">
         <div class="col-md-4">
-            
-            <div class="info-box bg-secondary">
+            <div class="info-box bg-green-gradient">
                 <span class="info-box-icon"><i class="fa fa-money"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">Total Interest&nbsp;(in $)</span>
@@ -99,21 +98,33 @@
         </div>
         <div class="col-md-4">
            
-            <div class="info-box bg-light">
+            <div class="info-box bg-red-gradient">
                 <span class="info-box-icon"><i class="fa fa-money"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text">Total Penalty&nbsp;(in $)</span>
+                    <span class="info-box-text">Total Loan Penalty&nbsp;(in $)</span>
                     <span class="info-box-number">{{$totalPenalty}}</span>
                 </div>
             </div>
            
         </div>
+
+        <div class="col-md-4">
+            <a href="{{route(ADMIN.'.loan_request.index')}}">
+            <div class="info-box bg-blue-gradient">
+                <span class="info-box-icon"><i class="fa fa-money"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Unapproved Loan Request</span>
+                    <span class="info-box-number">{{$unApprovedLoanCount}}</span>
+                </div>
+            </div>
+            </a>
+
+        </div>
     </div>
 
-    @else
         <div class="row">
             <div class="col-md-4">
-                <div class="info-box bg-red">
+                <div class="info-box bg-aqua">
                     <span class="info-box-icon"><i class="fa fa-money"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Total Membership&nbsp;(in $)</span>
@@ -121,6 +132,29 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-4">
+                <div class="info-box bg-light-blue">
+                    <span class="info-box-icon"><i class="fa fa-money"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Member Penalty&nbsp;(in $)</span>
+                        <span class="info-box-number">{{$totalMemberPenalty}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    @else
+        <div class="row">
+            {{--<div class="col-md-4">--}}
+                {{--<div class="info-box bg-red">--}}
+                    {{--<span class="info-box-icon"><i class="fa fa-money"></i></span>--}}
+                    {{--<div class="info-box-content">--}}
+                        {{--<span class="info-box-text">Total Membership&nbsp;(in $)</span>--}}
+                        {{--<span class="info-box-number">{{$totalMembershipFees}}</span>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
 
             <div class="col-md-4">
                 <div class="info-box bg-gray">

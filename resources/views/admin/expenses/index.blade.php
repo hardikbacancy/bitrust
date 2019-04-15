@@ -211,6 +211,36 @@
                     ]
                 });
             });
+
+            $(document.body).on('click', '.delete-expense', function () {
+                var obj = $(this);
+                var expenseId = $(this).attr('data-expenseId');
+
+                swal({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then(function(isConfirm) {
+                    $.ajax({
+                        url: '{{route(ADMIN.'.expense.delete')}}',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                            expenseId: expenseId,
+                        },
+                        success: function (response) {
+                            notification("Removed Successfully!",'success');
+                            $('#expenseList').DataTable().ajax.reload(null, false);
+
+                        }
+                    });
+                });
+            });
+
         });
     </script>
 @stop

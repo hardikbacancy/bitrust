@@ -44,9 +44,14 @@ class ExpenseController extends Controller
        
         return Datatables::of($expenseData_1)
             ->addColumn('editDeleteAction', function ($expenseData) {
-                return ' <span style="margin-right: 2px;"  class="tooltips" title="View Membership Detail" data-placement="top">
+                return ' <span style="margin-right: 2px;"  class="tooltips" title="Edit Expense Type" data-placement="top">
                               <a href="' . route(ADMIN . '.expense.edit', $expenseData['id']) . '" class="btn btn-primary btn-xs" style="margin-left: 10%;">
                                 <i class="fa fa-edit"></i>
+                              </a>
+                            </span>
+                            <span style="margin-right: 2px;"  class="tooltips" title="Delete Expense Type" data-placement="top">
+                              <a data-expenseId="' . $expenseData['id'] . '" class="btn btn-danger btn-xs danger delete-expense" style="margin-left: 10%;">
+                                <i class="fa fa-trash-o"></i>
                               </a>
                             </span>
                            ';
@@ -81,7 +86,7 @@ class ExpenseController extends Controller
         }
     }
     public function editExpense(Request $request,$Id){
-        $expensesDetails=ExpenseDetail::where('id','=',$Id)->first();
+        $expensesDetails=ExpenseDetail::select('expense_details.*','expenses.expense_type')->join('expenses','expenses.id','=','expense_details.expense_id')->where('expense_details.id','=',$Id)->first();
         return view('admin.expenses.edit',get_defined_vars());
     }
 
@@ -105,6 +110,12 @@ class ExpenseController extends Controller
          $expense->save();
          $expenses_details=Expense::all()->toArray();
          return json_encode($expenses_details);
+    }
+
+    public function deleteExpense(Request $request){
+        $id=$request->expenseId;
+        DB::table('expense_details')->where('id', '=', $id)->delete();
+        return json_encode('1');
     }
 
 }

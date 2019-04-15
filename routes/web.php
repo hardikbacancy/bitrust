@@ -93,6 +93,9 @@ Route::group(['prefix' => ADMIN, 'as' => ADMIN . '.', 'middleware'=>['auth','Rol
     Route::post('expense/update', 'admin\ExpenseController@updateExpense')->name('expense.update');
     Route::post('expense/addExpenseType', 'admin\ExpenseController@addExpenseType')->name('expense.addExpenseType');
 
+    Route::post('expense/delete', 'admin\ExpenseController@deleteExpense')->name('expense.delete');
+
+
     //Loan Profit
     Route::get('loanProfit', 'admin\LoanProfitController@loanProfit')->name('loanProfit');
     Route::post('loanProfit/loanProfitPostAjax', 'admin\LoanProfitController@loanProfitPostAjax')->name('loanProfit.loanProfitPostAjax');

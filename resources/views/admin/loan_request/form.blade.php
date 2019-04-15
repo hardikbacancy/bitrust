@@ -22,6 +22,12 @@
         <option value="24" @if(isset($loanRequest)) @if($loanRequest['tenuar_period']=='24') selected @endif @endif>
             2-year
         </option>
+        <option value="36" @if(isset($loanRequest)) @if($loanRequest['tenuar_period']=='36') selected @endif @endif>
+            3-year
+        </option>
+        <option value="48" @if(isset($loanRequest)) @if($loanRequest['tenuar_period']=='48') selected @endif @endif>
+            4-year
+        </option>
     </select>
 </div>
 

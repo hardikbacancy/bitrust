@@ -11,6 +11,32 @@
             {!! session('message') !!}
         </div>
     @endif
+
+    <div class="box-header" style="background-color:#f5f5f5;border-bottom:1px solid #d2d6de;margin-bottom: -12px;">
+        <div class="row">
+            <div class="col-md-2">
+                <label>Expense Type:</label>
+            </div>
+            <div class="col-md-2">
+                {{$expensesDetails['expense_type']}}
+            </div>
+            <div class="col-md-2">
+                <label>Year</label> :
+            </div>
+            <div class="col-md-2">
+                <span>{{$expensesDetails['year']}}</span>
+            </div>
+            <div class="col-md-2">
+                <label>Month</label> :
+            </div>
+            <div class="col-md-2">
+                <span> {{$expensesDetails['month']}}</span>
+            </div>
+        </div>
+    </div>
+
+
+
     <div class="row" id="expense-update">
         <div class="col-md-12">
             <div class="box" style="border:1px solid #d2d6de;">
