@@ -18,9 +18,11 @@
 
 </head>
 <body class="hold-transition login-page">
-	<div class="login-box">
+<div class="row">
+<div class="col-sm-12">
+	<div class="login-box custom-login-box">
 		<div class="login-logo">
-			<a href="{{ url('/') }}"><b style="font-size: 27px;">Brahmani Investment Trust</b></a>
+			<a href="{{ url('/') }}"><b style="font-size: 26px;">Shree Brahmani Investor INC</b></a>
 		</div>
 		<!-- /.login-logo -->
 		<div class="login-box-body">
@@ -30,6 +32,8 @@
 		</div>
 		<!-- /.login-box-body -->
 	</div>
+</div>
+</div>
 	<!-- /.login-box -->
 
 	<script src="{{ asset('js/admin-vendor.js') }} "></script>

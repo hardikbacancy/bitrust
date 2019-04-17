@@ -22,7 +22,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role', 'active', 'avatar','mobile','verification_code','gender','email_verified_at','membership_fees','username','address','birthdate','social_insurance_number'
+        'name', 'email', 'password', 'role', 'active', 'avatar','mobile','verification_code','gender','email_verified_at','membership_fees','username','address','birthdate','social_insurance_number',
+        'first_beneficiary_name','first_beneficiary_relationship','first_beneficiary_share',
+        'second_beneficiary_name','second_beneficiary_relationship','second_beneficiary_share'
     ];
 
     /**
@@ -56,6 +58,13 @@ class User extends Authenticatable
             'mobile' =>'required|digits:10',
             'social_insurance_number' => "required",
             'avatar' => 'image|mimes:jpeg,bmp,png|max:2048',
+            'first_beneficiary_name'=>'required',
+            'first_beneficiary_relationship'=>'required',
+            'first_beneficiary_share'=>'required',
+            'second_beneficiary_name'=>'required',
+            'second_beneficiary_relationship'=>'required',
+            'second_beneficiary_share'=>'required',
+            'membership_fees'=>'required'
         ];
 
         if ($update) {

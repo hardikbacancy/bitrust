@@ -8,7 +8,7 @@
 
     <link rel="icon" href="img/favicon.png">
 
-    <title>BTrust</title>
+    <title>BiTrust</title>
 
     <!-- BOOTSTRAP -->
     <link href="js/bootstrap/css/bootstrap.min.css" rel="stylesheet">

@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
-use App\Mail\AdminAlertMail;
 use App\Mail\AdminConfirmMail;
+use App\Mail\NewUserVerificationMail;
 use App\Mail\VerifyMail;
 use App\Models\admin\AdminSetting;
 use Illuminate\Http\Request;
@@ -65,7 +65,7 @@ class UsersController extends Controller
         }
         else if($request->active=='0'){
             $adminEmail="shashi.sagar@bacancytechnology.com";
-            Mail::to($adminEmail)->send(new AdminAlertMail($user));
+            Mail::to($adminEmail)->send(new NewUserVerificationMail($user));
             return redirect()->route(ADMIN.'.pending_users.index')->withSuccess("User Added Successfully,alert email sent to you, please verify from here username".' '.$user->username);
         }
         else{

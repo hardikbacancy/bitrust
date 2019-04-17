@@ -51,14 +51,15 @@
     </tr>
     <tr>
         <td class="second-part">
-            <h2>Hello, <span> {{$user->name}} </span> </h2>
-            <p>We have verified all your informations, You can access your account now</p>
-            <p>Please use username and your choosen password for login into application</p>
+            <h2>Hello, <span> Admin </span> </h2>
+            <p>New User has been registered in Shree Brahmani Investor INC</p>
 
             <div class="detailbox">
+                <b>Name: </b> {{$user->name}}<br>
                 <b>User Name: </b> {{$user->username}} <br>
                 <b>Email: </b> {{$user->email}}
             </div>
+            <p>Please login into admin panel and approve it from un-verified user list.</p>
         </td>
     </tr>
     <tr>

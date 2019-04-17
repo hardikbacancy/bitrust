@@ -18,6 +18,13 @@
 
         <div class="box-body" style="margin:10px;">
           @include('admin.users.form')
+
+            <div class="form-group">
+                <label for="membership_fees">Default Membership Fees</label>
+                <input class="form-control" type="text" name="membership_fees" id="membership_fees"
+                       value="@if(isset($item['membership_fees'])){{$item['membership_fees']}}@endif">
+            </div>
+
             <div class="form-group">
                 <label for="photo">Photo  &nbsp;(Allow only jpeg,bmp,png up to 2MB)<span>*</span>:</label>
                 <div class="col-md-12 pd-0 mt-10">

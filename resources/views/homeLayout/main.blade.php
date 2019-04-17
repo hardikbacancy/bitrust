@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="" content="">
     <link rel="icon" href="home/images/favicon.png">
-    <title>BTrust</title>
+    <title>BiTrust</title>
     <!-- BOOTSTRAP -->
     <link href="home/js/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- CUSTOM STYLES -->

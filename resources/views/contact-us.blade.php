@@ -69,7 +69,7 @@
                             </div>
                             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                                 <ul class="address-link">
-                                    <li><i class="fa fa-phone"></i><a href="tel:123.567.8978">123.567.8978</a></li>
+                                    <li><i class="fa fa-phone"></i><a href="tel:123.567.8978"> +1 519 835 4546</a></li>
                                     <li><i class="fa fa-envelope-o"></i><a href="emailto:info@bitrust.ca">info@bitrust.ca</a></li>
                                 </ul>
                             </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Welcome To Brahmani Investment Trust</title>
+    <title>Welcome To Shree Brahmani Investor INC</title>
 </head>
 
 <body>
@@ -25,7 +25,7 @@
 
 
 kindest,<br>
-Brahmani Investement Trust!
+Shree Brahmani Investor INC!
 </body>
 
 </html>

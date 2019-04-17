@@ -54,7 +54,7 @@
             <div class="info-box bg-yellow">
                 <span class="info-box-icon"><i class="fa fa-money"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text">Total Loan Profit&nbsp;(in $)</span>
+                    <span class="info-box-text">Total collected Interset Profit&nbsp;(in $)</span>
                     <span class="info-box-number">{{$profit}}</span>
                 </div>
             </div>
@@ -90,7 +90,7 @@
             <div class="info-box bg-green-gradient">
                 <span class="info-box-icon"><i class="fa fa-money"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text">Total Interest&nbsp;(in $)</span>
+                    <span class="info-box-text">Total Principal Collect&nbsp;(in $)</span>
                     <span class="info-box-number">{{$totalInterest}}</span>
                 </div>
             </div>
@@ -123,22 +123,32 @@
     </div>
 
         <div class="row">
+            {{--<div class="col-md-4">--}}
+                {{--<div class="info-box bg-aqua">--}}
+                    {{--<span class="info-box-icon"><i class="fa fa-money"></i></span>--}}
+                    {{--<div class="info-box-content">--}}
+                        {{--<span class="info-box-text">Total Membership&nbsp;(in $)</span>--}}
+                        {{--<span class="info-box-number">{{$totalMembershipFees}}</span>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+
+            {{--<div class="col-md-4">--}}
+                {{--<div class="info-box bg-light-blue">--}}
+                    {{--<span class="info-box-icon"><i class="fa fa-money"></i></span>--}}
+                    {{--<div class="info-box-content">--}}
+                        {{--<span class="info-box-text">Member Penalty&nbsp;(in $)</span>--}}
+                        {{--<span class="info-box-number">{{$totalMemberPenalty}}</span>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+
             <div class="col-md-4">
                 <div class="info-box bg-aqua">
                     <span class="info-box-icon"><i class="fa fa-money"></i></span>
                     <div class="info-box-content">
-                        <span class="info-box-text">Total Membership&nbsp;(in $)</span>
-                        <span class="info-box-number">{{$totalMembershipFees}}</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="info-box bg-light-blue">
-                    <span class="info-box-icon"><i class="fa fa-money"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Member Penalty&nbsp;(in $)</span>
-                        <span class="info-box-number">{{$totalMemberPenalty}}</span>
+                        <span class="info-box-text">Default Membership Fees&nbsp;(in $)</span>
+                        <span class="info-box-number">{{$defaultMembershipFees}}</span>
                     </div>
                 </div>
             </div>

@@ -114,8 +114,8 @@ class ExpenseController extends Controller
 
     public function deleteExpense(Request $request){
         $id=$request->expenseId;
-        DB::table('expense_details')->where('id', '=', $id)->delete();
-        return json_encode('1');
+        $expense_delete=DB::table('expense_details')->where('id', '=', $id)->delete();
+        return json_encode($expense_delete);
     }
 
 }

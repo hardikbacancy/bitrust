@@ -6,7 +6,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class AdminAlertMail extends Mailable
+class NewUserVerificationMail extends Mailable
 {
     public $user;
     use Queueable, SerializesModels;
@@ -28,6 +28,6 @@ class AdminAlertMail extends Mailable
      */
     public function build()
     {
-        return $this->view('email.admin_alert_mail');
+        return $this->view('email.new_user_verification_mail');
     }
 }

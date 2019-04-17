@@ -46,6 +46,8 @@ class DashboardController extends Controller
 
             $totalMemberPenalty=$totalMembershipPenalty1+$totalMembershipPenalty2;
 
+            $defaultMembershipFees = User::where('active', '=', 1)->sum('membership_fees');
+
 
             if(!empty($loanAmountDetails)){
                foreach ($loanAmountDetails as $loanAmountDetail){

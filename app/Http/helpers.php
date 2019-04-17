@@ -51,3 +51,7 @@ function countUnverifiedUser(){
     $count=\App\User::where('active','=',0)->count();
     return $count;
 }
+function countUnverifiedRequest(){
+    $count=\App\Models\admin\LoanRequest::where('request_status','=',0)->count();
+    return $count;
+}
