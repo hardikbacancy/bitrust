@@ -54,8 +54,9 @@
         <td class="second-part">
             <?php $user=new \App\User();
             $penalty=$user->getPenalty();
+            $count=0;
             ?>
-            <p>Hello, User</p>
+            <p>Hello,  @foreach($userLoanMgmt as $key=>$userLoan) @if($key==0) {{$userLoan->name}} @endif @endforeach</p>
             <p>This is reminder for your EMI which is pending.</p>
             <table class="table">
                 <thead>
@@ -79,7 +80,7 @@
                             @endif
                         </td>
                     <!--  <td>{{$penalty}}</td> -->
-                        <td>{{$userLoan->emi_amount+$penalty}}</td>
+                        <td>@if(isset($userLoan->penalty)) {{$userLoan->emi_amount+$userLoan->penalty}} @else {{$userLoan->emi_amount+$penalty}} @endif </td>
                     </tr>
                 @endforeach
                 </tbody>
