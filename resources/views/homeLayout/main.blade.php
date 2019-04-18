@@ -81,11 +81,12 @@
                     Guelph,ON<br>
                     N1E0B8</p>
                 <ul class="menu">
-                    <li><a class="active" href="/">HOME</a></li>
-                    <li><a href="/about-us">About us</a></li>
-                    <li><a href="/who-we-are">Who We are</a></li>
-                    <li><a href="/contant-us">Contact US</a></li>
-                    <li><a href="javascript:;">SIGN IN / UP</a></li>
+
+                    <li class="{{ request()->is('/') ? 'active' : '' }}"><a href="{{ url('/') }}">Home</a></li>
+                    <li class="{{ request()->is('about-us') ? 'active' : '' }}"><a href="{{ url('/about-us') }}">About Us</a></li>
+                    <li class="{{ request()->is('who-we-are') ? 'active' : '' }}"><a href="{{ url('/who-we-are') }}">Who we are</a></li>
+                    <li class="{{ request()->is('contact-us') ? 'active' : '' }}"><a href="{{ url('/contact-us') }}">Contact Us</a></li>
+                    <li><a href="{{ url('/login') }}">Sign In/up</a></li>
                 </ul>
                 <hr>
                 <ul class="contact">

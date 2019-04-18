@@ -43,13 +43,6 @@ $val = str_random(40);
            value="@if(isset($item['social_insurance_number'])){{$item['social_insurance_number']}}@endif">
 </div>
 
-@if(isset($item->id))
-    {!! Form::myInput('password', 'password', 'Password') !!}
-    {!! Form::myInput('password', 'password_confirmation', 'Password confirmation') !!}
-@else
-    {!! Form::myInput('password', 'password', 'Password <span>*</span>') !!}
-    {!! Form::myInput('password', 'password_confirmation', 'Password confirmation <span>*</span>') !!}
-@endif
 
 <p><b>Beneficiary <span style="color:red;">*</span></b></p>
 <div class="beneficiary-box">
@@ -159,6 +152,22 @@ $val = str_random(40);
 
     </div>
 </div>
+
+<div class="form-group">
+    <label for="membership_fees">Default Membership Fees<span style="color: red;">*</span></label>
+    <input class="form-control" type="text" name="membership_fees" id="membership_fees"
+           value="@if(isset($item['membership_fees'])){{$item['membership_fees']}}@endif">
+</div>
+
+@if(isset($item->id))
+    {!! Form::myInput('password', 'password', 'Password') !!}
+    {!! Form::myInput('password', 'password_confirmation', 'Password confirmation') !!}
+@else
+    {!! Form::myInput('password', 'password', 'Password <span>*</span>') !!}
+    {!! Form::myInput('password', 'password_confirmation', 'Password confirmation <span>*</span>') !!}
+@endif
+
+
 
 
 {{--<div class="form-group">--}}

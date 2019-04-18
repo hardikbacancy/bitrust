@@ -149,7 +149,7 @@
 </div>
 @if(isset($item->id))
 <div class="form-group">
-  <label for="membership_fees">Default Membership Fees</label>
+  <label for="membership_fees">Default Membership Fees<span style="color:red;">*</span></label>
   <input class="form-control" type="text" name="membership_fees" id="membership_fees"
          value="@if(isset($item['membership_fees'])){{$item['membership_fees']}}@endif">
 </div>

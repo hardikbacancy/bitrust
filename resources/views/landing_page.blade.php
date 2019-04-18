@@ -37,7 +37,7 @@
                         <img src="{{asset('home/images/banking.png')}}">
                     </div>
                     <h3>Banking</h3>
-                    <p>We are the financial institution that take less membership fees from the public and provide them loan in less Emi's for certain period</p>
+                    <p>We are the financial institution that take less membership fees from the public and provide them loan in less Emi's for certain period.</p>
                 </div>
             </div>
             <div class="col-sm-4">
@@ -67,6 +67,11 @@
                     <h3>Apply anywhere in minutes</h3>
                     <p>Enter basic information along with beneficiary's data online.</p>
                 </div>
+                <div>
+                    <a href="{{ url('/register') }}"> <button style="background-color: #ffffff;color:#e85205;
+    border-color: #e85205;margin-left: 57px; margin-top: 32px;" class="btn btn-primary">Register</button>
+                    </a> </div>
+
             </div>
             <div class="col-sm-4 mt-10p trustwrk-c-img">
                 <div class="col-icon-2 box">
@@ -74,7 +79,7 @@
                         <img src="{{asset('home/images/banking.png')}}">
                     </div>
                     <h3>Get a decision quickly</h3>
-                    <p>Pay basic membership fees and be eligible to get funds</p>
+                    <p>Pay basic membership fees and be eligible to get funds.</p>
                 </div>
             </div>
             <div class="col-sm-4 mt-20p">
@@ -83,7 +88,7 @@
                         <img src="{{'home/images/evaluation.png'}}">
                     </div>
                     <h3>Start using your funds today</h3>
-                    <p>Apply for any loan amount with certain period at lowest emi's</p>
+                    <p>Apply for any loan amount with certain period at lowest emi's.</p>
                 </div>
             </div>
         </div>
@@ -138,7 +143,7 @@
                     The solutions provide a comprehensive set of
                     customer and account centric business operations
                     which enable customers to be more business centic and offers
-                    customer support capability
+                    customer support capability.
                 </p>
             </div>
             <div class="row">

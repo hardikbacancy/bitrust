@@ -61,9 +61,9 @@ class User extends Authenticatable
             'first_beneficiary_name'=>'required',
             'first_beneficiary_relationship'=>'required',
             'first_beneficiary_share'=>'required',
-            'second_beneficiary_name'=>'required',
-            'second_beneficiary_relationship'=>'required',
-            'second_beneficiary_share'=>'required',
+//            'second_beneficiary_name'=>'required',
+//            'second_beneficiary_relationship'=>'required',
+//            'second_beneficiary_share'=>'required',
             'membership_fees'=>'required'
         ];
 

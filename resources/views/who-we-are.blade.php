@@ -24,12 +24,6 @@
                     <div class="content-box">
                         <h3 class="mt-3">Jagdish B Patel</h3>
                         <span>Director</span>
-                        <h4>Work Experience</h4>
-                        <ul>
-                            <li>Entrepreneur</li>
-                            <li>8-years in IT-professional</li>
-                        </ul>
-
                     </div>
 
 
@@ -39,11 +33,6 @@
                     <div class="content-box">
                         <h3 class="mt-3">Sunil Patel</h3>
                         <span>Director</span>
-                        <h4>Work Experience</h4>
-                        <ul>
-                            <li>Entrepreneur</li>
-                            <li>6-years in IT-professional</li>
-                        </ul>
                     </div>
 
 
@@ -53,19 +42,12 @@
                     <div class="content-box">
                         <h3 class="mt-3">Bhadresh Patel</h3>
                         <span>Director</span>
-                        <h4>Work Experience</h4>
-                        <ul>
-                            <li>Entrepreneur</li>
-                            <li>5-years in IT-professional</li>
-                        </ul>
                     </div>
 
 
                 </div>
             </div>
-
-
-
+        </div>
 
     </section>
 

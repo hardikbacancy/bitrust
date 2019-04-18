@@ -73,15 +73,6 @@
             first_beneficiary_share: {
                 required: true,
             },
-            second_beneficiary_name: {
-                required: true,
-            },
-            second_beneficiary_relationship: {
-                required: true,
-            },
-            second_beneficiary_share: {
-                required: true,
-            },
             address: {
                 required: true,
             },

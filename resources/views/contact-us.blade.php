@@ -15,7 +15,7 @@
                     <div class="section-heading">
                         <h2>Contact Us</h2>
                     </div>
-                    <p>At Bitrust, We Have Made it Easy for Customer to Reach Us and Get Their Solutions Weaved.Drop your inquiry in the form given below of this page. And within 24 hours, one of our business development executive will reach you for further communication</p>
+                    <p>At Bitrust, We Have Made it Easy for Customer to Reach Us and Get Their Solutions Weaved.Drop your inquiry in the form given below of this page,and within 24 hours, one of our business development executive will reach you for further communication.</p>
                 </div>
             </div>
         </div>

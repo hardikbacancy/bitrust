@@ -14,13 +14,13 @@
             <div class="row">
                 <div class="col-xs-12">
                     <h3 class="text-red mt-4">History</h3>
-                    <p>We face too much difficulties and problem at the begining as it was difficult to provide loan and manage it on manual basis.After our core team develope a sytem Bitrust.This is our pioneer step to help people</p>
+                    <p>We face too much difficulties and problem at the begining as it was difficult to provide loan and manage it on manual basis.After our core team develope a sytem Bitrust.This is our pioneer step to help people.</p>
 
                     <h3 class="text-red mt-4">Group Companies</h3>
-                    <p>We are working as group companies here. Each and every member is independent,complete and able to make decision for the organization to make it successful</p>
+                    <p>We are working as group companies here. Each and every member is independent,complete and able to make decision for the organization to make it successful.</p>
 
                     <h3 class="text-red mt-4">Board of Directors</h3>
-                    <p>We are board of directors working towards customer to fullfil their dreams using financial help</p>
+                    <p>We are board of directors working towards customer to fullfil their dreams using financial help.</p>
 
                     <h3 class="text-red mt-4">Investor Relations</h3>
                     <p>All our investors are very important for us. we make them believe on us and working hard to buy trust of our investors. We believe in making relationship based on trust.</p>
@@ -49,7 +49,7 @@
                                 <div class="description">
                                     <h4 class="info-title text-red">Affordability</h4>
                                     <p class="desc">Affordable to those with a median income
-                                        or below as rated by the national government or a local government</p>
+                                        or below as rated by the national government or a local government.</p>
                                 </div>
                             </div>
                         </div>
@@ -85,7 +85,7 @@
                                 </div>
                                 <div class="description">
                                     <h4 class="info-title text-red">Advocacy</h4>
-                                    <p class="desc">We provide advocacy support to people who need it</p>
+                                    <p class="desc">We provide advocacy support to people who need it.</p>
                                 </div>
                             </div>
                         </div>
