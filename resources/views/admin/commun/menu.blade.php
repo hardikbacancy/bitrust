@@ -45,10 +45,9 @@
     <li class="<?php echo (starts_with($route, ADMIN . '.loan_request')) ? "active" : '' ?>">
         <a href="{{ route(ADMIN.'.loan_request.index') }}">
             <i class="fa fa-list"></i>
-            <span>Loan Request({{$countUnverifiedRequest}})</span>
+            <span>Loan Request  @if (auth()->user()->hasRole('Superadmin'))(Pending ({{$countUnverifiedRequest}}))@endif</span>
         </a>
     </li>
-
 
     @if (auth()->user()->hasRole('Superadmin|Admin'))
         <li class="<?php echo (starts_with($route, ADMIN . '.expense')) ? "active" : '' ?>">

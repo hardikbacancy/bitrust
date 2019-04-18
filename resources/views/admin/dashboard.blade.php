@@ -30,7 +30,7 @@
             <div class="info-box bg-blue">
                 <span class="info-box-icon"><i class="fa fa-money"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text" style="font-size: 13px;">Total Available Balance&nbsp;(in $)</span>
+                    <span class="info-box-text" style="font-size: 12px;">Total Available Balance&nbsp;(in $)</span>
                     <span class="info-box-number">{{$totalMembershipFees+$profit-$loanAmount-$expense}}</span>
                 </div>
             </div>
@@ -54,7 +54,8 @@
             <div class="info-box bg-yellow">
                 <span class="info-box-icon"><i class="fa fa-money"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text">Total collected Interset Profit&nbsp;(in $)</span>
+                    <span class="info-box-text">Total Collected Interset</span>
+                    <span class="info-box-text">Profit (in $)</span>
                     <span class="info-box-number">{{$profit}}</span>
                 </div>
             </div>
@@ -90,7 +91,8 @@
             <div class="info-box bg-green-gradient">
                 <span class="info-box-icon"><i class="fa fa-money"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text">Total Principal Collect&nbsp;(in $)</span>
+                    <span class="info-box-text" style="font-size: 13px;">Total Principal
+                        Collect(in $)</span>
                     <span class="info-box-number">{{$totalInterest}}</span>
                 </div>
             </div>
@@ -147,7 +149,7 @@
                 <div class="info-box bg-aqua">
                     <span class="info-box-icon"><i class="fa fa-money"></i></span>
                     <div class="info-box-content">
-                        <span class="info-box-text">Default Membership Fees&nbsp;(in $)</span>
+                        <span class="info-box-text">Membership Fees&nbsp;(in $)</span>
                         <span class="info-box-number">{{$defaultMembershipFees}}</span>
                     </div>
                 </div>

@@ -6,8 +6,7 @@
     <!--  <img src="images/banner.jpg"> -->
     <div class="banncontent">
         <h1>We Provide the Best Financial Solution</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-        <a href="#">Know More</a>
+        <p>Bitrust team believe in to help each and every financial needy person to provide fund,so they can fullfil their dream</p>
     </div>
 </div>
 <!-- END OF SLIDER WRAPPER -->
@@ -29,7 +28,7 @@
                         <img src="{{asset('home/images/marketing.png')}}">
                     </div>
                     <h3>Marketting</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore. </p>
+                    <p>With its focus on the customer, marketing is one of the premier components of our business.</p>
                 </div>
             </div>
             <div class="col-sm-4">
@@ -38,7 +37,7 @@
                         <img src="{{asset('home/images/banking.png')}}">
                     </div>
                     <h3>Banking</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore. </p>
+                    <p>We are the financial institution that take less membership fees from the public and provide them loan in less Emi's for certain period</p>
                 </div>
             </div>
             <div class="col-sm-4">
@@ -47,7 +46,7 @@
                         <img src="{{asset('home/images/evaluation.png')}}">
                     </div>
                     <h3>Evaluation</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore. </p>
+                    <p>As a financial institution we evaluate the significance,and actual need for customers so right person can take our benefits.</p>
                 </div>
             </div>
         </div>
@@ -66,7 +65,7 @@
                         <img src="{{asset('home/images/minute.png')}}">
                     </div>
                     <h3>Apply anywhere in minutes</h3>
-                    <p>Enter basic business information and link your revenue data online or through our mobile app. </p>
+                    <p>Enter basic information along with beneficiary's data online.</p>
                 </div>
             </div>
             <div class="col-sm-4 mt-10p trustwrk-c-img">
@@ -75,7 +74,7 @@
                         <img src="{{asset('home/images/banking.png')}}">
                     </div>
                     <h3>Get a decision quickly</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore. </p>
+                    <p>Pay basic membership fees and be eligible to get funds</p>
                 </div>
             </div>
             <div class="col-sm-4 mt-20p">
@@ -84,7 +83,7 @@
                         <img src="{{'home/images/evaluation.png'}}">
                     </div>
                     <h3>Start using your funds today</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore. </p>
+                    <p>Apply for any loan amount with certain period at lowest emi's</p>
                 </div>
             </div>
         </div>
@@ -100,11 +99,11 @@
             <div class="col-md-6 mt-50">
                 <span> For Self Employed </span>
                 <h5>MSME Loan</h5>
-                <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex. </p>
+                <p>Loans for The Micro, Small and Medium Enterprises categorise under MSME Loan,and we make provide and support it </p>
                 <ul>
-                    <li> Lorem ipsum dolor sit amet </li>
-                    <li> Lorem ipsum dolor sit amet, consectetur adipisicing  </li>
-                    <li> Lorem ipsum dolor sit amet, consectetur adipisicing </li>
+                    <li> To Promote MSME growth</li>
+                    <li> We encourage and inspire young Enterpreneur</li>
+                    <li> We removed every process that slows down a loan approval</li>
                 </ul>
             </div>
         </div>
@@ -116,11 +115,13 @@
             <div class="col-md-6 mt-50">
                 <span> For Self Employed </span>
                 <h5>Business Loan</h5>
-                <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex. </p>
+                <p>With small business loans , funding for your small business is now just 24 hours away.
+                    Use the funds to invest in infrastructure, expand operations, upgrade to the latest plant and machinery,
+                    maintain inventory, or to increase working capital</p>
                 <ul>
-                    <li> Lorem ipsum dolor sit amet </li>
-                    <li> Lorem ipsum dolor sit amet, consectetur adipisicing  </li>
-                    <li> Lorem ipsum dolor sit amet, consectetur adipisicing </li>
+                    <li> Large capital made affordable</li>
+                    <li> To help Scale up operations and take on bigger projects and much more </li>
+                    <li> To Increase your business cash flow </li>
                 </ul>
             </div>
 
@@ -132,81 +133,86 @@
     <div class="cta-wrapper ">
         <div class="container">
             <div class="row parallaxsectop">
-                <h4>We Bring the Right People Together to Challenge Established Thinking and Drive Transformation.</h4>
-                <p>On the other hand we denounce with righteous indignation and dislike men who are so beguiled and demoralized
-                    by the charms of pleasure of the moment so blinded by desire that they cannot.</p>
+                <h4>Shree Brahmani Investor INC bring support people to grow individually</h4>
+                <p>We helps the servicing and management of loan facility on a single platform.
+                    The solutions provide a comprehensive set of
+                    customer and account centric business operations
+                    which enable customers to be more business centic and offers
+                    customer support capability
+                </p>
             </div>
             <div class="row">
                 <div class="col-md-4 cta-box">
                     <div class="col-icon centered">
                         <img src="{{asset('home/images/stockexchange.png')}}">
-                        <h5>Stock Exchange and Banks</h5>
-                        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit.  </p>
+                        <h5>End-to-end loan management functionality</h5>
+                        {{--<p> Lorem ipsum dolor sit amet, consectetur adipisicing elit.  </p>--}}
                     </div>
                 </div>
                 <div class="col-md-4 cta-box">
                     <div class="col-icon centered">
                         <img src="{{asset('home/images/stockexchange.png')}}">
-                        <h5>Stock Exchange and Banks</h5>
-                        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit.  </p>
+                        <h5>User specific Dashboards, full trace and control</h5>
+                        {{--<p> Lorem ipsum dolor sit amet, consectetur adipisicing elit.  </p>--}}
                     </div>
                 </div>
                 <div class="col-md-4 cta-box">
                     <div class="col-icon centered">
                         <img src="{{asset('home/images/stockexchange.png')}}">
-                        <h5>Stock Exchange and Banks</h5>
-                        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit.  </p>
+                        <h5>Customer oriented settlement of loan</h5>
+                        {{--<p> Lorem ipsum dolor sit amet, consectetur adipisicing elit.  </p>--}}
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </section>
 
-<section class="newsinsight contain-wrapp gray-container ">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="section-heading ">
-                    <h2>News and Insights</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam voluptas ducimus sequi animi.</p>
+{{--<section class="newsinsight contain-wrapp gray-container ">--}}
+    {{--<div class="container">--}}
+        {{--<div class="row">--}}
+            {{--<div class="col-md-8 col-md-offset-2">--}}
+                {{--<div class="section-heading ">--}}
+                    {{--<h2>News and Insights</h2>--}}
+                    {{--<p>Get the latest news from our team</p>--}}
 
-                </div>
-            </div>
-        </div>
-        <div class="row mt-50">
-            <div class="col-md-4">
-                <article class="post-wrapper">
-                    <a href="#"><img src="{{asset('home/images/articleone.png')}}" class="img-responsive" alt=""></a>
-                    <div class="post-content">
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+        {{--<div class="row mt-50">--}}
+            {{--<div class="col-md-4">--}}
+                {{--<article class="post-wrapper">--}}
+                    {{--<img src="{{asset('home/images/articleone.png')}}" class="img-responsive" alt="">--}}
+                    {{--<div class="post-content">--}}
 
-                        <h6><a href="#">If the White Whale be raised, it must be in a month</a></h6>
-                        <span class="post-date"><i class="fa fa-clock-o"></i> 17 August 2017</span>
-                    </div>
-                </article>
-            </div>
-            <div class="col-md-4">
-                <article class="post-wrapper">
-                    <a href="#"><img src="{{asset('home/images/articleone.png')}}" class="img-responsive" alt=""></a>
-                    <div class="post-content">
+                        {{--<h6>If the White Whale be raised, it must be in a month</h6>--}}
+                        {{--<span class="post-date"><i class="fa fa-clock-o"></i> 17 August 2017</span>--}}
+                    {{--</div>--}}
+                {{--</article>--}}
+            {{--</div>--}}
+            {{--<div class="col-md-4">--}}
+                {{--<article class="post-wrapper">--}}
+                    {{--<img src="{{asset('home/images/articleone.png')}}" class="img-responsive" alt="">--}}
+                    {{--<div class="post-content">--}}
 
-                        <h6><a href="#">If the White Whale be raised, it must be in a month</a></h6>
-                        <span class="post-date"><i class="fa fa-clock-o"></i> 17 August 2017</span>
-                    </div>
-                </article>
-            </div>
-            <div class="col-md-4">
-                <article class="post-wrapper">
-                    <a href="#"><img src="{{asset('home/images/articleone.png')}}" class="img-responsive" alt=""></a>
-                    <div class="post-content">
+                        {{--<h6>If the White Whale be raised, it must be in a month</h6>--}}
+                        {{--<span class="post-date"><i class="fa fa-clock-o"></i> 17 August 2017</span>--}}
+                    {{--</div>--}}
+                {{--</article>--}}
+            {{--</div>--}}
+            {{--<div class="col-md-4">--}}
+                {{--<article class="post-wrapper">--}}
+                    {{--<img src="{{asset('home/images/articleone.png')}}" class="img-responsive" alt="">--}}
+                    {{--<div class="post-content">--}}
 
-                        <h6><a href="#">If the White Whale be raised, it must be in a month</a></h6>
-                        <span class="post-date"><i class="fa fa-clock-o"></i> 17 August 2017</span>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </div>
-</section>
+                        {{--<h6>If the White Whale be raised, it must be in a month</h6>--}}
+                        {{--<span class="post-date"><i class="fa fa-clock-o"></i> 17 August 2017</span>--}}
+                    {{--</div>--}}
+                {{--</article>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
+{{--</section>--}}
 @endsection
        

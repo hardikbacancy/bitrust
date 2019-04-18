@@ -15,7 +15,7 @@
                     <div class="section-heading">
                         <h2>Contact Us</h2>
                     </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <p>At Bitrust, We Have Made it Easy for Customer to Reach Us and Get Their Solutions Weaved.Drop your inquiry in the form given below of this page. And within 24 hours, one of our business development executive will reach you for further communication</p>
                 </div>
             </div>
         </div>

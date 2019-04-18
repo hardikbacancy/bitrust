@@ -26,7 +26,8 @@
                         <span>Director</span>
                         <h4>Work Experience</h4>
                         <ul>
-                            <li>Founder of 4 successful startnup</li>
+                            <li>Entrepreneur</li>
+                            <li>8-years in IT-professional</li>
                         </ul>
 
                     </div>
@@ -40,7 +41,8 @@
                         <span>Director</span>
                         <h4>Work Experience</h4>
                         <ul>
-                            <li>Founder of 4 successful startnup</li>
+                            <li>Entrepreneur</li>
+                            <li>6-years in IT-professional</li>
                         </ul>
                     </div>
 
@@ -53,7 +55,8 @@
                         <span>Director</span>
                         <h4>Work Experience</h4>
                         <ul>
-                            <li>Founder of 4 successful startnup</li>
+                            <li>Entrepreneur</li>
+                            <li>5-years in IT-professional</li>
                         </ul>
                     </div>
 
