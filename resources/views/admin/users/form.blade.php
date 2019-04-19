@@ -139,7 +139,7 @@ $val = str_random(40);
         </div>
 
 
-        <div class="form-group col-sm-4{{ $errors->has('second_beneficiary_share') ? ' has-error' : '' }} has-feedback">
+        <div class="form-group col-sm-4 {{ $errors->has('second_beneficiary_share') ? ' has-error' : '' }} has-feedback">
             <input type="text" class="form-control" placeholder="Beneficiary Percentage Share"
                    name="second_beneficiary_share" value="@if(isset($item['second_beneficiary_share'])){{$item['second_beneficiary_share']}}@endif">
 

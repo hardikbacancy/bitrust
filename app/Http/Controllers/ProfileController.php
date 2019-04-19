@@ -37,9 +37,22 @@ class ProfileController extends Controller
     public function update(Request $request, $id)
     {
         //Log::info('user: '. print_r( $request->all() )   );
-        $this->validate($request, User::rules(true, $id));
-        $item = User::findOrFail($id);
-        $item->update($request->all());
+        if(!empty(\Auth::user()->id) && \Auth::user()->role=='0'){
+            $this->validate($request, User::rules_auth(true, $id));
+            $item = User::findOrFail($id);
+            $item->update($request->all());
+        }
+        else if(!empty(\Auth::user()->id) && \Auth::user()->role!='0'){
+            $this->validate($request, User::rules_super_auth(true, $id));
+            $item = User::findOrFail($id);
+            $item->update($request->all());
+        }
+        else{
+            $this->validate($request, User::rules(true, $id));
+            $item = User::findOrFail($id);
+            $item->update($request->all());
+        }
+
 
         //update the auth, will needed for refresh UI
         \Auth::user()->update(['name' => $request->name]);

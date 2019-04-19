@@ -41,6 +41,117 @@
                 <input class="form-control" type="text" name="social_insurance_number" id="social_insurance_number" value="@if(isset($item->social_insurance_number)){{$item->social_insurance_number}}@endif">
             </div>
 
+            @if(\Auth::user()->role=='0')
+            <p><b>Beneficiary <span style="color:red;">*</span></b></p>
+            <div class="beneficiary-box">
+
+                <div class="row formbox">
+                    <div class="form-group col-sm-4{{ $errors->has('first_beneficiary_name') ? ' has-error' : '' }} has-feedback">
+                        <input type="text" class="form-control" placeholder="First Beneficiary Name" name="first_beneficiary_name"
+                               value="@if(isset($item['first_beneficiary_name'])){{$item['first_beneficiary_name']}}@endif">
+
+                        @if ($errors->has('first_beneficiary_name'))
+                            <span class="help-block">
+                            <strong>{{ $errors->first('first_beneficiary_name') }}</strong>
+                </span>
+                        @endif
+                    </div>
+
+
+                    <div class="form-group  col-sm-4{{ $errors->has('first_beneficiary_relationship') ? ' has-error' : '' }} has-feedback">
+                        <select class="form-control" name="first_beneficiary_relationship">
+                            <option value="">--Relationship--</option>
+                            <option value="Father" @if(isset($item['first_beneficiary_relationship'])) @if($item['first_beneficiary_relationship']=="Father") selected @endif @endif>Father</option>
+                            <option value="Mother" @if(isset($item['first_beneficiary_relationship']))@if($item['first_beneficiary_relationship']=="Mother") selected @endif @endif>Mother</option>
+                            <option value="Husband" @if(isset($item['first_beneficiary_relationship']))@if($item['first_beneficiary_relationship']=="Husband") selected @endif @endif>Husband</option>
+                            <option value="Wife" @if(isset($item['first_beneficiary_relationship']))@if($item['first_beneficiary_relationship']=="Wife") selected @endif @endif>Wife</option>
+                            <option value="Son" @if(isset($item['first_beneficiary_relationship']))@if($item['first_beneficiary_relationship']=="Son") selected @endif @endif>Son</option>
+                            <option value="Daughter" @if(isset($item['first_beneficiary_relationship']))@if($item['first_beneficiary_relationship']=="Daughter") selected @endif @endif>Daughter</option>
+                            <option value="Uncle" @if(isset($item['first_beneficiary_relationship']))@if($item['first_beneficiary_relationship']=="Uncle") selected @endif @endif>Uncle</option>
+                            <option value="Aunt" @if(isset($item['first_beneficiary_relationship']))@if($item['first_beneficiary_relationship']=="Aunt") selected @endif @endif>Aunt</option>
+                            <option value="Cousin" @if(isset($item['first_beneficiary_relationship']))@if($item['first_beneficiary_relationship']=="Cousin") selected @endif @endif>Cousin</option>
+                            <option value="Nephew" @if(isset($item['first_beneficiary_relationship']))@if($item['first_beneficiary_relationship']=="Nephew") selected @endif @endif>Nephew</option>
+                            <option value="Niece" @if(isset($item['first_beneficiary_relationship']))@if($item['first_beneficiary_relationship']=="Niece") selected @endif @endif>Niece</option>
+                            <option value="Grandfather" @if(isset($item['first_beneficiary_relationship']))@if($item['first_beneficiary_relationship']=="Grandfather") selected @endif @endif>Grandfather</option>
+                            <option value="Grandmother" @if(isset($item['first_beneficiary_relationship']))@if($item['first_beneficiary_relationship']=="Grandmother") selected @endif @endif>Grandmother</option>
+                            <option value="Grandson" @if(isset($item['first_beneficiary_relationship']))@if($item['first_beneficiary_relationship']=="Grandson") selected @endif @endif>Grandson</option>
+                            <option value="Granddaughter" @if(isset($item['first_beneficiary_relationship']))@if($item['first_beneficiary_relationship']=="Granddaughter") selected @endif @endif>Granddaughter</option>
+
+                        </select>
+                        @if ($errors->has('first_beneficiary_relationship'))
+                            <span class="help-block">
+                            <strong>{{ $errors->first('first_beneficiary_relationship') }}</strong>
+                </span>
+                        @endif
+                    </div>
+
+                    <div class="form-group  col-sm-4{{ $errors->has('first_beneficiary_share') ? ' has-error' : '' }} has-feedback">
+                        <input type="text" class="form-control" placeholder="Beneficiary Percentage Share"
+                               name="first_beneficiary_share" value="@if(isset($item['first_beneficiary_share'])){{$item['first_beneficiary_share']}}@endif">
+
+                        @if ($errors->has('first_beneficiary_share'))
+                            <span class="help-block">
+                            <strong>{{ $errors->first('first_beneficiary_share') }}</strong>
+                </span>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="row formbox">
+                    <div class="form-group col-sm-4{{ $errors->has('second_beneficiary_name') ? ' has-error' : '' }} has-feedback">
+                        <input type="text" class="form-control" placeholder="Second Beneficiary Name" name="second_beneficiary_name"
+                               value="@if(isset($item['second_beneficiary_name'])){{$item['second_beneficiary_name']}}@endif">
+
+                        @if ($errors->has('second_beneficiary_name'))
+                            <span class="help-block">
+                            <strong>{{ $errors->first('second_beneficiary_name') }}</strong>
+                </span>
+                        @endif
+                    </div>
+
+                    <div class="form-group col-sm-4 {{ $errors->has('second_beneficiary_relationship') ? ' has-error' : '' }} has-feedback">
+                        <select class="form-control" name="second_beneficiary_relationship">
+                            <option value="">--Relationship--</option>
+                            <option value="Father" @if(isset($item['second_beneficiary_relationship'])) @if($item['second_beneficiary_relationship']=="Father") selected @endif @endif>Father</option>
+                            <option value="Mother" @if(isset($item['second_beneficiary_relationship']))@if($item['second_beneficiary_relationship']=="Mother") selected @endif @endif>Mother</option>
+                            <option value="Husband" @if(isset($item['second_beneficiary_relationship']))@if($item['second_beneficiary_relationship']=="Husband") selected @endif @endif>Husband</option>
+                            <option value="Wife" @if(isset($item['second_beneficiary_relationship']))@if($item['second_beneficiary_relationship']=="Wife") selected @endif @endif>Wife</option>
+                            <option value="Son" @if(isset($item['second_beneficiary_relationship']))@if($item['second_beneficiary_relationship']=="Son") selected @endif @endif>Son</option>
+                            <option value="Daughter" @if(isset($item['second_beneficiary_relationship']))@if($item['second_beneficiary_relationship']=="Daughter") selected @endif @endif>Daughter</option>
+                            <option value="Uncle" @if(isset($item['second_beneficiary_relationship']))@if($item['second_beneficiary_relationship']=="Uncle") selected @endif @endif>Uncle</option>
+                            <option value="Aunt" @if(isset($item['second_beneficiary_relationship']))@if($item['second_beneficiary_relationship']=="Aunt") selected @endif @endif>Aunt</option>
+                            <option value="Cousin" @if(isset($item['second_beneficiary_relationship']))@if($item['second_beneficiary_relationship']=="Cousin") selected @endif @endif>Cousin</option>
+                            <option value="Nephew" @if(isset($item['second_beneficiary_relationship']))@if($item['second_beneficiary_relationship']=="Nephew") selected @endif @endif>Nephew</option>
+                            <option value="Niece" @if(isset($item['second_beneficiary_relationship']))@if($item['second_beneficiary_relationship']=="Niece") selected @endif @endif>Niece</option>
+                            <option value="Grandfather" @if(isset($item['second_beneficiary_relationship']))@if($item['second_beneficiary_relationship']=="Grandfather") selected @endif @endif>Grandfather</option>
+                            <option value="Grandmother" @if(isset($item['second_beneficiary_relationship']))@if($item['second_beneficiary_relationship']=="Grandmother") selected @endif @endif>Grandmother</option>
+                            <option value="Grandson" @if(isset($item['second_beneficiary_relationship']))@if($item['second_beneficiary_relationship']=="Grandson") selected @endif @endif>Grandson</option>
+                            <option value="Granddaughter" @if(isset($item['second_beneficiary_relationship']))@if($item['second_beneficiary_relationship']=="Granddaughter") selected @endif @endif>Granddaughter</option>
+
+                        </select>
+                        @if ($errors->has('second_beneficiary_relationship'))
+                            <span class="help-block">
+                            <strong>{{ $errors->first('second_beneficiary_relationship') }}</strong>
+                </span>
+                        @endif
+                    </div>
+
+
+                    <div class="form-group col-sm-4 {{ $errors->has('second_beneficiary_share') ? ' has-error' : '' }} has-feedback">
+                        <input type="text" class="form-control" placeholder="Beneficiary Percentage Share"
+                               name="second_beneficiary_share" value="@if(isset($item['second_beneficiary_share'])){{$item['second_beneficiary_share']}}@endif">
+
+                        @if ($errors->has('second_beneficiary_share'))
+                            <span class="help-block">
+                            <strong>{{ $errors->first('second_beneficiary_share') }}</strong>
+                </span>
+                        @endif
+                    </div>
+
+                </div>
+            </div>
+            @endif
+
 
             {{--<div class="form-group">--}}
                 {{--<label for="gender">Gender:</label>--}}

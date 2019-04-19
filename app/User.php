@@ -56,7 +56,6 @@ class User extends Authenticatable
             'birthdate'    => "required",
             'password' => 'nullable|confirmed',
             'mobile' =>'required|digits:10',
-            'social_insurance_number' => "required",
             'avatar' => 'image|mimes:jpeg,bmp,png|max:2048',
             'first_beneficiary_name'=>'required',
             'first_beneficiary_relationship'=>'required',
@@ -65,6 +64,56 @@ class User extends Authenticatable
 //            'second_beneficiary_relationship'=>'required',
 //            'second_beneficiary_share'=>'required',
             'membership_fees'=>'required'
+        ];
+
+        if ($update) {
+            return $commun;
+        }
+
+        return array_merge($commun, [
+            'email'    => 'required|email|max:255|unique:users',
+            'password' => 'required|confirmed|min:6',
+        ]);
+    }
+
+    public static function rules_auth($update = false, $id = null)
+    {
+        $commun = [
+            'name' => 'required|min:2',
+            'username' => "required|string|max:20|regex:/^\S*$/u|unique:users,username,$id",
+            'email'    => "required|email|unique:users,email,$id",
+            'address'    => "required",
+            'birthdate'    => "required",
+            'password' => 'nullable|confirmed',
+            'mobile' =>'required|digits:10',
+            'avatar' => 'image|mimes:jpeg,bmp,png|max:2048',
+            'first_beneficiary_name'=>'required',
+            'first_beneficiary_relationship'=>'required',
+            'first_beneficiary_share'=>'required',
+        ];
+
+        if ($update) {
+            return $commun;
+        }
+
+        return array_merge($commun, [
+            'email'    => 'required|email|max:255|unique:users',
+            'password' => 'required|confirmed|min:6',
+        ]);
+    }
+
+
+    public static function rules_super_auth($update = false, $id = null)
+    {
+        $commun = [
+            'name' => 'required|min:2',
+            'username' => "required|string|max:20|regex:/^\S*$/u|unique:users,username,$id",
+            'email'    => "required|email|unique:users,email,$id",
+            'address'    => "required",
+            'birthdate'    => "required",
+            'password' => 'nullable|confirmed',
+            'mobile' =>'required|digits:10',
+            'avatar' => 'image|mimes:jpeg,bmp,png|max:2048',
         ];
 
         if ($update) {

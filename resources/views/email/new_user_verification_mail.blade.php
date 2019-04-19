@@ -25,6 +25,18 @@
         table.wrapper tr td.third-part p.font-small{ font-size:16px; color:#2b2b2b; margin-bottom:0;}
         /*.button_style{ background: #f6911f; font-size: 16px;color: #FFF; font-weight: 500; padding: 5px 20px; border-radius: 5px; text-decoration: none; display: inline-block; cursor:pointer;}*/
         table.wrapper tr td.second-part h3 span{ font-weight:400;}
+
+        .login-btn{padding: 8px 30px;background-color: #ffffff; color: #e85205 !important;border-color: #e85205 !important;box-shadow: none;
+            border-style: solid;
+            cursor: pointer !important;
+            outline: none;
+            box-sizing: unset !important;
+            display: inline-block;
+            text-decoration: none;
+            margin-top: 15px;
+        }
+
+
         /*table.wrapper tr td.second-part a:hover { text-decoration: none; background: #ce7712;}*/
         /*--------------media query css start------------------*/
         @media (max-width:767px) {
@@ -52,14 +64,15 @@
     <tr>
         <td class="second-part">
             <h2>Hello, <span> Admin </span> </h2>
-            <p>New User has been registered in Shree Brahmani Investor INC</p>
+            <p style="font-size: 15px;">New User has been registered in Shree Brahmani Investor INC</p>
 
             <div class="detailbox">
                 <b>Name: </b> {{$user->name}}<br>
                 <b>User Name: </b> {{$user->username}} <br>
                 <b>Email: </b> {{$user->email}}
             </div>
-            <p>Please login into admin panel and approve it from un-verified user list.</p>
+            <p style="font-size: 15px;">Please login into admin panel and approve it from un-verified user list.</p>
+            <a href="https://bitrust.ca/login" class="login-btn" >Login</a>
         </td>
     </tr>
     <tr>

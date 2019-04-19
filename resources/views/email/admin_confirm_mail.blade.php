@@ -25,6 +25,17 @@
         table.wrapper tr td.third-part p.font-small{ font-size:16px; color:#2b2b2b; margin-bottom:0;}
         /*.button_style{ background: #f6911f; font-size: 16px;color: #FFF; font-weight: 500; padding: 5px 20px; border-radius: 5px; text-decoration: none; display: inline-block; cursor:pointer;}*/
         table.wrapper tr td.second-part h3 span{ font-weight:400;}
+
+        .login-btn{padding: 8px 30px;background-color: #ffffff; color: #e85205 !important;border-color: #e85205 !important;box-shadow: none;
+            border-style: solid;
+            cursor: pointer !important;
+            outline: none;
+            box-sizing: unset !important;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+
         /*table.wrapper tr td.second-part a:hover { text-decoration: none; background: #ce7712;}*/
         /*--------------media query css start------------------*/
         @media (max-width:767px) {
@@ -51,14 +62,16 @@
     </tr>
     <tr>
         <td class="second-part">
-            <h2>Hello, <span> {{$user->name}} </span> </h2>
-            <p>We have verified all your informations, You can access your account now</p>
-            <p>Please use username and your choosen password for login into application</p>
+            <h2><b>Hello,</b> <span> <b>{{ucwords($user->name)}}</b></span> </h2>
+            <p style="font-size: 15px;">We have verified all your informations, You can access your account now</p>
+            <p style="font-size: 13px;">Please use username and your choosen password for login into application</p>
 
             <div class="detailbox">
                 <b>User Name: </b> {{$user->username}} <br>
                 <b>Email: </b> {{$user->email}}
             </div>
+            <a href="https://bitrust.ca/login" class="login-btn" >Login</a>
+
         </td>
     </tr>
     <tr>

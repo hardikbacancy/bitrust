@@ -56,8 +56,8 @@
             $penalty=$user->getPenalty();
             $count=0;
             ?>
-            <p>Hello,  @foreach($userLoanMgmt as $key=>$userLoan) @if($key==0) {{$userLoan->name}} @endif @endforeach</p>
-            <p>This is reminder for your EMI which is pending.</p>
+            <p><b>Hello,</b>  @foreach($userLoanMgmt as $key=>$userLoan) @if($key==0) <b>{{ucwords($userLoan->name)}}</b>@endif @endforeach</p>
+            <p style="font-size: 15px;">This is reminder for your EMI which is pending.</p>
             <table class="table">
                 <thead>
                 <tr>
@@ -79,7 +79,7 @@
                                 {{$penalty}}
                             @endif
                         </td>
-                    <!--  <td>{{$penalty}}</td> -->
+                    {{--<!--  <td>{{$penalty}}</td> -->--}}
                         <td>@if(isset($userLoan->penalty)) {{$userLoan->emi_amount+$userLoan->penalty}} @else {{$userLoan->emi_amount+$penalty}} @endif </td>
                     </tr>
                 @endforeach
